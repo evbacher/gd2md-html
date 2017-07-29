@@ -1,4 +1,4 @@
-<!----- Conversion time: 3.441 seconds.
+<!----- Conversion time: 3.086 seconds.
 
 
 Using this Markdown file:
@@ -10,8 +10,8 @@ Using this Markdown file:
 
 Conversion notes:
 
-* gd2md-html version 1.0β2
-* Sat Jul 29 2017 16:04:13 GMT-0700 (PDT)
+* gd2md-html version 1.0β3
+* Sat Jul 29 2017 16:23:39 GMT-0700 (PDT)
 * Source doc: https://docs.google.com/open?id=1Zn4Cdp_OZ-qEbETwkG8reJY40TsZ_lDbLQL5lNKtw28
 
 WARNING:
@@ -64,7 +64,7 @@ gd2md-html converts headings to the corresponding heading level in Markdown or H
 If you generate a table of contents in your Doc, gd2md-html will create IDs for each heading. If your Markdown environment does not handle heading attributes, you can chose the `HTML headings/IDs` option.
 
 
-### Basic paragraphs {#basic-paragraphs} 
+### Basic paragraphs {#basic-paragraphs}
 
 This is a paragraph.[^1] (gd2md-html also supports footnotes) A sentence with `some embedded code`. gd2md-html removes "smart quotes" from text and code to guard against cut-and-paste errors.
 
