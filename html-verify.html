@@ -1,4 +1,4 @@
-<!----- Conversion time: 5.387 seconds.
+<!----- Conversion time: 3.133 seconds.
 
 
 Using this HTML file:
@@ -10,8 +10,8 @@ Using this HTML file:
 
 Conversion notes:
 
-* gd2md-html version 1.0β2
-* Sat Jul 29 2017 16:13:13 GMT-0700 (PDT)
+* gd2md-html version 1.0β3
+* Sat Jul 29 2017 16:25:04 GMT-0700 (PDT)
 * Source doc: https://docs.google.com/open?id=1Zn4Cdp_OZ-qEbETwkG8reJY40TsZ_lDbLQL5lNKtw28
 
 WARNING:
@@ -205,7 +205,7 @@ A single-cell table also becomes a code block:
 </p>
 
 
-<pre class="prettyprint">#include<stdio.h>
+<pre class="prettyprint">#include&lt;stdio.h>
 main()
 {
     printf("Hello World");
@@ -234,7 +234,7 @@ first line:
 </p>
 
 
-<pre class="prettyprint lang-c">#include<stdio.h>
+<pre class="prettyprint lang-c">#include&lt;stdio.h>
 main()
 {
     printf("Hello World");
@@ -260,8 +260,8 @@ Code with some embedded HTML tags that should be displayed, not interpreted:
 
 
 <pre class="prettyprint
-lang-html">This is <code>some code</code>
-and some <strong>bold text</strong>.
+lang-html">This is &lt;code>some code&lt;/code>
+and some &lt;strong>bold text&lt;/strong>.
 </pre>
 <p>
 A single-cell table with some HTML inside:
@@ -272,7 +272,7 @@ A single-cell table with some HTML inside:
 class="prettyprint">This is some code
      We want to handle as code block;
 
-Preserve whitespace, <code>HTML tags</code>, etc.
+Preserve whitespace, &lt;code>HTML tags&lt;/code>, etc.
 Make a fenced code block in Markdown,
         pre in HTML.</pre>
 <h3 id="tables">Tables</h3>
