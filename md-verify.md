@@ -64,7 +64,7 @@ gd2md-html converts headings to the corresponding heading level in Markdown or H
 If you generate a table of contents in your Doc, gd2md-html will create IDs for each heading. If your Markdown environment does not handle heading attributes, you can chose the `HTML headings/IDs` option.
 
 
-### Basic paragraphs {#basic-paragraphs}
+### Basic paragraphs {#basic-paragraphs} 
 
 This is a paragraph.[^1] (gd2md-html also supports footnotes) A sentence with `some embedded code`. gd2md-html removes "smart quotes" from text and code to guard against cut-and-paste errors.
 
