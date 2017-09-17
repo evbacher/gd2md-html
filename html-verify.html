@@ -1,4 +1,4 @@
-<!----- Conversion time: 3.551 seconds.
+<!----- Conversion time: 29.983 seconds.
 
 
 Using this HTML file:
@@ -11,7 +11,7 @@ Using this HTML file:
 Conversion notes:
 
 * gd2md-html version 1.0β4
-* Sat Sep 16 2017 21:09:19 GMT-0700 (PDT)
+* Sun Sep 17 2017 09:05:06 GMT-0700 (PDT)
 * Source doc: https://docs.google.com/open?id=1Zn4Cdp_OZ-qEbETwkG8reJY40TsZ_lDbLQL5lNKtw28
 
 WARNING:
@@ -38,115 +38,125 @@ You have some equations: look for ">>>>>  gd2md-html alert:  equation..." in out
 
 <p style="color: red; font-weight: bold">>>>>> PLEASE check and correct alert issues and delete this message and the inline alerts.<hr></p>
 
+
 <p>
 This is a raw conversion from a Google Doc.
 </p>
-<h2>gd2md-html MASTER doc</h2>
-<p>
-This page demonstrates the features of gd2md-html conversion from a Google Doc
-to a simple Markdown or HTML file.
-</p>
-<p>
-<strong>Note</strong>: Not all Markdown renderers support all Markdown features.
-For example github Markdown does not support a table of contents ([TOC]),
-footnotes, or definition lists. Also, some Markdown environments strip heading
-IDs and replace them with their own generated IDs. You'll have to do some manual
-adjustments, depending on your target environment.
-</p>
-<p>
-<strong>Note</strong>: If you find any bugs, please file them at <a
-href="https://github.com/evbacher/gd2md-html/issues">https://github.com/evbacher/gd2md-html/issues</a>.
-Thanks for helping to make gd2md-html better!
-</p>
-<h3 id="headings">Headings</h3>
-<p>
-gd2md-html converts headings to the corresponding heading level in Markdown or
-HTML. If you use a lot of <code>Heading 1</code> headings in your Doc, but you
-want to adhere to the HTML convention of only a single H1 heading per page, you
-can use the <code>Demote headings</code> option.
-</p>
-<h3 id="heading-ids">Heading IDs</h3>
-<p>
-If you generate a table of contents in your Doc, gd2md-html will create IDs for
-each heading. If your Markdown environment does not handle heading attributes,
-you can chose the <code>HTML headings/IDs</code> option.
-</p>
-<h3 id="basic-paragraphs">Basic paragraphs</h3>
-<p>
-This is a paragraph.<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup>
-(gd2md-html also supports footnotes) A sentence with <code>some embedded
-code</code>. gd2md-html removes "smart quotes" from text and code to guard
-against cut-and-paste errors.
-</p>
-<h3 id="mixed-code-spans">Mixed code spans</h3>
-<p>
-gd2md-html uses Markdown for most <code>inline code</code>, but it will also
-handle mixed code spans like this: <code>$ ls -l
-<strong><em>filename</em></strong></code>, by using HTML markup.
+<h1>gd2md-html MASTER doc</h1>
 
-<h3 id="lists">Lists</h3>
+
+<p>
+This page demonstrates the features of gd2md-html conversion from a Google Doc to a simple Markdown or HTML file. 
+</p>
+<p>
+<strong>Note</strong>: Not all Markdown renderers support all Markdown features. For example github Markdown does not support a table of contents ([TOC]), footnotes, or definition lists. Also, some Markdown environments strip heading IDs and replace them with their own generated IDs. You'll have to do some manual adjustments, depending on your target environment.
+</p>
+<p>
+<strong>Note</strong>: If you find any bugs, please file them at <a href="https://github.com/evbacher/gd2md-html/issues">https://github.com/evbacher/gd2md-html/issues</a>. Thanks for helping to make gd2md-html better!
+</p>
+<h2 id="headings">Headings</h2>
+
+
+<p>
+gd2md-html converts headings to the corresponding heading level in Markdown or HTML. If you use a lot of <code>Heading 1</code> headings in your Doc, but you want to adhere to the HTML convention of only a single H1 heading per page, you can use the <code>Demote headings</code> option.
+</p>
+<h2 id="heading-ids">Heading IDs</h2>
+
+
+<p>
+If you generate a table of contents in your Doc, gd2md-html will create IDs for each heading. If your Markdown environment does not handle heading attributes, you can chose the <code>HTML headings/IDs</code> option.
+</p>
+<h2 id="basic-paragraphs">Basic paragraphs</h2>
+
+
+<p>
+This is a paragraph.<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup> (gd2md-html also supports footnotes) A sentence with <code>some embedded code</code>. gd2md-html removes "smart quotes" from text and code to guard against cut-and-paste errors.
+</p>
+<h2 id="mixed-code-spans">Mixed code spans</h2>
+
+
+<p>
+gd2md-html uses Markdown for most <code>inline code</code>, but it will also handle mixed code spans like this: <code>$ ls -l <strong><em>filename</em></strong></code>, by using HTML markup.
+
+<h2 id="lists">Lists</h2>
+
+
 <p>
 gd2md-html supports numbered lists, ordered lists, and definition lists.
 </p>
-<h4 id="numbered-lists">Numbered lists</h4>
+<h3 id="numbered-lists">Numbered lists</h3>
+
+
 <p>
 Here is a numbered list:
 </p><ol>
+
 <li>Item one.
 <li>Item two.</li></ol>
-<h4 id="ordered-lists">Ordered lists</h4>
+
+<h3 id="ordered-lists">Ordered lists</h3>
+
+
 <p>
 And here is a bullet list:
 </p><ul>
+
 <li>A list item without any punctuation
-<li>A list item with an embedded command: <code>ps aux | grep conky | grep -v
-grep | awk '{print $2}' | xargs kill</code>
-<li>Some mixed-font code: <code>ls -l <strong><em>filename</em></strong></code>.
-Followed by some normal text.</li></ul>
-<h4 id="lists-with-code-blocks">Lists with code blocks</h4>
+<li>A list item with an embedded command: <code>ps aux | grep conky | grep -v grep | awk '{print $2}' | xargs kill</code>
+<li>Some mixed-font code: <code>ls -l <strong><em>filename</em></strong></code>. Followed by some normal text.</li></ul>
+
+<h3 id="lists-with-code-blocks">Lists with code blocks</h3>
+
+
 <p>
-You can have a code block within a list item, as long as you indent the code
-(in the Doc) the same amount as the list:
+You can have a code block within a list item, as long as you indent the code  (in the Doc) the same amount as the list: 
 </p><ul>
-<li>A text item, followed by a code block that's indented and should be part of
-this item:
 
+<li>A text item, followed by a code block that's indented and should be part of this item:
 
-<pre
-class="prettyprint">// A comment.
+    
+
+<pre class="prettyprint">// A comment.
 some code;
   callFunction();
 </pre>
+
 <ul>
+
 <li>Another item. <ul>
+
  <li>A nested list item with a command:
 
+        
 
-<pre
-class="prettyprint">$ cat file | grep dog | wc
-</li>
-</ul>
+<pre class="prettyprint">$ cat file | grep dog | wc
+</li> </ul>
 </li> </ul>
 </li> </ul>
 </pre>
-<h4 id="definition-lists">Definition lists</h4>
+
+
+<h3 id="definition-lists">Definition lists</h3>
+
+
 <p>
-Because Google Docs does not have a definition list element, gd2md-html uses a
-simple but explicit syntax that is similar to the kramdown syntax for definition
-lists:
+Because Google Docs does not have a definition list element, gd2md-html uses a simple but explicit syntax that is similar to the kramdown syntax for definition lists:
 </p>
 
 
-<pre
-class="prettyprint">?term on a line by itself (starting with a question mark)
+
+<pre class="prettyprint">?term on a line by itself (starting with a question mark)
 :Definition preceded by a colon.
 </pre>
-<h4 id="definition-list-examples">Definition list examples</h4>
+
+
+<h3 id="definition-list-examples">Definition list examples</h3>
 
 
 
-<pre
-class="prettyprint">? term
+
+
+<pre class="prettyprint">? term
 : Definition here.
 
 ?term1
@@ -154,55 +164,64 @@ class="prettyprint">? term
 : First paragraph of definition.
 : Second paragraph of definition.
 </pre>
+
+
 <p>
 renders as:
 </p>
+
 <dl>
   <dt>term</dt>
    <dd> Definition here.</dd>
+
   <dt>term1</dt>
   <dt>term2</dt>
    <dd> First paragraph of definition.</dd>
+
    <dd> Second paragraph of definition.</dd>
-  <dt>A term that has some <strong><em>crazy formatting</em></strong> and
-<code>characters</code> (not recommended)//.</dt>
+
+  <dt>A term that has some <strong><em>crazy formatting</em></strong> and <code>characters</code> (not recommended)//.</dt>
    <dd> Definition of crazy term.</dd>
 </dl>
+
+
+
 <p>
 But a definition term cannot be empty:
 </p>
 <p>
 ?
 </p>
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html
-alert: Definition &darr;&darr; outside of definition list. Missing preceding
-term(s)? </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next
-alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
+<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: Definition &darr;&darr; outside of definition list. Missing preceding term(s)? </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
+
 <p>
 : Empty term above causes an error here.
 </p>
-<h3 id="code-blocks">Code blocks</h3>
+<h2 id="code-blocks">Code blocks</h2>
+
+
 <p>
-A code block (note that by default, gd2md-html does <em>not</em> add language
-descriptors to code blocks, but see <a
-href="#code-blocks-with-lang-specification">Code Blocks with lang
-specification</a>):
+A code block (note that by default, gd2md-html does <em>not</em> add language descriptors to code blocks, but see <a href="#code-blocks-with-lang-specification">Code Blocks with lang specification</a>):
 </p>
 
 
-<pre
-class="prettyprint">package main
+
+<pre class="prettyprint">package main
 
 import "fmt"
 
 func main() {
-
-fmt.Println("Hello, 世界")
+	fmt.Println("Hello, 世界")
 }
 </pre>
+
+
 <p>
 A single-cell table also becomes a code block:
 </p>
+
 
 
 <pre class="prettyprint">#include&lt;stdio.h>
@@ -210,28 +229,30 @@ main()
 {
     printf("Hello World");
 }</pre>
+
+
 <p>
-If you have any smart quotes in <code>"code"</code> or code blocks, gd2md-html
-removes them during the conversion:
+If you have any smart quotes in <code>"code"</code> or code blocks, gd2md-html removes them during the conversion:
 </p>
+
 
 
 <pre class="prettyprint">func main() {
-
-fmt.Println("Why would you do this?")
+	fmt.Println("Why would you do this?")
 }
 </pre>
-<h3 id="code-blocks-with-lang-specification">Code blocks with lang
-specification</h3>
-<p>
-gd2md-html supports an optional lang specification on the first line of the code
-sample (in the Doc source). The syntax is: <code>lang:
-<em>langspec</em></code>
+
+
+<h2 id="code-blocks-with-lang-specification">Code blocks with lang specification</h2>
+
 
 <p>
-For example, here is a code block that specifies <code>lang:c</code> on the
-first line:
+gd2md-html supports an optional lang specification on the first line of the code sample (in the Doc source). The syntax is: <code>lang: <em>langspec</em></code>
+
+<p>
+For example, here is a code block that specifies <code>lang:c</code> on the first line:
 </p>
+
 
 
 <pre class="prettyprint lang-c">#include&lt;stdio.h>
@@ -240,48 +261,60 @@ main()
     printf("Hello World");
 }
 </pre>
+
+
 <p>
-This also works in single-cell tables: here is a single-cell table that
-specifies <code>lang: java</code> on the first line:
+This also works in single-cell tables: here is a single-cell table that specifies <code>lang: java</code> on the first line:
 </p>
 
 
-<pre class="prettyprint
-lang-java">
+
+<pre class="prettyprint lang-java">
 public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("Hello, World");
     }
 }</pre>
-<h3 id="code-blocks-with-html">Code blocks with HTML</h3>
+
+
+<h2 id="code-blocks-with-html">Code blocks with HTML</h2>
+
+
 <p>
 Code with some embedded HTML tags that should be displayed, not interpreted:
 </p>
 
 
-<pre class="prettyprint
-lang-html">This is &lt;code>some code&lt;/code>
+
+<pre class="prettyprint lang-html">This is &lt;code>some code&lt;/code>
 and some &lt;strong>bold text&lt;/strong>.
 </pre>
+
+
 <p>
 A single-cell table with some HTML inside:
 </p>
 
 
-<pre
-class="prettyprint">This is some code
+
+<pre class="prettyprint">This is some code
      We want to handle as code block;
 
 Preserve whitespace, &lt;code>HTML tags&lt;/code>, etc.
 Make a fenced code block in Markdown,
         pre in HTML.</pre>
-<h3 id="tables">Tables</h3>
+
+
+<h2 id="tables">Tables</h2>
+
+
 <p>
 gd2md-html generates HTML tables.
 </p>
 <p>
 A table:
 </p>
+
 <table>
   <tr>
    <td>Some text.
@@ -295,14 +328,18 @@ A table:
    <td>More text.
    </td>
    <td>A list:<ul>
-<li><a href="https://en.wikipedia.org/wiki/Mozzarella">mozzarella
-cheese</a></li></ul>
+
+<li><a href="https://en.wikipedia.org/wiki/Mozzarella">mozzarella cheese</a></li></ul>
+
    </td>
   </tr>
 </table>
+
+
 <p>
 You can also merge columns and rows in tables:
 </p>
+
 <table>
   <tr>
    <td colspan="3" ><strong>This row merges the first three columns.</strong>
@@ -333,125 +370,126 @@ three
    </td>
   </tr>
 </table>
-<h3 id="links">Links</h3>
+
+
+<h2 id="links">Links</h2>
+
+
 <p>
 Some regular URL links:
 </p><ul>
+
 <li><a href="http://www.google.com/">http://www.google.com/</a>
-<li><a
-href="https://fivethirtyeight.com/">https://fivethirtyeight.com/</a></li></ul>
+<li><a href="https://fivethirtyeight.com/">https://fivethirtyeight.com/</a></li></ul>
+
 <p>
 Some links with titles:
 </p><ul>
+
 <li><a href="http://kottke.org/">Jason Kottke's blog</a>
 <li><a href="https://beanroad.blogspot.com/">Bean Road</a></li></ul>
-<h3 id="images">Images</h3>
+
+<h2 id="images">Images</h2>
+
+
 <p>
 A plain image:
 </p>
 <p>
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html
-alert: inline image link here (to images/gd2md-html-MASTER0.png). Store image on
-your image server and adjust path/filename if necessary. </span><br>(<a
-href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span
-style="color: red; font-weight: bold">>>>>> </span></p>
-<img src="images/gd2md-html-MASTER0.png" width="" alt="alt_text"
-title="image_tooltip">
+
+
+<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/gd2md-html-MASTER0.png). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
+
+<img src="images/gd2md-html-MASTER0.png" width="" alt="alt_text" title="image_tooltip">
+
 </p>
 <p>
-Note that the image link will be broken until you store the image file on your
-server and adjust the path and width if necessary.
+Note that the image link will be broken until you store the image file on your server and adjust the path and width if necessary.
 </p>
 <p>
-Alternatively, you can use a Drawing to display an image. Here's an example
-where we've pasted the image into a Drawing and referenced it after converting
-the doc:
+Alternatively, you can use a Drawing to display an image. Here's an example where we've pasted the image into a Drawing and referenced it after converting the doc:
 </p>
 <p>
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html
-alert: inline image link here (to images/gd2md-html-MASTER1.jpg). Store image on
-your image server and adjust path/filename if necessary. </span><br>(<a
-href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span
-style="color: red; font-weight: bold">>>>>> </span></p>
-<img src="images/gd2md-html-MASTER1.jpg" width="" alt="alt_text"
-title="image_tooltip">
+
+
+<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/gd2md-html-MASTER1.jpg). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
+
+<img src="images/gd2md-html-MASTER1.jpg" width="" alt="alt_text" title="image_tooltip">
+
 </p>
 <p>
-Tip: You can limit the width of an image in Markdown by adding (for example)
-<code>{width="75%"}</code> after the link markup (if your Markdown engine
-supports such syntax). For HTML, just add a <code>width="75%"</code> attribute
-to the <code>img</code> tag.
+Tip: You can limit the width of an image in Markdown by adding (for example) <code>{width="75%"}</code> after the link markup (if your Markdown engine supports such syntax). For HTML, just add a <code>width="75%"</code> attribute to the <code>img</code> tag.
 </p>
-<h3 id="drawings">Drawings</h3>
+<h2 id="drawings">Drawings</h2>
+
+
 <p>
-Google Docs does not provide an API for accessing the data in a Google Drawing.
-If you have an inline drawing, gd2md-html will warn and provide an alert in the
-converted output:
+Google Docs does not provide an API for accessing the data in a Google Drawing. If you have an inline drawing, gd2md-html will warn and provide an alert in the converted output:
 </p>
 <p>
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html
-alert: inline drawings not supported directly from Docs. You may want to copy
-the inline drawing to a standalone drawing and export by reference. See <a
-href="https://github.com/evbacher/gd2md-html/wiki/Google-Drawings-by-reference">Google
-Drawings by reference</a> for details. The img URL below is a placeholder.
-</span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next
-alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-<img src="https://docs.google.com/a/google.com/drawings/d/12345/export/png"
-width="80%" alt="drawing">
+
+
+<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline drawings not supported directly from Docs. You may want to copy the inline drawing to a standalone drawing and export by reference. See <a href="https://github.com/evbacher/gd2md-html/wiki/Google-Drawings-by-reference">Google Drawings by reference</a> for details. The img URL below is a placeholder. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
+
+<img src="https://docs.google.com/a/google.com/drawings/d/12345/export/png" width="80%" alt="drawing">
+
 </p>
 <p>
-You can display Google Drawings (and images in Drawings) by reference. See <a
-href="https://github.com/evbacher/gd2md-html/wiki/Google-Drawings-by-reference">Google
-Drawings by reference</a> for details.
+You can display Google Drawings (and images in Drawings) by reference. See <a href="https://github.com/evbacher/gd2md-html/wiki/Google-Drawings-by-reference">Google Drawings by reference</a> for details.
 </p>
 <p>
-Here's an example where we've referred to a drawing by reference (after
-converting):
+Here's an example where we've referred to a drawing by reference (after converting):
 </p>
 <p>
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html
-alert: inline drawings not supported directly from Docs. You may want to copy
-the inline drawing to a standalone drawing and export by reference. See <a
-href="https://github.com/evbacher/gd2md-html/wiki/Google-Drawings-by-reference">Google
-Drawings by reference</a> for details. The img URL below is a placeholder.
-</span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next
-alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-<img src="https://docs.google.com/a/google.com/drawings/d/12345/export/png"
-width="80%" alt="drawing">
+
+
+<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline drawings not supported directly from Docs. You may want to copy the inline drawing to a standalone drawing and export by reference. See <a href="https://github.com/evbacher/gd2md-html/wiki/Google-Drawings-by-reference">Google Drawings by reference</a> for details. The img URL below is a placeholder. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
+
+<img src="https://docs.google.com/a/google.com/drawings/d/12345/export/png" width="80%" alt="drawing">
+
 </p>
 <p>
-Tip: For any drawing that you display by reference, be sure to change the
-permissions to make it viewable by anyone with the link.
+Tip: For any drawing that you display by reference, be sure to change the permissions to make it viewable by anyone with the link.
 </p>
-<h3 id="equations">Equations</h3>
+<h2 id="equations">Equations</h2>
+
+
 <p>
-If you insert an equation using Google Docs, gd2md-html will warn and insert an
-alert message in the output. However, if your target publishing platform
-supports LaTeX equations, you can use LaTeX syntax directly.
+If you insert an equation using Google Docs, gd2md-html will warn and insert an alert message in the output. However, if your target publishing platform supports LaTeX equations, you can use LaTeX syntax directly.
 </p>
 <p>
 A Google Docs equation:
 </p>
 <p>
-<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html
-alert: equation: use MathJax/LaTeX if your publishing platform supports it.
-</span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next
-alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
+
+<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: equation: use MathJax/LaTeX if your publishing platform supports it. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
+
 </p>
 <p>
 A LaTeX equation:
 </p>
 
 
+
 <pre class="prettyprint">$$e^{i\pi } = -1$$
 </pre>
+
+
 <p>
 renders as:
 </p>
 <p>
 $$e^{i\pi } = -1$$
 </p>
-<h3 id="right-to-left-text">Right-to-left text</h3>
+<h2 id="right-to-left-text">Right-to-left text</h2>
+
+
 <p>
 A few Arabic words هذه فقرة تجريبية inside an English paragraph:
 </p>
@@ -461,39 +499,41 @@ They should appear as in this RTL paragraph:
 <p>
 <p dir="rtl">
 هذه فقرة تجريبية </p>
+
 </p>
-<h3 id="subscript-and-superscript-processing">Subscript and superscript
-processing</h3>
+<h2 id="subscript-and-superscript-processing">Subscript and superscript processing</h2>
+
+
 <p>
-A sentence with <sub>subscript</sub> and <sup>superscript</sup> and some more
-regular text and <sup><a href="http://www.google.com">a link to
-Google</a></sup>.
+A sentence with <sub>subscript</sub> and <sup>superscript</sup> and some more regular text and <sup><a href="http://www.google.com">a link to Google</a></sup>.
 </p>
 <p>
-And more <sub><strong>bold</strong></sub> and <sup><code>mixed<strong><em>
-</em>bold<em> italic </em></strong>code</code></sup> and some more text. Some
-<em>italic text</em>.
+And more <sub><strong>bold</strong></sub> and <sup><code>mixed<strong><em> </em>bold<em> italic </em></strong>code</code></sup> and some more text. Some <em>italic text</em>.
 
 <p>
 Another paragraph with <strong>some bold text</strong>.
 </p>
 <p>
-<sup>SUP</sup>A subscript or superscript at the beginning or end of a paragraph
-should not break things:<sub>SUB</sub>
+<sup>SUP</sup>A subscript or superscript at the beginning or end of a paragraph should not break things:<sub>SUB</sub>
 </p><ol>
+
 <li>A numbered list following a terminal subscript.
 <li>Another list item.</li></ol>
-<h3 id="bugs">Bugs</h3>
+
+<h2 id="bugs">Bugs</h2>
+
 <ul>
-<li>Current open bugs: <a
-href="https://github.com/evbacher/gd2md-html/issues">https://github.com/evbacher/gd2md-html/issues</a>
-<li>New bug or feature request: <a
-href="https://github.com/evbacher/gd2md-html/issues/new">https://github.com/evbacher/gd2md-html/issues/new</a>.
-Thanks for helping to make gd2md-html better!<!-- Footnotes themselves at the bottom. -->
+
+<li>Current open bugs: <a href="https://github.com/evbacher/gd2md-html/issues">https://github.com/evbacher/gd2md-html/issues</a> 
+<li>New bug or feature request: <a href="https://github.com/evbacher/gd2md-html/issues/new">https://github.com/evbacher/gd2md-html/issues/new</a>. Thanks for helping to make gd2md-html better!
+
+<!-- Footnotes themselves at the bottom. -->
+
 <h2>Notes</h2>
 <div class="footnotes">
 <hr>
 <ol><li id="fn1">
 <p>
      gd2md-html supports footnotes!&nbsp;<a href="#fnref1" rev="footnote">&#8617;</a>
+
 </ol></div>
