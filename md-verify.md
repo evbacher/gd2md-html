@@ -1,4 +1,4 @@
-<!----- Conversion time: 2.766 seconds.
+<!----- Conversion time: 3.472 seconds.
 
 
 Using this Markdown file:
@@ -10,8 +10,8 @@ Using this Markdown file:
 
 Conversion notes:
 
-* gd2md-html version 1.0β6
-* Sat Oct 07 2017 16:08:17 GMT-0700 (PDT)
+* gd2md-html version 1.0β7
+* Tue Oct 10 2017 21:23:02 GMT-0700 (PDT)
 * Source doc: https://docs.google.com/open?id=1Zn4Cdp_OZ-qEbETwkG8reJY40TsZ_lDbLQL5lNKtw28
 
 WARNING:
