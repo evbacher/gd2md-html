@@ -1,4 +1,4 @@
-<!----- Conversion time: 3.472 seconds.
+<!----- Conversion time: 3.663 seconds.
 
 
 Using this Markdown file:
@@ -10,8 +10,8 @@ Using this Markdown file:
 
 Conversion notes:
 
-* gd2md-html version 1.0β7
-* Tue Oct 10 2017 21:23:02 GMT-0700 (PDT)
+* gd2md-html version 1.0β8
+* Mon Oct 30 2017 16:42:24 GMT-0700 (PDT)
 * Source doc: https://docs.google.com/open?id=1Zn4Cdp_OZ-qEbETwkG8reJY40TsZ_lDbLQL5lNKtw28
 
 WARNING:
@@ -78,6 +78,11 @@ END BLANK HEADINGS
 
 
 This is a paragraph.[^1] (gd2md-html also supports footnotes) A sentence with `some embedded code`. gd2md-html removes "smart quotes" from text and code to guard against cut-and-paste errors.
+
+<h2>Mixed font spans</h2>
+
+
+Some regular text, _followed by an italic span **with some embedded bold** text_. Some more regular text.
 
 <h2 id="mixed-code-spans">Mixed code spans</h2>
 
@@ -174,7 +179,7 @@ term2
 :  First paragraph of definition.
 :  Second paragraph of definition.
 
-A term that has some ***crazy formatting*** and `characters` (not recommended)//.
+A term that has some **_crazy formatting_** and `characters` (not recommended)//.
 :  Definition of crazy term.
 
 
@@ -194,7 +199,7 @@ But a definition term cannot be empty:
 <h2 id="code-blocks">Code blocks</h2>
 
 
-A code block (note that by default, gd2md-html does *not* add language descriptors to code blocks, but see [Code Blocks with lang specification](#code-blocks-with-lang-specification)):
+A code block (note that by default, gd2md-html does _not_ add language descriptors to code blocks, but see [Code Blocks with lang specification](#code-blocks-with-lang-specification)):
 
 
 ```
@@ -458,7 +463,7 @@ They should appear as in this RTL paragraph:
 
 A sentence with <sub>subscript</sub> and <sup>superscript</sup> and some more regular text and <sup><a href="http://www.google.com">a link to Google</a></sup>.
 
-And more <sub><strong>bold</strong></sub> and <sup><code>mixed<strong><em> </em>bold<em> italic </em></strong>code</code></sup> and some more text. Some *italic text*.
+And more <sub><strong>bold</strong></sub> and <sup><code>mixed<strong><em> </em>bold<em> italic </em></strong>code</code></sup> and some more text. Some _italic text_.
 
 Another paragraph with **some bold text**.
 
