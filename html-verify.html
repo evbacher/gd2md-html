@@ -1,4 +1,4 @@
-<!----- Conversion time: 3.445 seconds.
+<!----- Conversion time: 3.716 seconds.
 
 
 Using this HTML file:
@@ -10,8 +10,8 @@ Using this HTML file:
 
 Conversion notes:
 
-* gd2md-html version 1.0β8
-* Mon Oct 30 2017 16:43:37 GMT-0700 (PDT)
+* gd2md-html version 1.0β9
+* Thu Nov 09 2017 20:44:54 GMT-0800 (PST)
 * Source doc: https://docs.google.com/open?id=1Zn4Cdp_OZ-qEbETwkG8reJY40TsZ_lDbLQL5lNKtw28
 
 WARNING:
@@ -70,7 +70,7 @@ gd2md-html converts headings to the corresponding heading level in Markdown or H
 <p>
 If you generate a table of contents in your Doc, gd2md-html will create IDs for each heading. If your Markdown environment does not handle heading attributes, you can chose the <code>HTML headings/IDs</code> option.
 </p>
-<h1>Blank headings</h1>
+<h1 id="blank-headings">Blank headings</h1>
 
 
 <p>
@@ -85,7 +85,7 @@ END BLANK HEADINGS
 <p>
 This is a paragraph.<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup> (gd2md-html also supports footnotes) A sentence with <code>some embedded code</code>. gd2md-html removes "smart quotes" from text and code to guard against cut-and-paste errors.
 </p>
-<h2>Mixed font spans</h2>
+<h2 id="mixed-font-spans">Mixed font spans</h2>
 
 
 <p>
@@ -155,6 +155,66 @@ some code;
 </pre>
 
 
+<h3 id="lists-with-embedded-paragraphs">Lists with embedded paragraphs</h3>
+
+
+<p>
+Note: Works for Markdown, still a known issue for HTML.
+</p><ul>
+
+<li>A bullet list with an additional paragraph:
+<p>
+
+    This is another paragraph.
+</p>
+<p>
+
+    This is a new paragraph, but also part of this list item. It should be indented
+</p><ul>
+
+<li>Another item. <ul>
+
+ <li>A nested item.
+<p>
+
+        This is a new paragraph within the nested item.
+</p>
+
+        
+
+<pre class="prettyprint">// Some code after a nested paragraph.
+callSomeFunction();
+</pre>
+
+<ul>
+
+<li>Another list item.
+<li>And another. <ul>
+
+ <li>Nested
+<p>
+
+        A paragraph within a list item.
+</p>  <ul>
+
+  <li>Nested
+<p>
+
+            A paragraph within a list item.
+</p> <ul>
+
+ <li>Reducing the nesting level.
+<li>First-level list item.</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+
+<p>
+A regular paragraph.
+</p>
 <h3 id="definition-lists">Definition lists</h3>
 
 
