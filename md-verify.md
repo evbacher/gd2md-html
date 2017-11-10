@@ -1,4 +1,4 @@
-<!----- Conversion time: 3.663 seconds.
+<!----- Conversion time: 5.308 seconds.
 
 
 Using this Markdown file:
@@ -10,9 +10,9 @@ Using this Markdown file:
 
 Conversion notes:
 
-* gd2md-html version 1.0β8
-* Mon Oct 30 2017 16:42:24 GMT-0700 (PDT)
-* Source doc: https://docs.google.com/open?id=1Zn4Cdp_OZ-qEbETwkG8reJY40TsZ_lDbLQL5lNKtw28
+* gd2md-html version 1.0β9
+* Thu Nov 09 2017 20:46:34 GMT-0800 (PST)
+* Source doc: https://docs.google.com/open?id=1Szd7NyQR3ddHsu9T7FkP4z4ReC2nCKGnUEAzx3uujGg
 
 WARNING:
 Inline drawings not supported: look for ">>>>>  gd2md-html alert:  inline drawings..." in output.
@@ -67,7 +67,7 @@ gd2md-html converts headings to the corresponding heading level in Markdown or H
 
 If you generate a table of contents in your Doc, gd2md-html will create IDs for each heading. If your Markdown environment does not handle heading attributes, you can chose the `HTML headings/IDs` option.
 
-<h1>Blank headings</h1>
+<h1 id="blank-headings">Blank headings</h1>
 
 
 From here to END BLANK HEADINGS are headings that are empty or contain only whitespace.
@@ -79,7 +79,7 @@ END BLANK HEADINGS
 
 This is a paragraph.[^1] (gd2md-html also supports footnotes) A sentence with `some embedded code`. gd2md-html removes "smart quotes" from text and code to guard against cut-and-paste errors.
 
-<h2>Mixed font spans</h2>
+<h2 id="mixed-font-spans">Mixed font spans</h2>
 
 
 Some regular text, _followed by an italic span **with some embedded bold** text_. Some more regular text.
@@ -139,6 +139,47 @@ You can have a code block within a list item, as long as you indent the code  (i
 
         ```
 
+
+<h3 id="lists-with-embedded-paragraphs">Lists with embedded paragraphs</h3>
+
+
+Note: Works for Markdown, still a known issue for HTML.
+
+
+
+*   A bullet list with an additional paragraph:
+
+    This is another paragraph.
+
+
+    This is a new paragraph, but also part of this list item. It should be indented
+
+*   Another item.
+    *   A nested item.
+
+        This is a new paragraph within the nested item.
+
+
+        ```
+        // Some code after a nested paragraph.
+        callSomeFunction();
+        ```
+
+
+*   Another list item.
+*   And another.
+    *   Nested
+
+        A paragraph within a list item.
+
+        *   Nested
+
+            A paragraph within a list item.
+
+    *   Reducing the nesting level.
+*   First-level list item.
+
+A regular paragraph.
 
 <h3 id="definition-lists">Definition lists</h3>
 
@@ -377,10 +418,10 @@ A plain image:
 
 
 
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/gd2md-html-MASTER0.png). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/0-beta90.png). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/gd2md-html-MASTER0.png "image_tooltip")
+![alt_text](images/0-beta90.png "image_tooltip")
 
 
 Note that the image link will be broken until you store the image file on your server and adjust the path and width if necessary.
@@ -389,10 +430,10 @@ Alternatively, you can use a Drawing to display an image. Here's an example wher
 
 
 
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/gd2md-html-MASTER1.jpg). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/0-beta91.jpg). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/gd2md-html-MASTER1.jpg "image_tooltip")
+![alt_text](images/0-beta91.jpg "image_tooltip")
 
 
 Tip: You can limit the width of an image in Markdown by adding (for example) `{width="75%"}` after the link markup (if your Markdown engine supports such syntax). For HTML, just add a `width="75%"` attribute to the `img` tag.
