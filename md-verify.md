@@ -1,4 +1,4 @@
-<!----- Conversion time: 5.308 seconds.
+<!----- Conversion time: 4.247 seconds.
 
 
 Using this Markdown file:
@@ -10,9 +10,9 @@ Using this Markdown file:
 
 Conversion notes:
 
-* gd2md-html version 1.0β9
-* Thu Nov 09 2017 20:46:34 GMT-0800 (PST)
-* Source doc: https://docs.google.com/open?id=1Szd7NyQR3ddHsu9T7FkP4z4ReC2nCKGnUEAzx3uujGg
+* gd2md-html version 1.0β10
+* Sat Feb 17 2018 21:19:26 GMT-0800 (PST)
+* Source doc: https://docs.google.com/open?id=1Zn4Cdp_OZ-qEbETwkG8reJY40TsZ_lDbLQL5lNKtw28
 
 WARNING:
 Inline drawings not supported: look for ">>>>>  gd2md-html alert:  inline drawings..." in output.
@@ -418,10 +418,10 @@ A plain image:
 
 
 
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/0-beta90.png). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/gd2md-html-MASTER0.png). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/0-beta90.png "image_tooltip")
+![alt_text](images/gd2md-html-MASTER0.png "image_tooltip")
 
 
 Note that the image link will be broken until you store the image file on your server and adjust the path and width if necessary.
@@ -430,10 +430,10 @@ Alternatively, you can use a Drawing to display an image. Here's an example wher
 
 
 
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/0-beta91.jpg). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/gd2md-html-MASTER1.jpg). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/0-beta91.jpg "image_tooltip")
+![alt_text](images/gd2md-html-MASTER1.jpg "image_tooltip")
 
 
 Tip: You can limit the width of an image in Markdown by adding (for example) `{width="75%"}` after the link markup (if your Markdown engine supports such syntax). For HTML, just add a `width="75%"` attribute to the `img` tag.
@@ -498,6 +498,20 @@ They should appear as in this RTL paragraph:
 <p dir="rtl">
 هذه فقرة تجريبية </p>
 
+
+<h2>Soft line-breaks</h2>
+
+
+lineBreak \
+This line contains a shift-enter soft line-break here \
+This bit is after the line break.
+
+This is a line with some bold text interrupted by a soft line **break (shift-enter) here \
+Followed by more bold** and some more regular text.
+
+This paragraph has an explicit line-break (Enter) here.
+
+And this is a separate paragraph.
 
 <h2 id="subscript-and-superscript-processing">Subscript and superscript processing</h2>
 
