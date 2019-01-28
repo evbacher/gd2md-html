@@ -1,4 +1,4 @@
-<!----- Conversion time: 4.247 seconds.
+<!----- Conversion time: 3.042 seconds.
 
 
 Using this Markdown file:
@@ -10,8 +10,8 @@ Using this Markdown file:
 
 Conversion notes:
 
-* gd2md-html version 1.0β10
-* Sat Feb 17 2018 21:19:26 GMT-0800 (PST)
+* Docs to Markdown version 1.0β15
+* Sun Jan 27 2019 17:27:24 GMT-0800 (PST)
 * Source doc: https://docs.google.com/open?id=1Zn4Cdp_OZ-qEbETwkG8reJY40TsZ_lDbLQL5lNKtw28
 
 WARNING:
@@ -42,12 +42,12 @@ You have 3 H1 headings. You may want to use the "H1 -> H2" option to demote all 
 <p style="color: red; font-weight: bold">>>>>> PLEASE check and correct alert issues and delete this message and the inline alerts.<hr></p>
 
 
-This is a raw conversion from a Google Doc.
+This is a raw conversion from a Google Doc (HTML headings option for MD).
 
-<h1>gd2md-html MASTER doc</h1>
+<h1>Docs to Markdown (GD2md-html) MASTER doc</h1>
 
 
-This page demonstrates the features of gd2md-html conversion from a Google Doc to a simple Markdown or HTML file. 
+This page demonstrates the features of GD2md-html conversion from a Google Doc to a simple Markdown or HTML file. 
 
 **Note**: Not all Markdown renderers support all Markdown features. For example github Markdown does not support a table of contents ([TOC]), footnotes, or definition lists. Also, some Markdown environments strip heading IDs and replace them with their own generated IDs. You'll have to do some manual adjustments, depending on your target environment.
 
@@ -55,17 +55,17 @@ This page demonstrates the features of gd2md-html conversion from a Google Doc t
 [TOC]
 
 
-**Note**: If you find any bugs, please file them at [https://github.com/evbacher/gd2md-html/issues](https://github.com/evbacher/gd2md-html/issues). Thanks for helping to make gd2md-html better!
+**Note**: If you find any bugs, please file them at [https://github.com/evbacher/gd2md-html/issues](https://github.com/evbacher/gd2md-html/issues). Thanks for helping to make GD2md-html better!
 
 <h1 id="headings">Headings</h1>
 
 
-gd2md-html converts headings to the corresponding heading level in Markdown or HTML. If you use a lot of `Heading 1` headings in your Doc, but you want to adhere to the HTML convention of only a single H1 heading per page, you can use the `Demote headings` option.
+GD2md-html converts headings to the corresponding heading level in Markdown or HTML. If you use a lot of `Heading 1` headings in your Doc, but you want to adhere to the HTML convention of only a single H1 heading per page, you can use the `Demote headings` option.
 
 <h1 id="heading-ids">Heading IDs</h1>
 
 
-If you generate a table of contents in your Doc, gd2md-html will create IDs for each heading. If your Markdown environment does not handle heading attributes, you can chose the `HTML headings/IDs` option.
+If you generate a table of contents in your Doc, GD2md-html will create IDs for each heading. If your Markdown environment does not handle heading attributes, you can chose the `HTML headings/IDs` option.
 
 <h1 id="blank-headings">Blank headings</h1>
 
@@ -77,34 +77,38 @@ END BLANK HEADINGS
 <h2 id="basic-paragraphs">Basic paragraphs</h2>
 
 
-This is a paragraph.[^1] (gd2md-html also supports footnotes) A sentence with `some embedded code`. gd2md-html removes "smart quotes" from text and code to guard against cut-and-paste errors.
+This is a paragraph.[^1] (GD2md-html also supports footnotes) A sentence with `some embedded code`. GD2md-html removes "smart quotes" from text and code to guard against cut-and-paste errors.
 
 <h2 id="mixed-font-spans">Mixed font spans</h2>
 
 
-Some regular text, _followed by an italic span **with some embedded bold** text_. Some more regular text.
+Some regular text, _followed by an italic span **with some embedded bold** text_. Some more regular text. Some ~~strikethrough text~~ here. 
+
+Some ~~strikethrough text at the end of the paragraph.~~
+
+Followed by some regular text.
 
 <h2 id="mixed-code-spans">Mixed code spans</h2>
 
 
-gd2md-html uses Markdown for most `inline code`, but it will also handle mixed code spans like this: <code>$ ls -l <strong><em>filename</em></strong></code>, by using HTML markup.
+GD2md-html uses Markdown for most `inline code`, but it will also handle mixed code spans like this: <code>$ ls -l <strong><em>filename</em></strong></code>, by using HTML markup.
 
 <h2 id="lists">Lists</h2>
 
 
-gd2md-html supports numbered lists, ordered lists, and definition lists.
+GD2md-html supports numbered lists, ordered lists, and definition lists.
 
-<h3 id="numbered-lists">Numbered lists</h3>
+<h3 id="numbered-lists-ordered-lists">Numbered lists (ordered lists)</h3>
 
 
 Here is a numbered list:
 
 
 
-1.  Item one.
-1.  Item two.
+1. Item one.
+2. Item two.
 
-<h3 id="ordered-lists">Ordered lists</h3>
+<h3 id="unordered-lists">Unordered lists</h3>
 
 
 And here is a bullet list:
@@ -114,6 +118,26 @@ And here is a bullet list:
 *   A list item without any punctuation
 *   A list item with an embedded command: `ps aux | grep conky | grep -v grep | awk '{print $2}' | xargs kill`
 *   Some mixed-font code: <code>ls -l <strong><em>filename</em></strong></code>. Followed by some normal text.
+
+<h3 id="another-ordered-list">Another ordered list</h3>
+
+
+
+
+1. First item
+2. Second item
+3. Third item
+
+<h3 id="a-nested-ordered-list">A nested ordered list</h3>
+
+
+
+
+1. First item
+2. Second item
+    1. First nested item
+    2. Second nested item
+3. Third item
 
 <h3 id="lists-with-code-blocks">Lists with code blocks</h3>
 
@@ -184,7 +208,7 @@ A regular paragraph.
 <h3 id="definition-lists">Definition lists</h3>
 
 
-Because Google Docs does not have a definition list element, gd2md-html uses a simple but explicit syntax that is similar to the kramdown syntax for definition lists:
+Because Google Docs does not have a definition list element, GD2md-html uses a simple but explicit syntax that is similar to the kramdown syntax for definition lists:
 
 
 ```
@@ -195,6 +219,8 @@ Because Google Docs does not have a definition list element, gd2md-html uses a s
 
 <h3 id="definition-list-examples">Definition list examples</h3>
 
+
+**Note**: Github-flavored Markdown does not support Markdown definition-list syntax. You can select a definition list in a Google Doc and convert it to HTML if you're using it in a GFM page.
 
 
 ```
@@ -240,7 +266,7 @@ But a definition term cannot be empty:
 <h2 id="code-blocks">Code blocks</h2>
 
 
-A code block (note that by default, gd2md-html does _not_ add language descriptors to code blocks, but see [Code Blocks with lang specification](#code-blocks-with-lang-specification)):
+A code block (note that by default, GD2md-html does _not_ add language descriptors to code blocks, but see [Code Blocks with lang specification](#code-blocks-with-lang-specification)):
 
 
 ```
@@ -266,7 +292,7 @@ main()
 ```
 
 
-If you have any smart quotes in `"code"` or code blocks, gd2md-html removes them during the conversion:
+If you have any smart quotes in `"code"` or code blocks, GD2md-html removes them during the conversion:
 
 
 ```
@@ -279,7 +305,7 @@ func main() {
 <h2 id="code-blocks-with-lang-specification">Code blocks with lang specification</h2>
 
 
-gd2md-html supports an optional lang specification on the first line of the code sample (in the Doc source). The syntax is: <code>lang: <em>langspec</em></code>
+GD2md-html supports an optional lang specification on the first line of the code sample (in the Doc source). The syntax is: <code>lang: <em>langspec</em></code>
 
 For example, here is a code block that specifies `lang:c` on the first line:
 
@@ -333,7 +359,7 @@ Make a fenced code block in Markdown,
 <h2 id="tables">Tables</h2>
 
 
-gd2md-html generates HTML tables.
+GD2md-html generates HTML tables.
 
 A table:
 
@@ -418,10 +444,10 @@ A plain image:
 
 
 
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/gd2md-html-MASTER0.png). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/GD2md-html-MASTER0.png). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/gd2md-html-MASTER0.png "image_tooltip")
+![alt_text](images/GD2md-html-MASTER0.png "image_tooltip")
 
 
 Note that the image link will be broken until you store the image file on your server and adjust the path and width if necessary.
@@ -430,10 +456,10 @@ Alternatively, you can use a Drawing to display an image. Here's an example wher
 
 
 
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/gd2md-html-MASTER1.jpg). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/GD2md-html-MASTER1.jpg). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/gd2md-html-MASTER1.jpg "image_tooltip")
+![alt_text](images/GD2md-html-MASTER1.jpg "image_tooltip")
 
 
 Tip: You can limit the width of an image in Markdown by adding (for example) `{width="75%"}` after the link markup (if your Markdown engine supports such syntax). For HTML, just add a `width="75%"` attribute to the `img` tag.
@@ -441,7 +467,7 @@ Tip: You can limit the width of an image in Markdown by adding (for example) `{w
 <h2 id="drawings">Drawings</h2>
 
 
-Google Docs does not provide an API for accessing the data in a Google Drawing. If you have an inline drawing, gd2md-html will warn and provide an alert in the converted output:
+Google Docs does not provide an API for accessing the data in a Google Drawing. If you have an inline drawing, GD2md-html will warn and provide an alert in the converted output:
 
 
 
@@ -466,7 +492,7 @@ Tip: For any drawing that you display by reference, be sure to change the permis
 <h2 id="equations">Equations</h2>
 
 
-If you insert an equation using Google Docs, gd2md-html will warn and insert an alert message in the output. However, if your target publishing platform supports LaTeX equations, you can use LaTeX syntax directly.
+If you insert an equation using Google Docs, GD2md-html will warn and insert an alert message in the output. However, if your target publishing platform supports LaTeX equations, you can use LaTeX syntax directly.
 
 A Google Docs equation:
 
@@ -499,7 +525,7 @@ They should appear as in this RTL paragraph:
 هذه فقرة تجريبية </p>
 
 
-<h2>Soft line-breaks</h2>
+<h2 id="soft-line-breaks">Soft line-breaks</h2>
 
 
 lineBreak \
@@ -512,6 +538,16 @@ Followed by more bold** and some more regular text.
 This paragraph has an explicit line-break (Enter) here.
 
 And this is a separate paragraph.
+
+<h2 id="special-characters-feature-request">Special characters (FEATURE REQUEST)</h2>
+
+
+FEATURE REQUEST (not yet implemented): Angle bracket escapes:
+
+
+
+*   Angle brackets: If you put angle brackets in your text: < or >, we don't want that to render as an HTML tag. So, we use &lt; for the opening bracket by default. However, if you select the Allow HTML tags option, the < will not be replaced.
+*   But if you really want an angle bracket while using the default setting (to insert a few HTML tags), you can escape it: \<tag>, \<div class='someclass'>. Not escaped: <tag>.
 
 <h2 id="subscript-and-superscript-processing">Subscript and superscript processing</h2>
 
@@ -526,8 +562,8 @@ Another paragraph with **some bold text**.
 
 
 
-1.  A numbered list following a terminal subscript.
-1.  Another list item.
+1. A numbered list following a terminal subscript.
+2. Another list item.
 
 <h2 id="bugs">Bugs</h2>
 
@@ -535,10 +571,13 @@ Another paragraph with **some bold text**.
 
 
 *   Current open bugs: [https://github.com/evbacher/gd2md-html/issues](https://github.com/evbacher/gd2md-html/issues) 
-*   New bug or feature request: [https://github.com/evbacher/gd2md-html/issues/new](https://github.com/evbacher/gd2md-html/issues/new). Thanks for helping to make gd2md-html better!
+*   New bug or feature request: [https://github.com/evbacher/gd2md-html/issues/new](https://github.com/evbacher/gd2md-html/issues/new). Thanks for helping to make GD2md-html better!
 
 <!-- Footnotes themselves at the bottom. -->
 ## Notes
 
 [^1]:
-     gd2md-html supports footnotes!
+     GD2md-html supports footnotes!
+
+
+<!-- Docs to Markdown version 1.0β15 -->
