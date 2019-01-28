@@ -1,4 +1,4 @@
-<!----- Conversion time: 3.042 seconds.
+<!----- Conversion time: 2.854 seconds.
 
 
 Using this Markdown file:
@@ -11,7 +11,7 @@ Using this Markdown file:
 Conversion notes:
 
 * Docs to Markdown version 1.0β15
-* Sun Jan 27 2019 17:27:24 GMT-0800 (PST)
+* Sun Jan 27 2019 17:34:17 GMT-0800 (PST)
 * Source doc: https://docs.google.com/open?id=1Zn4Cdp_OZ-qEbETwkG8reJY40TsZ_lDbLQL5lNKtw28
 
 WARNING:
@@ -47,7 +47,7 @@ This is a raw conversion from a Google Doc (HTML headings option for MD).
 <h1>Docs to Markdown (GD2md-html) MASTER doc</h1>
 
 
-This page demonstrates the features of GD2md-html conversion from a Google Doc to a simple Markdown or HTML file. 
+This page demonstrates the features of Docs to Markdown conversion from a Google Doc to a simple Markdown or HTML file. 
 
 **Note**: Not all Markdown renderers support all Markdown features. For example github Markdown does not support a table of contents ([TOC]), footnotes, or definition lists. Also, some Markdown environments strip heading IDs and replace them with their own generated IDs. You'll have to do some manual adjustments, depending on your target environment.
 
@@ -55,17 +55,17 @@ This page demonstrates the features of GD2md-html conversion from a Google Doc t
 [TOC]
 
 
-**Note**: If you find any bugs, please file them at [https://github.com/evbacher/gd2md-html/issues](https://github.com/evbacher/gd2md-html/issues). Thanks for helping to make GD2md-html better!
+**Note**: If you find any bugs, please file them at [https://github.com/evbacher/gd2md-html/issues](https://github.com/evbacher/gd2md-html/issues). Thanks for helping to make Docs to Markdown better!
 
 <h1 id="headings">Headings</h1>
 
 
-GD2md-html converts headings to the corresponding heading level in Markdown or HTML. If you use a lot of `Heading 1` headings in your Doc, but you want to adhere to the HTML convention of only a single H1 heading per page, you can use the `Demote headings` option.
+Docs to Markdown converts headings to the corresponding heading level in Markdown or HTML. If you use a lot of `Heading 1` headings in your Doc, but you want to adhere to the HTML convention of only a single H1 heading per page, you can use the `Demote headings` option.
 
 <h1 id="heading-ids">Heading IDs</h1>
 
 
-If you generate a table of contents in your Doc, GD2md-html will create IDs for each heading. If your Markdown environment does not handle heading attributes, you can chose the `HTML headings/IDs` option.
+If you generate a table of contents in your Doc, Docs to Markdown will create IDs for each heading. If your Markdown environment does not handle heading attributes, you can chose the `HTML headings/IDs` option.
 
 <h1 id="blank-headings">Blank headings</h1>
 
@@ -77,7 +77,7 @@ END BLANK HEADINGS
 <h2 id="basic-paragraphs">Basic paragraphs</h2>
 
 
-This is a paragraph.[^1] (GD2md-html also supports footnotes) A sentence with `some embedded code`. GD2md-html removes "smart quotes" from text and code to guard against cut-and-paste errors.
+This is a paragraph.[^1] (Docs to Markdown also supports footnotes) A sentence with `some embedded code`. Docs to Markdown removes "smart quotes" from text and code to guard against cut-and-paste errors.
 
 <h2 id="mixed-font-spans">Mixed font spans</h2>
 
@@ -91,12 +91,12 @@ Followed by some regular text.
 <h2 id="mixed-code-spans">Mixed code spans</h2>
 
 
-GD2md-html uses Markdown for most `inline code`, but it will also handle mixed code spans like this: <code>$ ls -l <strong><em>filename</em></strong></code>, by using HTML markup.
+Docs to Markdown uses Markdown for most `inline code`, but it will also handle mixed code spans like this: <code>$ ls -l <strong><em>filename</em></strong></code>, by using HTML markup.
 
 <h2 id="lists">Lists</h2>
 
 
-GD2md-html supports numbered lists, ordered lists, and definition lists.
+Docs to Markdown supports numbered lists, ordered lists, and definition lists.
 
 <h3 id="numbered-lists-ordered-lists">Numbered lists (ordered lists)</h3>
 
@@ -208,7 +208,7 @@ A regular paragraph.
 <h3 id="definition-lists">Definition lists</h3>
 
 
-Because Google Docs does not have a definition list element, GD2md-html uses a simple but explicit syntax that is similar to the kramdown syntax for definition lists:
+Because Google Docs does not have a definition list element, Docs to Markdown uses a simple but explicit syntax that is similar to the kramdown syntax for definition lists:
 
 
 ```
@@ -266,7 +266,7 @@ But a definition term cannot be empty:
 <h2 id="code-blocks">Code blocks</h2>
 
 
-A code block (note that by default, GD2md-html does _not_ add language descriptors to code blocks, but see [Code Blocks with lang specification](#code-blocks-with-lang-specification)):
+A code block (note that by default, Docs to Markdown does _not_ add language descriptors to code blocks, but see [Code Blocks with lang specification](#code-blocks-with-lang-specification)):
 
 
 ```
@@ -292,7 +292,7 @@ main()
 ```
 
 
-If you have any smart quotes in `"code"` or code blocks, GD2md-html removes them during the conversion:
+If you have any smart quotes in `"code"` or code blocks, Docs to Markdown removes them during the conversion:
 
 
 ```
@@ -305,7 +305,7 @@ func main() {
 <h2 id="code-blocks-with-lang-specification">Code blocks with lang specification</h2>
 
 
-GD2md-html supports an optional lang specification on the first line of the code sample (in the Doc source). The syntax is: <code>lang: <em>langspec</em></code>
+Docs to Markdown supports an optional lang specification on the first line of the code sample (in the Doc source). The syntax is: <code>lang: <em>langspec</em></code>
 
 For example, here is a code block that specifies `lang:c` on the first line:
 
@@ -359,7 +359,7 @@ Make a fenced code block in Markdown,
 <h2 id="tables">Tables</h2>
 
 
-GD2md-html generates HTML tables.
+Docs to Markdown generates HTML tables.
 
 A table:
 
@@ -467,7 +467,7 @@ Tip: You can limit the width of an image in Markdown by adding (for example) `{w
 <h2 id="drawings">Drawings</h2>
 
 
-Google Docs does not provide an API for accessing the data in a Google Drawing. If you have an inline drawing, GD2md-html will warn and provide an alert in the converted output:
+Google Docs does not provide an API for accessing the data in a Google Drawing. If you have an inline drawing, Docs to Markdown will warn and provide an alert in the converted output:
 
 
 
@@ -492,7 +492,7 @@ Tip: For any drawing that you display by reference, be sure to change the permis
 <h2 id="equations">Equations</h2>
 
 
-If you insert an equation using Google Docs, GD2md-html will warn and insert an alert message in the output. However, if your target publishing platform supports LaTeX equations, you can use LaTeX syntax directly.
+If you insert an equation using Google Docs, Docs to Markdown will warn and insert an alert message in the output. However, if your target publishing platform supports LaTeX equations, you can use LaTeX syntax directly.
 
 A Google Docs equation:
 
@@ -571,13 +571,13 @@ Another paragraph with **some bold text**.
 
 
 *   Current open bugs: [https://github.com/evbacher/gd2md-html/issues](https://github.com/evbacher/gd2md-html/issues) 
-*   New bug or feature request: [https://github.com/evbacher/gd2md-html/issues/new](https://github.com/evbacher/gd2md-html/issues/new). Thanks for helping to make GD2md-html better!
+*   New bug or feature request: [https://github.com/evbacher/gd2md-html/issues/new](https://github.com/evbacher/gd2md-html/issues/new). Thanks for helping to make Docs to Markdown better!
 
 <!-- Footnotes themselves at the bottom. -->
 ## Notes
 
 [^1]:
-     GD2md-html supports footnotes!
+     Docs to Markdown supports footnotes!
 
 
 <!-- Docs to Markdown version 1.0β15 -->
