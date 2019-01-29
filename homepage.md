@@ -16,16 +16,7 @@ Conversion notes:
 * This document has images: check for >>>>>  gd2md-html alert:  inline image link in generated source and store images to your server.
 ----->
 
-
-<p style="color: red; font-weight: bold">>>>>>  gd2md-html alert:  ERRORs: 0; WARNINGs: 0; ALERTS: 1.</p>
-<ul style="color: red; font-weight: bold"><li>See top comment block for details on ERRORs and WARNINGs. <li>In the converted Markdown or HTML, search for inline alerts that start with >>>>>  gd2md-html alert:  for specific instances that need correction.</ul>
-
-<p style="color: red; font-weight: bold">Links to alert messages:</p><a href="#gdcalert1">alert1</a>
-
-<p style="color: red; font-weight: bold">>>>>> PLEASE check and correct alert issues and delete this message and the inline alerts.<hr></p>
-
-
-<h2>**Docs to Markdown (GD2md-html): convert a Google Doc to Markdown or HTML**</h2>
+<h2>Docs to Markdown (GD2md-html): convert a Google Doc to Markdown or HTML</h2>
 
 
 [the add-on formerly known as GD2md-html]
@@ -33,8 +24,17 @@ Conversion notes:
 ([link to original Google Doc](https://docs.google.com/document/d/1-Z2oM1qMTAtbxsSLV3_mgmR5gLOC0KqszcTsn3eQ-jQ/))
 
 
-[TOC]
-
+**Contents:**
+* [Installing GD2md-html](#installing-docs-to-markdown)
+* [Using GD2md-html](#using-docs-to-markdown)
+* [Features](#features)
+* [Sample conversion](#sample-conversion)
+* [Troubleshooting](#troubleshooting)
+* [Permissions](#permissions)
+* [Bugs](#bugs)
+* [Acknowledgements](#acknowledgements)
+* [See also](#see-also)
+* [Articles and other good stuff about GD2md-html](#articles-about-docs-to-markdown)
 
 <h2>
 
@@ -80,13 +80,9 @@ You can use the Docs to Markdown add-on with any Doc for which you have edit per
 
 
 
-1.  From the Google Docs **Add-ons** menu, select **Docs to Markdown > Convert**. The sidebar window opens: \
+1.  From the Google Docs **Add-ons** menu, select **Docs to Markdown > Convert**. The sidebar window opens:
 
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/Using-gd2md0.png). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/Using-gd2md0.png "image_tooltip")
+    [![GD2md-html sidebar](https://docs.google.com/drawings/d/1B0J5YwRSZlPUmzq-2TX-bxW7duea0Ko3FnV-lwtMeuM/export/png)](https://docs.google.com/drawings/d/1B0J5YwRSZlPUmzq-2TX-bxW7duea0Ko3FnV-lwtMeuM/edit "Click to view/edit diagram")
 
 1.  Use the Markdown or HTML buttons in the sidebar window to convert your document to either Markdown or HTML. If you select part of the document, Docs to Markdown will convert only the selection. Otherwise it will convert the entire document. Click the Docs link for more information.
 
@@ -148,35 +144,28 @@ Support for both Markdown and HTML conversion, unless noted.
 *   **Code block language specification**: You can optionally specify the language for a code block by specifying `lang: langspec` as the first line. For example this code block (in your Google Doc):
 
 
-```
-
-
-        lang:java
-public class HelloWorld {
-    public static void main(String[] args) {
+    ```
+    lang:java
+    public class HelloWorld {
+      public static void main(String[] args) {
         System.out.println("Hello, World");
+      }
     }
-}
-```
+    ```
+    
+    renders as:
 
-
-
-        renders as:
-
-		
-
-
-```java
-        public class HelloWorld {
-    public static void main(String[] args) {
+    ```java
+    public class HelloWorld {
+      public static void main(String[] args) {
         System.out.println("Hello, World");
+      }
     }
-}
-```
+    ```
 
 
 
-        This applies to both constant-width-font paragraphs and single-cell tables.
+    This applies to both constant-width-font paragraphs and single-cell tables.
 
 
 
@@ -308,7 +297,7 @@ See these links for more information about Markdown syntax and standards, and ab
 *   Basic Markdown syntax from John Gruber, the inventor of Markdown: [https://daringfireball.net/projects/markdown/syntax](https://daringfireball.net/projects/markdown/syntax)
 *   CommonMark standard: [http://commonmark.org/](http://commonmark.org/)
 
-<h2 id="articles-about-docs-to-markdown-gd2md-html">Articles about Docs to Markdown (GD2md-html)</h2>
+<h2 id="articles-about-docs-to-markdown">Articles about Docs to Markdown (GD2md-html)</h2>
 
 
 
