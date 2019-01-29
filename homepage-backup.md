@@ -36,11 +36,7 @@ Conversion notes:
 * [See also](#see-also)
 * [Articles and other good stuff about GD2md-html](#articles-about-docs-to-markdown)
 
-<h2>
-
 ---
-</h2>
-
 
 <h2>Docs to Markdown quick start: </h2>
 
