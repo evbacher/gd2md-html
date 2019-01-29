@@ -129,16 +129,15 @@ Support for both Markdown and HTML conversion, unless noted.
 *   <strong>Line breaks</strong>: If you use shift-enter to insert an explicit line break, the converter will preserve that line break, inserting a <code>\\</code> at the end of the line for Markdown, or <code>&lt;br></code> for HTML.
 *   <strong>Intra-document links</strong>: If you linked to headings in your Doc, those links will convert properly as long as you generated a TOC.
 *   <strong>Mixed inline code</strong>: Docs to Markdown may fall back to HTML to handle mixed code spans in normal text properly.
-*   <strong>Definition lists</strong>: Docs to Markdown supports simple definition lists. \
+*   <strong>Definition lists</strong>: Docs to Markdown supports simple definition lists.
 
 
-        ```
-        Definition list syntax (in a Google Doc):
+     ```
+     Definition list syntax (in a Google Doc):
 
-?Term starts with a question mark.
-:Definition here (starts with a leading colon).
-        ```
-
+     ?Term starts with a question mark.
+     :Definition here (starts with a leading colon).
+     ```
 
 *   **Code blocks**: Constant-width-font paragraphs and single-cell tables convert to fenced code blocks (Markdown) or `<pre>` blocks (HTML).
 *   **Code block language specification**: You can optionally specify the language for a code block by specifying `lang: langspec` as the first line. For example this code block (in your Google Doc):
