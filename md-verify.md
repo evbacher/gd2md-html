@@ -1,4 +1,4 @@
-<!----- Conversion time: 4.79 seconds.
+<!----- Conversion time: 4.805 seconds.
 
 
 Using this Markdown file:
@@ -10,8 +10,9 @@ Using this Markdown file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β18
-* Sat Mar 07 2020 13:19:35 GMT-0800 (PST)
+* Docs to Markdown version 1.0β19
+* Sat Mar 07 2020 15:50:41 GMT-0800 (PST)
+* Source doc: Docs to Markdown (GD2md-html): MASTER
 
 WARNING:
 Inline drawings not supported: look for ">>>>>  gd2md-html alert:  inline drawings..." in output.
@@ -554,7 +555,7 @@ FEATURE REQUEST (not yet implemented): Angle bracket escapes:
 
 Note that we need to replace the opening &lt;, even if it occurs at the beginning of a line, like this:
 
-<br>&lt;img src="img1.png"/>&lt;br>
+&lt;br>&lt;img src="img1.png"/>&lt;br>
 
 Let’s also check for one at the end of a line, though that would be unusual: &lt;
 
@@ -607,4 +608,4 @@ Another paragraph with **some bold text**.
      Docs to Markdown supports footnotes!
 
 
-<!-- Docs to Markdown version 1.0β18 -->
+<!-- Docs to Markdown version 1.0β19 -->
