@@ -1,4 +1,4 @@
-<!----- Conversion time: 2.859 seconds.
+<!----- Conversion time: 5.353 seconds.
 
 
 Using this HTML file:
@@ -10,8 +10,8 @@ Using this HTML file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β19
-* Sat Mar 07 2020 15:52:55 GMT-0800 (PST)
+* Docs to Markdown version 1.0β20
+* Sat Mar 21 2020 16:33:01 GMT-0700 (PDT)
 * Source doc: Docs to Markdown (GD2md-html): MASTER
 
 WARNING:
@@ -83,13 +83,25 @@ END BLANK HEADINGS
 
 
 <p>
-This is a paragraph.<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup> (Docs to Markdown also supports footnotes) A sentence with <code>some embedded code</code>. Docs to Markdown removes “smart quotes” from code to guard against cut-and-paste errors.
+This is a paragraph.<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup> (Docs to Markdown also supports footnotes) A sentence with <code>some embedded code</code>. Docs to Markdown changes “smart quotes” to straight quotes in code to guard against cut-and-paste errors.
+</p>
+<h2 id="font-attribute-runs-including-extra-whitespace-at-the-ends">Font attribute runs including extra whitespace at the ends</h2>
+
+
+<p>
+For example a <strong> bold run with some whitespace </strong> on either end. Here’s an <em> italic run </em> with added whitespace. And a <del> strikethrough run </del> with additional whitespace. And <code> some code </code> with added whitespace. And<span style="text-decoration:underline;"> <span style="text-decoration:underline;"> some underline </span> with added whitespace. Links <a href="http://www.google.com">http://www.google.com</a>. Link with no space:<a href="http://www.google.com">http://www.google.com</a>.
+</p>
+<p>
+Some <em>italic<strong>text</strong>alternating<strong>with</strong>bold<strong>italic</strong></em> but no spaces between font changes.
 </p>
 <h2 id="mixed-font-spans">Mixed font spans</h2>
 
 
 <p>
-Some regular text, <em>followed by an italic span <strong>with some embedded bold</strong> text</em>. Some more regular text. Some <del>strikethrough text</del> here. 
+Some regular text, <em>followed by an italic span</em> <strong><em>with some embedded bold</em></strong> <em>text</em>. (Note: this may still be a problem, depending on how it’s formatted in the Google Doc. Like this: Some regular text, <em>followed by an italic span <strong>with some embedded bold</strong> text</em>.
+</p>
+<p>
+Some more regular text. Some <del>strikethrough text</del> here. 
 </p>
 <p>
 Some <del>strikethrough text at the end of the paragraph.</del>
@@ -469,7 +481,7 @@ A table:
    </td>
    <td><code>some code</code>
 <p>
-<code>  var i = 0;</code>
+ <code>  var i = 0;</code>
    </td>
   </tr>
   <tr>
@@ -679,7 +691,7 @@ And this is a separate paragraph.
 
 
 <p>
-FEATURE REQUEST (not yet implemented): Angle bracket escapes:
+FEATURE REQUEST: Angle bracket escapes:
 </p>
 <ul>
 
@@ -730,7 +742,7 @@ This is some more regular text.
 A sentence with <sub>subscript</sub> and <sup>superscript</sup> and some more regular text and <sup><a href="http://www.google.com">a link to Google</a></sup>.
 </p>
 <p>
-And more <sub><strong>bold</strong></sub> and <sup><code>mixed<strong><em> </em>bold<em> italic </em></strong>code</code></sup> and some more text. Some <em>italic text</em>.
+And more <sub><strong>bold</strong></sub> and <sup><code>mixed <strong> <em> </em> bold <em> italic </em> </strong> code</code></sup> and some more text. Some <em>italic text</em>.
 
 <p>
 Another paragraph with <strong>some bold text</strong>.
@@ -753,6 +765,8 @@ Another paragraph with <strong>some bold text</strong>.
 <li>Current open bugs: <a href="https://github.com/evbacher/gd2md-html/issues">https://github.com/evbacher/gd2md-html/issues</a> 
 
 <li>New bug or feature request: <a href="https://github.com/evbacher/gd2md-html/issues/new">https://github.com/evbacher/gd2md-html/issues/new</a>. Thanks for helping to make Docs to Markdown better!
+
+<li>
 
 <!-- Footnotes themselves at the bottom. -->
 
