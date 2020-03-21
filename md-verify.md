@@ -1,4 +1,4 @@
-<!----- Conversion time: 4.805 seconds.
+<!----- Conversion time: 3.519 seconds.
 
 
 Using this Markdown file:
@@ -10,8 +10,8 @@ Using this Markdown file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β19
-* Sat Mar 07 2020 15:50:41 GMT-0800 (PST)
+* Docs to Markdown version 1.0β20
+* Sat Mar 21 2020 16:25:41 GMT-0700 (PDT)
 * Source doc: Docs to Markdown (GD2md-html): MASTER
 
 WARNING:
@@ -77,12 +77,21 @@ END BLANK HEADINGS
 <h2 id="basic-paragraphs">Basic paragraphs</h2>
 
 
-This is a paragraph.[^1] (Docs to Markdown also supports footnotes) A sentence with `some embedded code`. Docs to Markdown removes “smart quotes” from code to guard against cut-and-paste errors.
+This is a paragraph.[^1] (Docs to Markdown also supports footnotes) A sentence with `some embedded code`. Docs to Markdown changes “smart quotes” to straight quotes in code to guard against cut-and-paste errors.
+
+<h2 id="font-attribute-runs-including-extra-whitespace-at-the-ends">Font attribute runs including extra whitespace at the ends</h2>
+
+
+For example a **bold run with some whitespace** on either end. Here’s an _italic run_ with added whitespace. And a ~~strikethrough run~~ with additional whitespace. And `some code` with added whitespace. And<span style="text-decoration:underline;"> <span style="text-decoration:underline;">some underline</span> with added whitespace. Links [http://www.google.com](http://www.google.com). Link with no space:[http://www.google.com](http://www.google.com).
+
+Some _italic**text**alternating**with**bold**italic**_ but no spaces between font changes.
 
 <h2 id="mixed-font-spans">Mixed font spans</h2>
 
 
-Some regular text, _followed by an italic span **with some embedded bold** text_. Some more regular text. Some ~~strikethrough text~~ here. 
+Some regular text, _followed by an italic span_ **_with some embedded bold_** _text_. (Note: this may still be a problem, depending on how it’s formatted in the Google Doc. Like this: Some regular text, _followed by an italic span**with some embedded bold**text_.
+
+Some more regular text. Some ~~strikethrough text~~ here. 
 
 Some ~~strikethrough text at the end of the paragraph.~~
 
@@ -370,7 +379,7 @@ A table:
    </td>
    <td><code>some code</code>
 <p>
-<code>  var i = 0;</code>
+ <code>  var i = 0;</code>
    </td>
   </tr>
   <tr>
@@ -544,7 +553,7 @@ And this is a separate paragraph.
 <h2 id="special-characters-feature-request">Special characters (FEATURE REQUEST)</h2>
 
 
-FEATURE REQUEST (not yet implemented): Angle bracket escapes:
+FEATURE REQUEST: Angle bracket escapes:
 
 
 
@@ -582,7 +591,7 @@ This is some more regular text.
 
 A sentence with <sub>subscript</sub> and <sup>superscript</sup> and some more regular text and <sup><a href="http://www.google.com">a link to Google</a></sup>.
 
-And more <sub><strong>bold</strong></sub> and <sup><code>mixed<strong><em> </em>bold<em> italic </em></strong>code</code></sup> and some more text. Some _italic text_.
+And more <sub><strong>bold</strong></sub> and <sup><code>mixed <strong> <em> </em> bold <em> italic </em> </strong> code</code></sup> and some more text. Some _italic text_.
 
 Another paragraph with **some bold text**.
 
@@ -600,6 +609,7 @@ Another paragraph with **some bold text**.
 
 *   Current open bugs: [https://github.com/evbacher/gd2md-html/issues](https://github.com/evbacher/gd2md-html/issues) 
 *   New bug or feature request: [https://github.com/evbacher/gd2md-html/issues/new](https://github.com/evbacher/gd2md-html/issues/new). Thanks for helping to make Docs to Markdown better!
+*   
 
 <!-- Footnotes themselves at the bottom. -->
 ## Notes
@@ -608,4 +618,4 @@ Another paragraph with **some bold text**.
      Docs to Markdown supports footnotes!
 
 
-<!-- Docs to Markdown version 1.0β19 -->
+<!-- Docs to Markdown version 1.0β20 -->
