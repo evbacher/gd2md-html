@@ -1,4 +1,4 @@
-<!----- Conversion time: 5.353 seconds.
+<!----- Conversion time: 3.539 seconds.
 
 
 Using this HTML file:
@@ -10,9 +10,10 @@ Using this HTML file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β20
-* Sat Mar 21 2020 16:33:01 GMT-0700 (PDT)
+* Docs to Markdown version 1.0β21
+* Tue Mar 31 2020 20:19:04 GMT-0700 (PDT)
 * Source doc: Docs to Markdown (GD2md-html): MASTER
+* Tables are currently converted to HTML tables.
 
 WARNING:
 Inline drawings not supported: look for ">>>>>  gd2md-html alert:  inline drawings..." in output.
