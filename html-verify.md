@@ -1,4 +1,4 @@
-<!----- Conversion time: 3.539 seconds.
+<!----- Conversion time: 2.974 seconds.
 
 
 Using this HTML file:
@@ -10,8 +10,8 @@ Using this HTML file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β21
-* Tue Mar 31 2020 20:19:04 GMT-0700 (PDT)
+* Docs to Markdown version 1.0β22
+* Thu Apr 09 2020 18:38:34 GMT-0700 (PDT)
 * Source doc: Docs to Markdown (GD2md-html): MASTER
 * Tables are currently converted to HTML tables.
 
@@ -90,7 +90,7 @@ This is a paragraph.<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup> (
 
 
 <p>
-For example a <strong> bold run with some whitespace </strong> on either end. Here’s an <em> italic run </em> with added whitespace. And a <del> strikethrough run </del> with additional whitespace. And <code> some code </code> with added whitespace. And<span style="text-decoration:underline;"> <span style="text-decoration:underline;"> some underline </span> with added whitespace. Links <a href="http://www.google.com">http://www.google.com</a>. Link with no space:<a href="http://www.google.com">http://www.google.com</a>.
+For example a<strong> bold run with some whitespace </strong>on either end. Here’s an<em> italic run </em>with added whitespace. And a<del> strikethrough run </del>with additional whitespace. And<code> some code </code>with added whitespace. And<span style="text-decoration:underline;"> some underline </span>with added whitespace. Links <a href="http://www.google.com">http://www.google.com</a>. Link with no space:<a href="http://www.google.com">http://www.google.com</a>.
 </p>
 <p>
 Some <em>italic<strong>text</strong>alternating<strong>with</strong>bold<strong>italic</strong></em> but no spaces between font changes.
@@ -482,7 +482,7 @@ A table:
    </td>
    <td><code>some code</code>
 <p>
- <code>  var i = 0;</code>
+<code>  var i = 0;</code>
    </td>
   </tr>
   <tr>
@@ -743,7 +743,7 @@ This is some more regular text.
 A sentence with <sub>subscript</sub> and <sup>superscript</sup> and some more regular text and <sup><a href="http://www.google.com">a link to Google</a></sup>.
 </p>
 <p>
-And more <sub><strong>bold</strong></sub> and <sup><code>mixed <strong> <em> </em> bold <em> italic </em> </strong> code</code></sup> and some more text. Some <em>italic text</em>.
+And more <sub><strong>bold</strong></sub> and <sup><code>mixed<strong><em> </em>bold<em> italic </em></strong>code</code></sup> and some more text. Some <em>italic text</em>.
 
 <p>
 Another paragraph with <strong>some bold text</strong>.
