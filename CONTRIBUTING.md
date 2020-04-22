@@ -30,5 +30,4 @@ This project follows
 
 ## How to contribute
 
-See the contribution guidelines in the Docs to Markdown user guide (to be
-added).
+See the developer guidelines ([dev.md](dev.md)).
