@@ -1,0 +1,162 @@
+<!--
+Copyright 2020 Google LLC
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<!-- sidebar.html -->
+<!-- See this stylesheet for the class names we're using. -->
+<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons.css">
+
+<!-- For hidden button styling (subtle to a fault). -->
+<style>
+input[type="button"].invisible {background: transparent;border: none;font-size:0;}
+</style>
+
+<!-- This HTML file displays the sidebar on the client browser. -->
+<style>
+.mono {
+    font-family:"Courier New", Courier, monospace;
+    font-size:small;
+}
+</style>
+
+
+<!-- Top of sidebar UI elements. -->
+<input type="button" class="blue" value="Markdown" onclick="markdown()">
+<input type="button" class="blue" value="HTML" onclick="html()">
+
+<input class="invisible" type="button" onclick="html()" value="test">
+
+<!-- Options. -->
+<br>
+<label>
+<input type="checkbox" id="demote_headings">
+Demote headings (H1 &rarr; H2, etc.)
+</label>
+<br>
+<label>
+<input type="checkbox" id="html_headings">
+HTML headings/IDs
+</label>
+<br>
+<label>
+<input type="checkbox" id="wrap_html">
+Wrap HTML
+</label>
+<br>
+<label>
+<input type="checkbox" id="render_html_tags">
+Render HTML tags
+</label>
+
+<!-- Docs, bug link. -->
+<br>
+<div style="text-align: right;">
+Help: 
+<a target="_blank" href="https://github.com/evbacher/gd2md-html/wiki">Docs</a>,
+<a target="_blank" href="https://github.com/evbacher/gd2md-html/issues">Bugs</a>
+</div>
+
+<!-- Text area for initial instructions and output. -->
+<textarea id="text" name="" class=mono rows=40 cols=32 border=none>
+
+Choose Markdown or HTML.
+
+* Default: convert entire doc.
+* Select text to limit scope.
+</textarea>
+
+<script>
+// Client-side JavaScript that initiates communication with the
+// server and handles messages from the server.
+  
+  // Config object to send to the server. This object contains
+  // any settings that we want to send from the UI.
+  // (But do not put a function in this object, since we're sending it
+  // to the server, and the server won't accept such an object.)
+  var config = config || {};
+  
+  // Set config options for each conversion run.
+  var setConfig = function() {  
+    // Default settings.
+    config.htmlHeadings = false;
+    config.zipImages = false;
+    config.demoteHeadings = false;
+    config.wrapHTML = false;
+    config.renderHTMLTags = false;
+
+    // Config settings from UI.
+    if (document.getElementById('demote_headings').checked) {
+      config.demoteHeadings = true;
+    }
+    if (document.getElementById('html_headings').checked) {
+      config.htmlHeadings = true;
+    }
+    if (document.getElementById('wrap_html').checked) {
+      config.wrapHTML = true;
+    }
+    if (document.getElementById('render_html_tags').checked) {
+      config.renderHTMLTags = true;
+    }
+};
+    
+  // Make the calls to the server, and send some callbacks for
+  // the server to call when the conversion is done.
+  
+  // Markdown conversion.
+  function markdown() {  
+    setConfig();
+    var text = document.getElementById('text');
+    text.value = 'Converting text to Markdown...';
+    text.value += '\n\n * Your output will appear here.';
+    
+    // Call the main add-on function (convertX()) on the server.
+    // We also send the names of callback functions to call in case of
+    // success or error.
+    google.script.run
+      .withSuccessHandler(displayServerMessage)
+      .withFailureHandler(displayServerError)
+      .convertToMarkdown(config);
+  }
+  
+  // HTML conversion.
+  function html() {
+    setConfig();
+    var text = document.getElementById('text');
+    text.value = 'Converting text to HTML...';
+    text.value += '\n\n * Your output will appear here.';
+    
+    google.script.run
+      .withSuccessHandler(displayServerMessage)
+      .withFailureHandler(displayServerError)
+      .convertToHTML(config);
+  }
+
+
+// These are callback functions that we pass to the server.
+// We pass one for a successful operation and one for failure.
+  
+  // Whatever the server returns is the serverMessage parameter.
+  function displayServerMessage(serverMessage) {    
+    // Show the server message in the text area.
+    var text = document.getElementById('text');
+    text.value = serverMessage;
+  }
+  
+  // Whatever the server returns is the serverError parameter.
+  function displayServerError(serverError) {
+    var text = document.getElementById('text');
+    text.value = serverError;
+  }
+</script>
