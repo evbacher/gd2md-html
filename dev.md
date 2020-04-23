@@ -51,10 +51,14 @@ And in general, Docs to Markdown converts the text as-is. There are a few except
 *   Definition lists: Docs to Markdown provides a simple markup for definition lists, since Google Docs does not provide a way to express this useful construct.
 *   Smart quotes are converted to straight quotes when they appear within code (inline or in code blocks).
 
+<h3>Minimum permissions</h3>
+
+Docs to Markdown requires only two permissions: permission to access the current document (to read and convert it) and permission to create a sidebar. For details, see [Required permissions](https://github.com/evbacher/gd2md-html/wiki/Privacy-policy#required-permissions). 
+
+The goal is to minimize the intrusiveness of Docs to Markdown. While it would be possible to do things like collect images and create a zip file in the users Drive, that would require much wider permissions to write to Drive.
+
+
 <h2 id="getting-the-source-to-docs-to-markdown">Getting the source to Docs to Markdown</h2>
-
-
-
 
 *   The source code to Docs to Markdown is in the `addon/` directory at [https://github.com/evbacher/gd2md-html](https://github.com/evbacher/gd2md-html). Fork the gd2md-html project into your own repository.
 
