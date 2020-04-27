@@ -493,7 +493,8 @@ html.handleListItem = function(listItem) {
   // Note that ulItem, olItem are the same in HTML (<li>).
   gdc.writeStringToBuffer(gdc.listPrefix + gdc.htmlMarkup.ulItem);
   md.childLoop(listItem);
-  
+  // Close the item of the list.
+  html.closeListItem();
   // Check to see if we should close this list.
   gdc.maybeCloseList(listItem);
 };
@@ -528,6 +529,11 @@ html.maybeOpenList = function (listItem) {
 };
 // Open list and save current list type to stack.
 html.openList = function() {
+  //Should add <li> before nested list was open
+  if (html.nestingLevel > 0) {
+    gdc.writeStringToBuffer('\n');
+    gdc.writeStringToBuffer(gdc.listPrefix + gdc.htmlMarkup.ulItem);
+  }
   gdc.isList = true;
   if (gdc.nestingLevel === 0) {
     gdc.writeStringToBuffer('\n');
@@ -545,8 +551,6 @@ html.openList = function() {
 };
 // Close list and remove it's list type from the stack.
 html.closeList = function() {
-  // Close the last item of the list.
-  html.closeListItem();
   if (html.listStack[0] === gdc.ul) {
     gdc.writeStringToBuffer(gdc.listPrefix + gdc.htmlMarkup.ulClose);
   }
@@ -556,6 +560,10 @@ html.closeList = function() {
   html.listStack.shift();
   if (html.listStack.length === 0) {
     gdc.isList = false;
+  }
+  // Should add </li> after nested list was closed
+  if (gdc.isList) {
+    html.closeListItem();
   }
 };
 // But what about a table that's in a list item?
