@@ -65,7 +65,7 @@ The goal is to minimize the intrusiveness of Docs to Markdown. While it would be
 <h2 id="modifying-docs-to-markdown-code">Modifying Docs to Markdown code</h2>
 
 
-There is a [development/verification doc](https://docs.google.com/document/d/18gdpECY7PDFT6govm7l7M1fjgGqESDZWOYkhmJoy0U8/edit#heading=h.vrm03961beag) that you can use to develop changes to Docs to Markdown. Make a copy of the development/verification doc and change the source there :
+There is a [development/verification doc](https://docs.google.com/document/d/18gdpECY7PDFT6govm7l7M1fjgGqESDZWOYkhmJoy0U8/edit) that you can use to develop changes to Docs to Markdown. Make a copy of the development/verification doc and change the source there :
 
 
 
