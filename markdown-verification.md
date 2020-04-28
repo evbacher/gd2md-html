@@ -1,4 +1,4 @@
-<!----- Conversion time: 3.177 seconds.
+<!----- Conversion time: 8.324 seconds.
 
 
 Using this Markdown file:
@@ -11,8 +11,8 @@ Using this Markdown file:
 Conversion notes:
 
 * Docs to Markdown version 1.0β22
-* Sun Apr 19 2020 15:08:18 GMT-0700 (PDT)
-* Source doc: Docs to Markdown (GD2md-html): MASTER
+* Tue Apr 28 2020 16:08:28 GMT+0500 (Yekaterinburg Standard Time)
+* Source doc: Docs to HTML fix
 * Tables are currently converted to HTML tables.
 
 WARNING:
