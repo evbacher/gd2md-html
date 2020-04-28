@@ -1,4 +1,4 @@
-<!----- Conversion time: 2.753 seconds.
+<!----- Conversion time: 13.354 seconds.
 
 
 Using this HTML file:
@@ -11,8 +11,8 @@ Using this HTML file:
 Conversion notes:
 
 * Docs to Markdown version 1.0β22
-* Sun Apr 19 2020 15:10:42 GMT-0700 (PDT)
-* Source doc: Docs to Markdown (GD2md-html): MASTER
+* Tue Apr 28 2020 16:08:05 GMT+0500 (Yekaterinburg Standard Time)
+* Source doc: Docs to HTML fix
 * Tables are currently converted to HTML tables.
 
 WARNING:
@@ -131,6 +131,7 @@ Here is a numbered list:
 <ol>
 
 <li>Item one.
+</li>
 
 <li>Item two.
 </li>
@@ -144,11 +145,12 @@ And here is a bullet list:
 <ul>
 
 <li>A list item without any punctuation
+</li>
 
 <li>A list item with an embedded command: <code>ps aux | grep conky | grep -v grep | awk '{print $2}' | xargs kill</code>
+</li>
 
 <li>Some mixed-font code: <code>ls -l <strong><em>filename</em></strong></code>. Followed by some normal text.
-</li>
 </ul>
 <h3 id="another-ordered-list">Another ordered list</h3>
 
@@ -156,8 +158,10 @@ And here is a bullet list:
 <ol>
 
 <li>First item
+</li>
 
 <li>Second item
+</li>
 
 <li>Third item
 </li>
@@ -168,15 +172,21 @@ And here is a bullet list:
 <ol>
 
 <li>First item
+</li>
 
-<li>Second item 
+<li>Second item
+</li>
+ 
+<li> 
 <ol>
  
 <li>First nested item
+</li>
  
 <li>Second nested item
 </li> 
 </ol>
+</li>
 
 <li>Third item
 </li>
@@ -190,6 +200,7 @@ You can have a code block within a list item, as long as you indent the code  (i
 <ul>
 
 <li>A text item, followed by a code block that's indented and should be part of this item:
+</li>
 
     
 
@@ -201,16 +212,19 @@ some code;
 
 <ul>
 
-<li>Another item. 
+<li>Another item.
+</li>
+ 
+<li> 
 <ul>
  
 <li>A nested list item with a command:
+</li>
 
         
 
 <pre class="prettyprint">$ cat file | grep dog | wc
-
-</li> 
+ 
 </ul>
 </li> 
 </ul>
@@ -227,6 +241,7 @@ Note: Works for Markdown, still a known issue for HTML.
 <ul>
 
 <li>A bullet list with an additional paragraph:
+</li>
 <p>
 
     This is another paragraph.
@@ -237,10 +252,14 @@ Note: Works for Markdown, still a known issue for HTML.
 </p>
 <ul>
 
-<li>Another item. 
+<li>Another item.
+</li>
+ 
+<li> 
 <ul>
  
 <li>A nested item.
+</li>
 <p>
 
         This is a new paragraph within the nested item.
@@ -256,27 +275,38 @@ callSomeFunction();
 <ul>
 
 <li>Another list item.
+</li>
 
-<li>And another. 
+<li>And another.
+</li>
+ 
+<li> 
 <ul>
  
 <li>Nested
+</li>
 <p>
 
         A paragraph within a list item.
-</p>  
+</p>
+  
+<li>  
 <ul>
   
 <li>Nested
+</li>
 <p>
 
             A paragraph within a list item.
-</p> 
+</p>
+ 
+<li> 
 <ul>
  
 <li>Reducing the nesting level.
 </li> 
 </ul>
+</li>
 
 <li>First-level list item.
 </li>
@@ -544,6 +574,7 @@ Some regular URL links:
 <ul>
 
 <li><a href="http://www.google.com/">http://www.google.com/</a>
+</li>
 
 <li><a href="https://fivethirtyeight.com/">https://fivethirtyeight.com/</a>
 </li>
@@ -554,6 +585,7 @@ Some links with titles:
 <ul>
 
 <li><a href="http://kottke.org/">Jason Kottke's blog</a>
+</li>
 
 <li><a href="https://beanroad.blogspot.com/">Bean Road</a>
 </li>
@@ -697,10 +729,13 @@ FEATURE REQUEST: Angle bracket escapes:
 <ul>
 
 <li>Angle brackets: If you put angle brackets in your text: &lt; or >, we don't want that to render as an HTML tag. So, we use &amp;lt; for the opening bracket by default. However, if you select the Render HTML tags option, the opening &lt; will not be replaced.
+</li>
 
 <li>Test: it seems that loose angle brackets &lt; and > do not behave like HTML tags. But when there is no whitespace: &lt;some text>, they do behave like HTML tags. To change that behavior, we’ll need to (by default) escape the opening angle bracket and turn it into &amp;lt;. 
+</li>
 
 <li>But if you really want an angle bracket while using the default setting (to insert a few HTML tags), you can escape it: <tag>, <div class=’someclass’>. Not escaped: &lt;tag>. Also not escaped: &lt;p>This is an HTML paragraph.&lt;p>
+</li>
 
 <li>Escaped: <p>This is an HTML paragraph.<p>
 </li>
@@ -754,6 +789,7 @@ Another paragraph with <strong>some bold text</strong>.
 <ol>
 
 <li>A numbered list following a terminal subscript.
+</li>
 
 <li>Another list item.
 </li>
@@ -764,10 +800,14 @@ Another paragraph with <strong>some bold text</strong>.
 <ul>
 
 <li>Current open bugs: <a href="https://github.com/evbacher/gd2md-html/issues">https://github.com/evbacher/gd2md-html/issues</a> 
+</li>
 
 <li>New bug or feature request: <a href="https://github.com/evbacher/gd2md-html/issues/new">https://github.com/evbacher/gd2md-html/issues/new</a>. Thanks for helping to make Docs to Markdown better!
+</li>
 
 <li>
+</li>
+</ul>
 
 <!-- Footnotes themselves at the bottom. -->
 
