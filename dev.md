@@ -85,7 +85,7 @@ Convert your development doc to both Markdown and HTML (use the HTML headings op
 
 
 
-1. When you’re sure your changes are working well, send me a pull request, detailing the changes you’ve made. In the pull request comment, share a link to your copy of the development doc with me (view permission is good enough, since I’ll have the changed add-on code via your pull request) so that I can use it to verify any changes.
+1. When you’re sure your changes are working well, send me a pull request, detailing the changes you’ve made. In the pull request comment, share a link to your copy of the [development/verification doc](https://docs.google.com/document/d/18gdpECY7PDFT6govm7l7M1fjgGqESDZWOYkhmJoy0U8/edit) with me (with edit permission) so that I can use it to verify any changes.
 2. I will add your code changes to a development branch and verify that your changes work and are consistent with the spirit of Docs to Markdown.
 3. Once I publish a new version, I will add you to the project as a contributor (unless you prefer to remain anonymous).
 
