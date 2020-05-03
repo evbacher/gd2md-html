@@ -1,17 +1,22 @@
-<!----- Conversion time: 2.753 seconds.
+<!-----
+NEW: Your output is on the clipboard!
+
+NEW: Check the "Supress top comment" to remove this info from the output.
+
+Conversion time: 4.193 seconds.
 
 
 Using this HTML file:
 
-1. Cut and paste this output into your source file.
+1. Paste this output into your source file.
 2. See the notes and action items below regarding this conversion run.
 3. Check the rendered output (headings, lists, code blocks, tables) for proper
    formatting and use a linkchecker before you publish this page.
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β22
-* Sun Apr 19 2020 15:10:42 GMT-0700 (PDT)
+* Docs to Markdown version 1.0β23
+* Sat May 02 2020 20:27:01 GMT-0700 (PDT)
 * Source doc: Docs to Markdown (GD2md-html): MASTER
 * Tables are currently converted to HTML tables.
 
@@ -766,8 +771,6 @@ Another paragraph with <strong>some bold text</strong>.
 <li>Current open bugs: <a href="https://github.com/evbacher/gd2md-html/issues">https://github.com/evbacher/gd2md-html/issues</a> 
 
 <li>New bug or feature request: <a href="https://github.com/evbacher/gd2md-html/issues/new">https://github.com/evbacher/gd2md-html/issues/new</a>. Thanks for helping to make Docs to Markdown better!
-
-<li>
 
 <!-- Footnotes themselves at the bottom. -->
 
