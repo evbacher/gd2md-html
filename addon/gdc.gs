@@ -42,7 +42,7 @@ var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
 var GDC_VERSION = '1.0β23'; // based on 1.0β22
 
 // Version notes: significant changes (latest on top). (files changed)
-// - 1.0β23: Copy converted output to the clipboard. Add option to suppress top comment. Add copyright comment. (gdc, html, sidebar, addon)
+// - 1.0β23: Copy converted output to the clipboard. Add option to suppress top comment. Add copyright comment, note about Docs link. (gdc, html, sidebar, addon)
 // - 1.0β22: Roll back font-change runs for now (still causing problems), but keep table note. (gdc)
 // - 1.0β21: Add a note that tables are currently converted to HTML tables. No change to rendered conversion. (gdc, html)
 // - 1.0β20: Handle font-change runs with extra whitespace better (italic, bold, etc.). (gdc)
