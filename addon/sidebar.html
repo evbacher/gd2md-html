@@ -1,12 +1,9 @@
 <!--
 Copyright 2020 Google LLC
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
     https://www.apache.org/licenses/LICENSE-2.0
-
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -36,10 +33,17 @@ input[type="button"].invisible {background: transparent;border: none;font-size:0
 <input type="button" class="blue" value="Markdown" onclick="markdown()">
 <input type="button" class="blue" value="HTML" onclick="html()">
 
+<input
+  type="button" class="blue"
+  value="Help" onclick="help()"
+>
+<p>
+
+<!--
 <input class="invisible" type="button" onclick="html()" value="test">
+-->
 
 <!-- Options. -->
-<br>
 <label>
 <input type="checkbox" id="demote_headings">
 Demote headings (H1 &rarr; H2, etc.)
@@ -58,26 +62,40 @@ Wrap HTML
 <label>
 <input type="checkbox" id="render_html_tags">
 Render HTML tags
+</label><br>
+<label>
+<input type="checkbox" id="suppress_info">
+Suppress top comment
 </label>
 
 <!-- Docs, bug link. -->
 <br>
-<div style="text-align: right;">
-Help: 
+<div style="text-align: left;"> 
 <a target="_blank" href="https://github.com/evbacher/gd2md-html/wiki">Docs</a>,
 <a target="_blank" href="https://github.com/evbacher/gd2md-html/issues">Bugs</a>
 </div>
 
 <!-- Text area for initial instructions and output. -->
 <textarea id="text" name="" class=mono rows=40 cols=32 border=none>
+</textarea>
+
+<script>
+var helpText = `NEW!: Your output will be copied to the clipboard.
 
 Choose Markdown or HTML.
 
 * Default: convert entire doc.
-* Select text to limit scope.
-</textarea>
+* Select text to limit scope.`
+;
+   
+  function help() {
+    var text = document.getElementById('text');
+    text.value = helpText;
+  }
+  
+  // Set help text in textarea.
+  help();
 
-<script>
 // Client-side JavaScript that initiates communication with the
 // server and handles messages from the server.
   
@@ -95,6 +113,7 @@ Choose Markdown or HTML.
     config.demoteHeadings = false;
     config.wrapHTML = false;
     config.renderHTMLTags = false;
+    config.suppressInfo= false;
 
     // Config settings from UI.
     if (document.getElementById('demote_headings').checked) {
@@ -109,6 +128,9 @@ Choose Markdown or HTML.
     if (document.getElementById('render_html_tags').checked) {
       config.renderHTMLTags = true;
     }
+    if (document.getElementById('suppress_info').checked) {
+      config.suppressInfo = true;
+    }
 };
     
   // Make the calls to the server, and send some callbacks for
@@ -119,7 +141,7 @@ Choose Markdown or HTML.
     setConfig();
     var text = document.getElementById('text');
     text.value = 'Converting text to Markdown...';
-    text.value += '\n\n * Your output will appear here.';
+    text.value += '\n\n * Your output will appear here (and on the clipboard).';
     
     // Call the main add-on function (convertX()) on the server.
     // We also send the names of callback functions to call in case of
@@ -135,7 +157,7 @@ Choose Markdown or HTML.
     setConfig();
     var text = document.getElementById('text');
     text.value = 'Converting text to HTML...';
-    text.value += '\n\n * Your output will appear here.';
+    text.value += '\n\n * Your output will appear here (and on the clipboard).';
     
     google.script.run
       .withSuccessHandler(displayServerMessage)
@@ -152,6 +174,8 @@ Choose Markdown or HTML.
     // Show the server message in the text area.
     var text = document.getElementById('text');
     text.value = serverMessage;
+    // Save the result to the clipboard.
+    navigator.clipboard.writeText(text.value);
   }
   
   // Whatever the server returns is the serverError parameter.
