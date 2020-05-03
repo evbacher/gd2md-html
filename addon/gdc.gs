@@ -39,9 +39,10 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β22'; // based on 1.0β19, 21
+var GDC_VERSION = '1.0β23'; // based on 1.0β22
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β23: Copy converted output to the clipboard. Add option to suppress top comment. Add copyright comment. (gdc, html, sidebar, addon)
 // - 1.0β22: Roll back font-change runs for now (still causing problems), but keep table note. (gdc)
 // - 1.0β21: Add a note that tables are currently converted to HTML tables. No change to rendered conversion. (gdc, html)
 // - 1.0β20: Handle font-change runs with extra whitespace better (italic, bold, etc.). (gdc)
@@ -103,6 +104,9 @@ gdc.config = function(config) {
   if (config.renderHTMLTags === true) {
     gdc.renderHTMLTags = true;
   }
+  if (config.suppressInfo === true) {
+    gdc.suppressInfo = true;
+  }
 };
 
 // Setup for each conversion run.
@@ -134,7 +138,7 @@ gdc.init = function(docType) {
   gdc.info =  '';
   // Hint about what to do with this output (note output type).
   gdc.info += '\n\nUsing this ' + gdc.docType + ' file:';
-  gdc.info += '\n\n1. Cut and paste this output into your source file.';
+  gdc.info += '\n\n1. Paste this output into your source file.';
   gdc.info += '\n2. See the notes and action items below regarding this conversion run.';
 
   gdc.info += '\n3. Check the rendered output (headings, lists, code blocks, tables) for proper';
@@ -1616,6 +1620,13 @@ md.preCodeBlock = '<newline><newline>';
 md.openCodeBlock = '```';
 md.closeCodeBlock = '```<newline><newline>';  // No leading \n here on purpose.
 
+// Add new information to the top of the info comment.
+// But don't get rid of the opening of the comment.
+gdc.topComment = '<!-----\n'
++ 'NEW: Your output is on the clipboard!\n\n'
++ 'NEW: Check the "Supress top comment" to remove this info from the output.\n\n'
+;
+  
 md.doMarkdown = function(config) {
   gdc.config(config);
   // Get the body elements.
@@ -1638,10 +1649,12 @@ md.doMarkdown = function(config) {
     gdc.info += '\n* This document has images: check for ' + gdc.alertPrefix;
     gdc.info += ' inline image link in generated source and store images to your server.';
   }
-  // Record elapsed time at the top of the info comment.
+  
+  // Record elapsed time.
   var eTime = (new Date().getTime() - gdc.startTime)/1000;
-  gdc.info = '<!----- Conversion time: ' + eTime + ' seconds.\n' + gdc.info;
-
+  gdc.info = 'Conversion time: ' + eTime + ' seconds.\n' + gdc.info;
+  
+  gdc.info = gdc.topComment + gdc.info;
   // Warn at the top if DEBUG is true.
   if (DEBUG) {
     gdc.info = '<!-- WARNING: DEBUG is TRUE!! -->\n\n' + gdc.info;
@@ -1651,10 +1664,12 @@ md.doMarkdown = function(config) {
   gdc.flushBuffer();
   gdc.flushFootnoteBuffer();
   gdc.setAlertMessage();
-  gdc.out = gdc.info + '\n----->\n\n' + gdc.alertMessage + gdc.out;
+  gdc.out = gdc.alertMessage + gdc.out;
+  // Add info comment if desired.
+  if (!gdc.suppressInfo) {
+    gdc.out = gdc.info + '\n----->\n\n' + gdc.out;
+  }
   
-  gdc.out += '\n\n' + '<!-- ' + GDC_TITLE + ' version ' + GDC_VERSION + ' -->\n';
-
   return gdc.out;
 };
 
