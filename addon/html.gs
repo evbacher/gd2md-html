@@ -72,7 +72,9 @@ html.doHtml = function(config) {
   
   // Record elapsed time.
   var eTime = (new Date().getTime() - gdc.startTime)/1000;
-  gdc.info = '<!----- Conversion time: ' + eTime + ' seconds.\n' + gdc.info;
+  gdc.info = 'Conversion time: ' + eTime + ' seconds.\n' + gdc.info;
+  // Add topComment (see gdc).
+  gdc.info = gdc.topComment + gdc.info;
 
   // Warn at the top if DEBUG is true.
   if (DEBUG) {
@@ -81,7 +83,11 @@ html.doHtml = function(config) {
 
   // Add info and alert message to top of output.
   gdc.setAlertMessage();
-  gdc.out = gdc.info + '\n----->\n\n' + gdc.alertMessage + gdc.out;
+  gdc.out = gdc.alertMessage + gdc.out;
+  // Add info comment if desired.
+  if (!gdc.suppressInfo) {
+    gdc.out = gdc.info + '\n----->\n\n' + gdc.out;
+  }
   
   // Output content.
   gdc.flushBuffer();
