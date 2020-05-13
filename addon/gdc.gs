@@ -1624,7 +1624,7 @@ md.closeCodeBlock = '```<newline><newline>';  // No leading \n here on purpose.
 // But don't get rid of the opening of the comment.
 gdc.topComment = '<!-----\n'
 + 'NEW: Your output is on the clipboard!\n\n'
-+ 'NEW: Check the "Supress top comment" to remove this info from the output.\n\n'
++ 'NEW: Check the "Suppress top comment" to remove this info from the output.\n\n'
 ;
   
 md.doMarkdown = function(config) {
