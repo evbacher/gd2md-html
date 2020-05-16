@@ -17,5 +17,5 @@ You'll also need to sign Google's Contributor License Agreement at https://cla.d
 
 Thanks to all!
 
-* [danielramosbh74](https://github.com/danielramosbh74
+* [danielramosbh74](https://github.com/danielramosbh74)
 * [evbacher](https://github.com/evbacher)
