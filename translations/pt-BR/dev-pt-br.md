@@ -46,23 +46,25 @@ Exemplos de formatação sofisticada considerados mas não implementados incluem
 
 E normalmente Docs to Markdown converte o texto como ele é. Aqui estão algumas poucas exceções:
 
+*   As tags HTML <tag> são ignoradas por padrão (para que apareçam literalmente na saída renderizada). Se você quer realmente escrever em HTML e renderizar esta saída, você deve marcar a opção "Renderizar tags HTML".
+*   Tabelas de uma única célula são convertidas em blocos de código.
+*   Listas de definições: o Docs to Markdown fornece uma marcação simples para listas de definições, pois o Google Docs não fornece uma maneira de expressar essa construção útil.
+*   As aspas inteligentes são convertidas em aspas simples quando aparecem no código (embutido ou em blocos de código).
+
+<h3>Permissões mínimas</h3>
+
+Docs to Markdown requer apenas duas permissões: permissão para acessar o documento atual (para ler e convertê-lo) e permissão para criar uma barra lateral. Para detalhes, consulte [Permissões requeridas] (https://github.com/evbacher/gd2md-html/wiki/Privacy-policy#required-permissions).
+
+O objetivo é minimizar a intrusão do Markdown no Google Docs. Embora fosse possível fazer coisas como coletar imagens e criar um arquivo zip no Drive dos usuários, isso exigiria permissões muito mais amplas para gravar no Drive.
+
 # >> I (or anyone else) can continue translating from this point forward
 
-*   HTML tags &lt;tag> are escaped by default (so that they appear literally in the rendered output). If you want to actually write HTML and render it in your output, you can select the Render HTML tags option.
-*   Single-cell tables get converted to code blocks.
-*   Definition lists: Docs to Markdown provides a simple markup for definition lists, since Google Docs does not provide a way to express this useful construct.
-*   Smart quotes are converted to straight quotes when they appear within code (inline or in code blocks).
 
-<h3>Minimum permissions</h3>
+<h2 id="getting-the-source-to-docs-to-markdown">Obtendo o código-fonte do Docs to Markdown</h2>
 
-Docs to Markdown requires only two permissions: permission to access the current document (to read and convert it) and permission to create a sidebar. For details, see [Required permissions](https://github.com/evbacher/gd2md-html/wiki/Privacy-policy#required-permissions). 
-
-The goal is to minimize the intrusiveness of Docs to Markdown. While it would be possible to do things like collect images and create a zip file in the users Drive, that would require much wider permissions to write to Drive.
+*   O código-fonte do Docs to Markdown está na pasta `addon/` em [https://github.com/evbacher/gd2md-html](https://github.com/evbacher/gd2md-html). Bifurque (_fork_) o projeto gd2md-html no seu próprio repositório.
 
 
-<h2 id="getting-the-source-to-docs-to-markdown">Getting the source to Docs to Markdown</h2>
-
-*   The source code to Docs to Markdown is in the `addon/` directory at [https://github.com/evbacher/gd2md-html](https://github.com/evbacher/gd2md-html). Fork the gd2md-html project into your own repository.
 
 <h2 id="modifying-docs-to-markdown-code">Modifying Docs to Markdown code</h2>
 
