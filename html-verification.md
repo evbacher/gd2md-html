@@ -1,7 +1,7 @@
 <!-----
 NEW: Your output is on the clipboard!
 
-NEW: Check the "Supress top comment" to remove this info from the output.
+NEW: Check the "Suppress top comment" to remove this info from the output.
 
 Conversion time: 4.193 seconds.
 
