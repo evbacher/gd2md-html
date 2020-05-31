@@ -1,9 +1,9 @@
 <!-----
-NEW: Your output is on the clipboard!
+Copy and paste the converted output.
 
-NEW: Check the "Supress top comment" to remove this info from the output.
+NEW: Check the "Suppress top comment" option to remove this info from the output.
 
-Conversion time: 6.086 seconds.
+Conversion time: 2.843 seconds.
 
 
 Using this Markdown file:
@@ -15,8 +15,8 @@ Using this Markdown file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β23
-* Sat May 02 2020 20:25:01 GMT-0700 (PDT)
+* Docs to Markdown version 1.0β25
+* Sat May 30 2020 20:29:52 GMT-0700 (PDT)
 * Source doc: Docs to Markdown (GD2md-html): MASTER
 * Tables are currently converted to HTML tables.
 
@@ -27,7 +27,8 @@ Inline drawings not supported: look for ">>>>>  gd2md-html alert:  inline drawin
 WARNING:
 You have some equations: look for ">>>>>  gd2md-html alert:  equation..." in output.
 
-* This document has images: check for >>>>>  gd2md-html alert:  inline image link in generated source and store images to your server.
+* This document has images: check for >>>>>  gd2md-html alert:  inline image link in generated source and store images to your server. NOTE: Images in exported zip file from Google Docs may not appear in  the same order as they do in your doc. Please check the images!
+
 
 WARNING:
 You have 3 H1 headings. You may want to use the "H1 -> H2" option to demote all headings by one level.
@@ -461,10 +462,10 @@ A plain image:
 
 
 
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/Docs-to0.png). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/Docs-to0.png "image_tooltip")
+![alt_text](images/image1.png "image_tooltip")
 
 
 Note that the image link will be broken until you store the image file on your server and adjust the path and width if necessary.
@@ -473,10 +474,10 @@ Alternatively, you can use a Drawing to display an image. Here's an example wher
 
 
 
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/Docs-to1.jpg). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.jpg). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/Docs-to1.jpg "image_tooltip")
+![alt_text](images/image2.jpg "image_tooltip")
 
 
 Tip: You can limit the width of an image in Markdown by adding (for example) `{width="75%"}` after the link markup (if your Markdown engine supports such syntax). For HTML, just add a `width="75%"` attribute to the `img` tag.
