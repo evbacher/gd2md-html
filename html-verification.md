@@ -1,9 +1,9 @@
 <!-----
-NEW: Your output is on the clipboard!
+Copy and paste the converted output.
 
-NEW: Check the "Supress top comment" to remove this info from the output.
+NEW: Check the "Suppress top comment" option to remove this info from the output.
 
-Conversion time: 4.193 seconds.
+Conversion time: 3.909 seconds.
 
 
 Using this HTML file:
@@ -15,8 +15,8 @@ Using this HTML file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β23
-* Sat May 02 2020 20:27:01 GMT-0700 (PDT)
+* Docs to Markdown version 1.0β25
+* Sat May 30 2020 20:28:08 GMT-0700 (PDT)
 * Source doc: Docs to Markdown (GD2md-html): MASTER
 * Tables are currently converted to HTML tables.
 
@@ -27,7 +27,8 @@ Inline drawings not supported: look for ">>>>>  gd2md-html alert:  inline drawin
 WARNING:
 You have some equations: look for ">>>>>  gd2md-html alert:  equation..." in output.
 
-* This document has images: check for >>>>>  gd2md-html alert:  inline image link in generated source and store images to your server.
+* This document has images: check for >>>>>  gd2md-html alert:  inline image link in generated source and store images to your server. NOTE: Images in exported zip file from Google Docs may not appear in  the same order as they do in your doc. Please check the images!
+
 * Footnote support in HTML is alpha: please check your footnotes.
 
 WARNING:
@@ -572,10 +573,10 @@ A plain image:
 <p>
 
 
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/Docs-to0.png). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-<img src="images/Docs-to0.png" width="" alt="alt_text" title="image_tooltip">
+<img src="images/image1.png" width="" alt="alt_text" title="image_tooltip">
 
 </p>
 <p>
@@ -587,10 +588,10 @@ Alternatively, you can use a Drawing to display an image. Here's an example wher
 <p>
 
 
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/Docs-to1.jpg). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.jpg). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-<img src="images/Docs-to1.jpg" width="" alt="alt_text" title="image_tooltip">
+<img src="images/image2.jpg" width="" alt="alt_text" title="image_tooltip">
 
 </p>
 <p>
