@@ -64,6 +64,8 @@ html.doHtml = function(config) {
   if (gdc.hasImages) {
     gdc.info += '\n* This document has images: check for ' + gdc.alertPrefix;
     gdc.info += ' inline image link in generated source and store images to your server.';
+    gdc.info += ' NOTE: Images in exported zip file from Google Docs may not appear in ';
+    gdc.info += ' the same order as they do in your doc. Please check the images!\n';
   }
   
   if (gdc.hasFootnotes) {
