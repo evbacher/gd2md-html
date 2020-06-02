@@ -39,9 +39,11 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β23'; // based on 1.0β22
+var GDC_VERSION = '1.0β25'; // based on 1.0β24
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β25: Use image path in this form: images/image1.png, images/image2.png, etc. Clean up old zip image code. (gdc,html,sidebar)
+// - 1.0β24: Correct a spelling error (s/Supress/Suppress). (gdc)
 // - 1.0β23: Copy converted output to the clipboard. Add option to suppress top comment. Add copyright comment, note about Docs link. (gdc, html, sidebar, addon)
 // - 1.0β22: Roll back font-change runs for now (still causing problems), but keep table note. (gdc)
 // - 1.0β21: Add a note that tables are currently converted to HTML tables. No change to rendered conversion. (gdc, html)
@@ -89,9 +91,6 @@ gdc.debug = function(text) {
 
 // Set up any config from client side config object.
 gdc.config = function(config) {
-  if (config.zipImages === true) {
-    gdc.zipImages = true;
-  }
   if (config.demoteHeadings === true) {
     gdc.demoteHeadings = true;
   }  
@@ -161,11 +160,8 @@ gdc.init = function(docType) {
   gdc.footnotes = [];
 
   // Images
-  gdc.zipImages = false;
-  gdc.zipName = '';
   gdc.defaultImagePath = 'images/'; // relative to page dir
   gdc.imgName = '';
-  gdc.imgBlobs = [];  // Save images for zip file.
   gdc.imageCounter = 0;
   gdc.attachments = [];
 
@@ -405,17 +401,6 @@ gdc.getDoc = function(docsUrl) {
   } catch(e) {
     return 'ERROR calling getName(): ' + e + '\n\n';
   }
-
-  // Create image file name using legal file name characters.
-  // Truncate doc name (if more than two words).
-  var tname = /\w+\s+\w+/.exec(gdc.docName);
-  if (tname) {
-    gdc.imgName = tname[0];
-  } else {
-    gdc.imgName = gdc.docName;
-  }
-  gdc.imgName = gdc.imgName.replace(/[^A-Za-z0-9]+/g,'-');
-  gdc.zipName = gdc.imgName + '_images.zip';
 
   return doc;
 };
@@ -943,8 +928,7 @@ gdc.handleInlineDrawing = function() {
 };
 
 gdc.handleImage = function(imageElement) {
-  // Figure out all the image file information for link.
-  // [Storage is optional.]
+  // Figure out image file information for the link.
   var img = imageElement.asInlineImage();
   var imgBlob = img.getBlob();
   var contentType = imgBlob.getContentType();
@@ -957,30 +941,23 @@ gdc.handleImage = function(imageElement) {
     fileType = '.gif';
   }
 
-  // Use current time to make file name unique (for loose files).
-  var fnameBase = gdc.imgName + gdc.imageCounter + fileType;
-  var fname = gdc.imgName + gdc.imageCounter + '_' + Date.now() + fileType;
+  // Create image path/file name: 
+  // Note that Google Docs export does not necessarily put them in order!
+  // But there's no way to predict, so users will need to check.
   gdc.imageCounter++;
-
-  // Save for zip if option available and selected.
-  // This is actually more useful than the preview option.
-  if (gdc.zipImages) {
-    // Add this image blob to the images array. We'll put them all in zip file later.
-    imgBlob.setName(fnameBase);
-    gdc.imgBlobs.push(imgBlob);
-  }
+  var imagePath = gdc.defaultImagePath + 'image' + gdc.imageCounter +fileType;
 
   // Put image markup here regardless of whether the image was stored or not.
   gdc.hasImages = true; // So we can provide a note at the top.
-  gdc.alert('inline image link here (to ' + gdc.defaultImagePath+fnameBase
-    + '). Store image on your image server and adjust path/filename if necessary.');
+  gdc.alert('inline image link here (to ' + imagePath
+    + '). Store image on your image server and adjust path/filename/extension if necessary.');
   if (gdc.isHTML) {
     // Width is an optional attribute for img tag, but let's leave the hint.
     gdc.writeStringToBuffer('\n<img src="'
-      + gdc.defaultImagePath+fnameBase
+      + imagePath
       + '" width="" alt="alt_text" title="image_tooltip">\n');
   } else {
-    gdc.writeStringToBuffer('<newline>![alt_text](' + gdc.defaultImagePath+fnameBase+' "image_tooltip")<newline>');
+    gdc.writeStringToBuffer('<newline>![alt_text](' + imagePath +' "image_tooltip")<newline>');
   }
 };
 
@@ -1159,14 +1136,6 @@ gdc.setAlertMessage = function() {
     gdc.alertMessage += '\n<p style="color: red; font-weight: bold">'
       + gdc.chevrons
       + 'PLEASE check and correct alert issues and delete this message and the inline alerts.<hr></p>\n\n';
-  }
-
-  // Provide link to images zip file if it exists.
-  if (gdc.imgBlobs.length > 0) {
-    gdc.alertMessage += alertOpen
-      + gdc.alertPrefix
-      + 'Images stored in <a href="' + gdc.imageZip.getUrl() + '">My Drive/' + gdc.zipName
-      + '</a></p>\n\n';
   }
 };
 
@@ -1623,8 +1592,8 @@ md.closeCodeBlock = '```<newline><newline>';  // No leading \n here on purpose.
 // Add new information to the top of the info comment.
 // But don't get rid of the opening of the comment.
 gdc.topComment = '<!-----\n'
-+ 'NEW: Your output is on the clipboard!\n\n'
-+ 'NEW: Check the "Supress top comment" to remove this info from the output.\n\n'
++ 'Copy and paste the converted output.\n\n'
++ 'NEW: Check the "Suppress top comment" option to remove this info from the output.\n\n'
 ;
   
 md.doMarkdown = function(config) {
@@ -1638,16 +1607,11 @@ md.doMarkdown = function(config) {
     md.handleChildElement(elements[i]);
   }
 
-  // Write image zip if selected (and available).
-  if (gdc.zipImages) {
-    if (izip) {
-      izip.createImagesZip();
-    }
-  }
-
   if (gdc.hasImages) {
     gdc.info += '\n* This document has images: check for ' + gdc.alertPrefix;
     gdc.info += ' inline image link in generated source and store images to your server.';
+    gdc.info += ' NOTE: Images in exported zip file from Google Docs may not appear in ';
+    gdc.info += ' the same order as they do in your doc. Please check the images!\n';
   }
   
   // Record elapsed time.
