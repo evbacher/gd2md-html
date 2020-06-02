@@ -80,8 +80,7 @@ Suppress top comment
 </textarea>
 
 <script>
-var helpText = `NEW!: Your output will be copied to the clipboard.
-
+var helpText = `
 Choose Markdown or HTML.
 
 * Default: convert entire doc.
@@ -143,7 +142,7 @@ For more details, click the Docs link above.`
     setConfig();
     var text = document.getElementById('text');
     text.value = 'Converting text to Markdown...';
-    text.value += '\n\n * Your output will appear here (and on the clipboard).';
+    text.value += '\n\n * Your output will appear here.';
     
     // Call the main add-on function (convertX()) on the server.
     // We also send the names of callback functions to call in case of
@@ -159,7 +158,7 @@ For more details, click the Docs link above.`
     setConfig();
     var text = document.getElementById('text');
     text.value = 'Converting text to HTML...';
-    text.value += '\n\n * Your output will appear here (and on the clipboard).';
+    text.value += '\n\n * Your output will appear here.';
     
     google.script.run
       .withSuccessHandler(displayServerMessage)
