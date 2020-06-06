@@ -3,7 +3,7 @@ Copy and paste the converted output.
 
 NEW: Check the "Suppress top comment" option to remove this info from the output.
 
-Conversion time: 3.909 seconds.
+Conversion time: 3.839 seconds.
 
 
 Using this HTML file:
@@ -15,9 +15,9 @@ Using this HTML file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β25
-* Sat May 30 2020 20:28:08 GMT-0700 (PDT)
-* Source doc: Docs to Markdown (GD2md-html): MASTER
+* Docs to Markdown version 1.0β26
+* Sat Jun 06 2020 16:54:00 GMT-0700 (PDT)
+* Source doc: (dev: fix line break/Wrap HTML issue) Docs to Markdown (GD2md-html): MASTER
 * Tables are currently converted to HTML tables.
 
 WARNING:
@@ -680,13 +680,10 @@ They should appear as in this RTL paragraph:
 
 
 <p>
-lineBreak&lt;br>
-This line contains a shift-enter soft line-break here&lt;br>
-This bit is after the line break.
+lineBreak<br>This line contains a shift-enter soft line-break here<br>This bit is after the line break.
 </p>
 <p>
-This is a line with some bold text interrupted by a soft line <strong>break (shift-enter) here&lt;br>
-Followed by more bold</strong> and some more regular text.
+This is a line with some bold text interrupted by a soft line <strong>break (shift-enter) here<br>Followed by more bold</strong> and some more regular text.
 </p>
 <p>
 This paragraph has an explicit line-break (Enter) here.
