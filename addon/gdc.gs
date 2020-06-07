@@ -39,9 +39,10 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β25'; // based on 1.0β24
+var GDC_VERSION = '1.0β26'; // based on 1.0β25
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β26: Render soft line breaks correctly in HTML (<br> not &lt;br>). (gdc)
 // - 1.0β25: Use image path in this form: images/image1.png, images/image2.png, etc. Clean up old zip image code. (gdc,html,sidebar)
 // - 1.0β24: Correct a spelling error (s/Supress/Suppress). (gdc)
 // - 1.0β23: Copy converted output to the clipboard. Add option to suppress top comment. Add copyright comment, note about Docs link. (gdc, html, sidebar, addon)
@@ -1514,6 +1515,7 @@ util.markNewlines = function(text) {
 util.replaceSpecial = function(text) {
   return text
     .replace(/<newline>/g, '\n')
+    .replace(/=linebreak=/g, '<br>')
     .replace(/<nbsp>/g, ' ')
     .replace(/<listindent>/g, '    ')
     .replace(/<footnoteindent>/g, '    ')
@@ -1524,7 +1526,7 @@ util.carriageReturns = function(text) {
   if (gdc.docType === gdc.docTypes.md) {
     return text.replace(/\r/g, ' \\\n');
   } else if (gdc.docType === gdc.docTypes.html) {
-    return text.replace(/\r/g, '<br>\n');
+    return text.replace(/\r/g, '=linebreak=');
   }
 };
 
