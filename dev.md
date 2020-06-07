@@ -73,7 +73,7 @@ There is a [development/verification doc](https://docs.google.com/document/d/18g
 2. Create a new project and copy the add-on files there (keep the same names).
 3. Make your changes (and add any necessary test cases to the doc). Note that Docs to Markdown is currently running under the legacy Rhino runtime engine (not the Chrome V8 engine).
 4. Run your modified add-on against the doc (select the “HTML headings/ids” option for the Markdown conversion, no options for the HTML conversion).
-5. Fork the gd2md-html project and compare your output to the `markdown-verification.md` and `html-verification.`md files. Any diffs should be consistent with your changes (and they should not change any other rendered output).
+5. Fork the gd2md-html project and compare your output to the `markdown-verification.md` and `html-verification.md` files. Any diffs should be consistent with your changes (and they should not change any other rendered output).
 
 <h3 id="testing-your-changes">Testing your changes</h3>
 
