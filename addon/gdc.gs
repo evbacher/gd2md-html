@@ -39,9 +39,10 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β26'; // based on 1.0β25
+var GDC_VERSION = '1.0β27'; // based on 1.0β26
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β27: Copy output to clipboard. Print success/error messages for clipboard output (see chromium bug 1074489). (gdc, sidebar)
 // - 1.0β26: Render soft line breaks correctly in HTML (<br> not &lt;br>). (gdc)
 // - 1.0β25: Use image path in this form: images/image1.png, images/image2.png, etc. Clean up old zip image code. (gdc,html,sidebar)
 // - 1.0β24: Correct a spelling error (s/Supress/Suppress). (gdc)
