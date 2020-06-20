@@ -175,8 +175,9 @@ For more details, click the Docs link above.`
     // Show the server message in the text area.
     var text = document.getElementById('text');
     text.value = serverMessage;
-    // Save the result to the clipboard.
-    navigator.clipboard.writeText(text.value);
+    // Save the result to the clipboard (and add an error message if the write fails).
+    // navigator.clipboard.writeText() returns a promise that we need to deal with.
+    navigator.clipboard.writeText(text.value).then(clipSuccess, clipError);
   }
   
   // Whatever the server returns is the serverError parameter.
@@ -184,4 +185,16 @@ For more details, click the Docs link above.`
     var text = document.getElementById('text');
     text.value = serverError;
   }
+  
+  // Test to see the result of the Promise from writing to the clipboard.
+  function clipSuccess(result) {
+    // All is well: notify for now until everyone gets used to it.
+    text.value = '<!-- Output copied to clipboard! -->\n\n' + text.value;
+  }
+  function clipError(error) {
+    var text = document.getElementById('text');
+    // See https://bugs.chromium.org/p/chromium/issues/detail?id=1074489
+    text.value = '<!-- Output not copied to clipboard: See issue 1074489 at bugs.chromium.org -->\n\n' + text.value;
+  }
+  
 </script>
