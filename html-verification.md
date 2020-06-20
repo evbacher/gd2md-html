@@ -1,9 +1,11 @@
+<!-- Output not copied to clipboard: See issue 1074489 at bugs.chromium.org -->
+
 <!-----
 Copy and paste the converted output.
 
 NEW: Check the "Suppress top comment" option to remove this info from the output.
 
-Conversion time: 3.839 seconds.
+Conversion time: 3.349 seconds.
 
 
 Using this HTML file:
@@ -16,8 +18,8 @@ Using this HTML file:
 Conversion notes:
 
 * Docs to Markdown version 1.0β26
-* Sat Jun 06 2020 16:54:00 GMT-0700 (PDT)
-* Source doc: (dev: fix line break/Wrap HTML issue) Docs to Markdown (GD2md-html): MASTER
+* Fri Jun 19 2020 20:47:58 GMT-0700 (PDT)
+* Source doc: MAIN: Docs to Markdown (GD2md-html)
 * Tables are currently converted to HTML tables.
 
 WARNING:
@@ -53,7 +55,7 @@ You have 3 H1 headings. You may want to use the "H1 -> H2" option to demote all 
 <p>
 This is a raw conversion from a Google Doc (HTML headings option for MD, no other options).
 </p>
-<h1>Docs to Markdown (GD2md-html) MASTER doc</h1>
+<h1>MAIN: Docs to Markdown (GD2md-html)</h1>
 
 
 <p>
