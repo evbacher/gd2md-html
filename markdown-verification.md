@@ -1,11 +1,9 @@
-<!-- Output not copied to clipboard: See issue 1074489 at bugs.chromium.org -->
+<!-- Copy and paste the converted output. -->
 
 <!-----
-Copy and paste the converted output.
-
 NEW: Check the "Suppress top comment" option to remove this info from the output.
 
-Conversion time: 5.267 seconds.
+Conversion time: 2.965 seconds.
 
 
 Using this Markdown file:
@@ -17,8 +15,8 @@ Using this Markdown file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β26
-* Fri Jun 19 2020 20:47:06 GMT-0700 (PDT)
+* Docs to Markdown version 1.0β29
+* Thu Jul 02 2020 17:57:08 GMT-0700 (PDT)
 * Source doc: MAIN: Docs to Markdown (GD2md-html)
 * Tables are currently converted to HTML tables.
 
