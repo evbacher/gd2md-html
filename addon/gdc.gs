@@ -39,9 +39,11 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β27'; // based on 1.0β26
+var GDC_VERSION = '1.0β29'; // based on 1.0β28
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β29: Handle partial selections correctly (expand to whole paragraph). (gdc)
+// - 1.0β28: Add Coffee button. UI change only. (gdc, sidebar)
 // - 1.0β27: Copy output to clipboard. Print success/error messages for clipboard output (see chromium bug 1074489). (gdc, sidebar)
 // - 1.0β26: Render soft line breaks correctly in HTML (<br> not &lt;br>). (gdc)
 // - 1.0β25: Use image path in this form: images/image1.png, images/image2.png, etc. Clean up old zip image code. (gdc,html,sidebar)
@@ -463,7 +465,7 @@ gdc.getElements = function() {
     if (selChildren[0].isPartial()) {
       elements[0] = elements[0].getParent();
     }
-    if (selChildren[selChildren.length - 1].isPartial()) {
+    if (selChildren.length > 1 && selChildren[selChildren.length - 1].isPartial()) {
       // Note that selChildren and elements are the same size.
       elements[elements.length - 1] = elements[elements.length - 1].getParent();
     }
@@ -1595,7 +1597,6 @@ md.closeCodeBlock = '```<newline><newline>';  // No leading \n here on purpose.
 // Add new information to the top of the info comment.
 // But don't get rid of the opening of the comment.
 gdc.topComment = '<!-----\n'
-+ 'Copy and paste the converted output.\n\n'
 + 'NEW: Check the "Suppress top comment" option to remove this info from the output.\n\n'
 ;
   
