@@ -3,7 +3,7 @@
 <!-----
 NEW: Check the "Suppress top comment" option to remove this info from the output.
 
-Conversion time: 2.965 seconds.
+Conversion time: 4.226 seconds.
 
 
 Using this Markdown file:
@@ -16,8 +16,8 @@ Using this Markdown file:
 Conversion notes:
 
 * Docs to Markdown version 1.0β29
-* Thu Jul 02 2020 17:57:08 GMT-0700 (PDT)
-* Source doc: MAIN: Docs to Markdown (GD2md-html)
+* Fri Jul 10 2020 19:46:46 GMT-0700 (PDT)
+* Source doc: (dev copy: partial list selection: close the list) MAIN: Docs to Markdown (GD2md-html)
 * Tables are currently converted to HTML tables.
 
 WARNING:
