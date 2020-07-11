@@ -90,7 +90,10 @@ html.doHtml = function(config) {
   if (!gdc.suppressInfo) {
     gdc.out = gdc.info + '\n----->\n\n' + gdc.out;
   }
-  
+
+  var end = true;
+  gdc.maybeCloseList(elements[i-1], end);
+
   // Output content.
   gdc.flushBuffer();
   gdc.flushFootnoteBuffer();
