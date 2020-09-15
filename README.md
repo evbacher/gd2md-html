@@ -11,7 +11,6 @@ Docs to Markdown is a Drive add-on that converts a Google Doc to simple, readabl
 ## Contributing
 
 If you want to contribute docs or code to this project, please read [CONTRIBUTING.md](CONTRIBUTING.md) and [dev.md](dev.md).
-You'll also need to sign Google's Contributor License Agreement at https://cla.developers.google.com/.
 
 ## Contributors
 
