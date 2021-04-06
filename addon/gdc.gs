@@ -39,10 +39,10 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β30'; // based on 1.0β29
+var GDC_VERSION = '1.0β29'; // based on 1.0β28
 
 // Version notes: significant changes (latest on top). (files changed)
-// - 1.0β30: Close HTML list after partial selection. (gdc, html)
+// - 1.0β29: UI change only: new Coffee button color. (gdc, sidebar)
 // - 1.0β29: Handle partial selections correctly (expand to whole paragraph). (gdc)
 // - 1.0β28: Add Coffee button. UI change only. (gdc, sidebar)
 // - 1.0β27: Copy output to clipboard. Print success/error messages for clipboard output (see chromium bug 1074489). (gdc, sidebar)
@@ -1164,23 +1164,18 @@ gdc.getUrlEnd = function(textElement, offset) {
 };
 
 // We do not need to close lists in Markdown, but we do in HTML.
-gdc.maybeCloseList = function(el, end) {
-  end = end || false; // default to not being at the end.
+gdc.maybeCloseList = function(el) {
   // Check to see if we should close this list.
   var next = el.getNextSibling();
   //var nestingLevel = gdc.nestLevel;
   var nestingLevel = el.getNestingLevel();
   if (next && next.toString() === "ListItem") {
     var nextNestingLevel = next.getNestingLevel();
-
+    
     // This is closer to being correct with list closing, but we also need to
     // keep state in case there are paragraphs embedded in the list.
     if (gdc.isHTML) {
       for (var nest = nestingLevel; nest > nextNestingLevel; nest--) {
-        html.closeList();
-      }
-      // Close the list if we're at the end of the selection.
-      if (end) {
         html.closeList();
       }
     }
@@ -1633,7 +1628,7 @@ md.doMarkdown = function(config) {
   if (DEBUG) {
     gdc.info = '<!-- WARNING: DEBUG is TRUE!! -->\n\n' + gdc.info;
   }
-  
+
   // Assemble output.
   gdc.flushBuffer();
   gdc.flushFootnoteBuffer();
@@ -1901,6 +1896,8 @@ md.handleParagraph = function(para) {
       gdc.writeStringToBuffer(gdc.markup.pClose);
     }
   }
+  
+  //gdc.maybeCloseList(para);
 }; // end md.handleParagraph
 
 // Handle the heading type of the paragraph. Fall through for NORMAL.
