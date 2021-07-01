@@ -1,9 +1,7 @@
-<!-- Copy and paste the converted output. -->
-
 <!-----
 NEW: Check the "Suppress top comment" option to remove this info from the output.
 
-Conversion time: 4.226 seconds.
+Conversion time: 2.63 seconds.
 
 
 Using this Markdown file:
@@ -15,9 +13,9 @@ Using this Markdown file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β29
-* Fri Jul 10 2020 19:46:46 GMT-0700 (PDT)
-* Source doc: (dev copy: partial list selection: close the list) MAIN: Docs to Markdown (GD2md-html)
+* Docs to Markdown version 1.0β30
+* Thu Jul 01 2021 11:52:10 GMT-0700 (PDT)
+* Source doc: MAIN: Docs to Markdown (GD2md-html)
 * Tables are currently converted to HTML tables.
 
 WARNING:
@@ -131,9 +129,9 @@ And here is a bullet list:
 
 
 
-*   A list item without any punctuation
-*   A list item with an embedded command: `ps aux | grep conky | grep -v grep | awk '{print $2}' | xargs kill`
-*   Some mixed-font code: <code>ls -l <strong><em>filename</em></strong></code>. Followed by some normal text.
+* A list item without any punctuation
+* A list item with an embedded command: `ps aux | grep conky | grep -v grep | awk '{print $2}' | xargs kill`
+* Some mixed-font code: <code>ls -l <strong><em>filename</em></strong></code>. Followed by some normal text.
 
 <h3 id="another-ordered-list">Another ordered list</h3>
 
@@ -162,7 +160,7 @@ You can have a code block within a list item, as long as you indent the code  (i
 
 
 
-*   A text item, followed by a code block that's indented and should be part of this item:
+* A text item, followed by a code block that's indented and should be part of this item:
 
     ```
     // A comment.
@@ -171,8 +169,8 @@ You can have a code block within a list item, as long as you indent the code  (i
     ```
 
 
-*   Another item.
-    *   A nested list item with a command:
+* Another item.
+    * A nested list item with a command:
 
         ```
         $ cat file | grep dog | wc
@@ -187,15 +185,15 @@ Note: Works for Markdown, still a known issue for HTML.
 
 
 
-*   A bullet list with an additional paragraph:
+* A bullet list with an additional paragraph:
 
     This is another paragraph.
 
 
     This is a new paragraph, but also part of this list item. It should be indented
 
-*   Another item.
-    *   A nested item.
+* Another item.
+    * A nested item.
 
         This is a new paragraph within the nested item.
 
@@ -206,18 +204,18 @@ Note: Works for Markdown, still a known issue for HTML.
         ```
 
 
-*   Another list item.
-*   And another.
-    *   Nested
+* Another list item.
+* And another.
+    * Nested
 
         A paragraph within a list item.
 
-        *   Nested
+        * Nested
 
             A paragraph within a list item.
 
-    *   Reducing the nesting level.
-*   First-level list item.
+    * Reducing the nesting level.
+* First-level list item.
 
 A regular paragraph.
 
@@ -445,15 +443,15 @@ Some regular URL links:
 
 
 
-*   [http://www.google.com/](http://www.google.com/)
-*   [https://fivethirtyeight.com/](https://fivethirtyeight.com/)
+* [http://www.google.com/](http://www.google.com/)
+* [https://fivethirtyeight.com/](https://fivethirtyeight.com/)
 
 Some links with titles:
 
 
 
-*   [Jason Kottke's blog](http://kottke.org/)
-*   [Bean Road](https://beanroad.blogspot.com/)
+* [Jason Kottke's blog](http://kottke.org/)
+* [Bean Road](https://beanroad.blogspot.com/)
 
 <h2 id="images">Images</h2>
 
@@ -564,10 +562,10 @@ FEATURE REQUEST: Angle bracket escapes:
 
 
 
-*   Angle brackets: If you put angle brackets in your text: &lt; or >, we don't want that to render as an HTML tag. So, we use &amp;lt; for the opening bracket by default. However, if you select the Render HTML tags option, the opening &lt; will not be replaced.
-*   Test: it seems that loose angle brackets &lt; and > do not behave like HTML tags. But when there is no whitespace: &lt;some text>, they do behave like HTML tags. To change that behavior, we’ll need to (by default) escape the opening angle bracket and turn it into &amp;lt;. 
-*   But if you really want an angle bracket while using the default setting (to insert a few HTML tags), you can escape it: <tag>, <div class=’someclass’>. Not escaped: &lt;tag>. Also not escaped: &lt;p>This is an HTML paragraph.&lt;p>
-*   Escaped: <p>This is an HTML paragraph.<p>
+* Angle brackets: If you put angle brackets in your text: &lt; or >, we don't want that to render as an HTML tag. So, we use &amp;lt; for the opening bracket by default. However, if you select the Render HTML tags option, the opening &lt; will not be replaced.
+* Test: it seems that loose angle brackets &lt; and > do not behave like HTML tags. But when there is no whitespace: &lt;some text>, they do behave like HTML tags. To change that behavior, we’ll need to (by default) escape the opening angle bracket and turn it into &amp;lt;. 
+* But if you really want an angle bracket while using the default setting (to insert a few HTML tags), you can escape it: <tag>, <div class=’someclass’>. Not escaped: &lt;tag>. Also not escaped: &lt;p>This is an HTML paragraph.&lt;p>
+* Escaped: <p>This is an HTML paragraph.<p>
 
 Note that we need to replace the opening &lt;, even if it occurs at the beginning of a line, like this:
 
@@ -614,8 +612,11 @@ Another paragraph with **some bold text**.
 
 
 
-*   Current open bugs: [https://github.com/evbacher/gd2md-html/issues](https://github.com/evbacher/gd2md-html/issues) 
-*   New bug or feature request: [https://github.com/evbacher/gd2md-html/issues/new](https://github.com/evbacher/gd2md-html/issues/new). Thanks for helping to make Docs to Markdown better!
+* Current open bugs: [https://github.com/evbacher/gd2md-html/issues](https://github.com/evbacher/gd2md-html/issues) 
+* New bug or feature request: [https://github.com/evbacher/gd2md-html/issues/new](https://github.com/evbacher/gd2md-html/issues/new). Thanks for helping to make Docs to Markdown better!
+
+This document ends with a regular paragraph.
+
 
 <!-- Footnotes themselves at the bottom. -->
 ## Notes
