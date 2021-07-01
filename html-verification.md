@@ -1,9 +1,7 @@
-<!-- Copy and paste the converted output. -->
-
 <!-----
 NEW: Check the "Suppress top comment" option to remove this info from the output.
 
-Conversion time: 2.284 seconds.
+Conversion time: 1.362 seconds.
 
 
 Using this HTML file:
@@ -15,9 +13,9 @@ Using this HTML file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β29
-* Fri Jul 10 2020 19:47:49 GMT-0700 (PDT)
-* Source doc: (dev copy: partial list selection: close the list) MAIN: Docs to Markdown (GD2md-html)
+* Docs to Markdown version 1.0β30
+* Thu Jul 01 2021 11:55:08 GMT-0700 (PDT)
+* Source doc: MAIN: Docs to Markdown (GD2md-html)
 * Tables are currently converted to HTML tables.
 
 WARNING:
@@ -769,6 +767,11 @@ Another paragraph with <strong>some bold text</strong>.
 <li>Current open bugs: <a href="https://github.com/evbacher/gd2md-html/issues">https://github.com/evbacher/gd2md-html/issues</a> 
 
 <li>New bug or feature request: <a href="https://github.com/evbacher/gd2md-html/issues/new">https://github.com/evbacher/gd2md-html/issues/new</a>. Thanks for helping to make Docs to Markdown better!
+</li>
+</ul>
+<p>
+This document ends with a regular paragraph.
+</p>
 
 <!-- Footnotes themselves at the bottom. -->
 
