@@ -33,10 +33,69 @@ input[type="button"].invisible {background: transparent;border: none;font-size:0
 <input type="button" class="blue" value="Markdown" onclick="markdown()">
 <input type="button" class="blue" value="HTML" onclick="html()">
 
-<input
-  type="button" class="blue"
-  value="Help" onclick="help()"
->
+<!--
+<input type="button" class="blue" value="Help" onclick="help()">
+-->
+
+<style>
+/* Button style for link. */
+a.gdcButton {
+/*
+align-items:flex-start;
+background-attachment:scroll;
+background-clip:border-box;
+background-color:rgba(0, 0, 0, 0);
+background-image:-webkit-linear-gradient(top, rgb(77, 144, 254), rgb(71, 135, 237));
+*/
+background-color: #F7882F;
+border-style: solid;
+border-width: 1px;
+border-radius: 2px;
+border-color: #F7882F;
+
+box-shadow:none;
+box-sizing:border-box;
+color:rgb(255, 255, 255);
+cursor:default;
+display:inline-block;
+font-family:arial, sans-serif;
+font-size:11px;
+font-stretch:100%;
+font-style:normal;
+
+font-weight:700;
+height:28.9941px;
+letter-spacing:normal;
+line-height:27px;
+margin-bottom:0px;
+margin-left:0px;
+margin-right:0px;
+margin-top:0px;
+min-width:72px;
+
+padding-bottom:0px;
+padding-left:8px;
+padding-right:8px;
+padding-top:0px;
+text-align:center;
+text-decoration: none;
+text-indent:0px;
+text-rendering:auto;
+text-shadow:none;
+text-transform:none;
+user-select:none;
+white-space:nowrap;
+width:72.3633px;
+word-spacing:0px;
+writing-mode:horizontal-tb;
+-webkit-appearance:none;
+-webkit-rtl-ordering:logical;
+-webkit-border-image:none;
+}
+</style>
+<a target="_blank" title="Donate for social justice!" class="gdcButton" href="https://www.buymeacoffee.com/docstomarkdown"> Coffee?</a>
+
+
 <p>
 
 <!--
@@ -71,6 +130,7 @@ Suppress top comment
 <!-- Docs, bug link. -->
 <br>
 <div style="text-align: left;"> 
+<a target="_blank" onclick="help()">Help</a>,
 <a target="_blank" href="https://github.com/evbacher/gd2md-html/wiki">Docs</a>,
 <a target="_blank" href="https://github.com/evbacher/gd2md-html/issues">Bugs</a>
 </div>
@@ -194,7 +254,9 @@ For more details, click the Docs link above.`
   function clipError(error) {
     var text = document.getElementById('text');
     // See https://bugs.chromium.org/p/chromium/issues/detail?id=1074489
-    text.value = '<!-- Output not copied to clipboard: See issue 1074489 at bugs.chromium.org -->\n\n' + text.value;
+    // Don't bother people with error message: they'll need to cut and paste output as usual.
+    //text.value = '<!-- Output not copied to clipboard: See issue 1074489 at bugs.chromium.org -->\n\n' + text.value;
+    text.value = '<!-- Copy and paste the converted output. -->\n\n' + text.value;
   }
   
 </script>
