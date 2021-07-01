@@ -39,10 +39,10 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β29'; // based on 1.0β28
+var GDC_VERSION = '1.0β30'; // based on 1.0β29
 
 // Version notes: significant changes (latest on top). (files changed)
-// - 1.0β29: UI change only: new Coffee button color. (gdc, sidebar)
+// - 1.0β30: Reduce whitespace after list item (bullets, numbers) in Markdown. (gdc)
 // - 1.0β29: Handle partial selections correctly (expand to whole paragraph). (gdc)
 // - 1.0β28: Add Coffee button. UI change only. (gdc, sidebar)
 // - 1.0β27: Copy output to clipboard. Print success/error messages for clipboard output (see chromium bug 1074489). (gdc, sidebar)
@@ -223,8 +223,8 @@ gdc.mdMarkup = {
   ulClose:      '<newline>',
   olOpen:       '<newline>',
   olClose:      '<newline>',
-  ulItem:       '*   ',
-  olItem:       '1.  ',
+  ulItem:       '* ',
+  olItem:       '1. ',
   liClose:      '',
 
   hr:           '<newline><newline>---<newline>',
@@ -266,8 +266,8 @@ gdc.mixedMarkup = {
   ulClose:      '',
   olOpen:       '',
   olClose:      '',
-  ulItem:       '*   ',
-  olItem:       '1.  ',
+  ulItem:       '* ',
+  olItem:       '1. ',
   liClose:      '',
 
   hr:           '<newline><newline>---<newline>',
