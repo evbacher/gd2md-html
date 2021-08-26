@@ -39,9 +39,10 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β30'; // based on 1.0β29
+var GDC_VERSION = '1.0β31'; // based on 1.0β30
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β31 (24 Aug. 2021): Don't contain <hr> in <p> for HTML. (gdc)
 // - 1.0β30 (1 July 2021): Reduce whitespace after list item (bullets, numbers) in Markdown. (gdc)
 // - 1.0β29: Handle partial selections correctly (expand to whole paragraph). (gdc)
 // - 1.0β28: Add Coffee button. UI change only. (gdc, sidebar)
@@ -1745,8 +1746,9 @@ md.handleParagraph = function(para) {
   gdc.isMixedCode = false;
   gdc.inHeading = false;
   gdc.state.isMixedCode = false;
+  gdc.numChildren = para.getNumChildren();
   // Do not bother with empty paragraphs (blank lines). (Except we preserve them for code blocks.)
-  if (para.getNumChildren() === 0) {
+  if (gdc.numChildren === 0) {
     if (gdc.inCodeBlock) {
       // Preserve newlines in code block (or single-cell table code block).
       if ( gdc.isCodeLine(para.getNextSibling()) || gdc.isSingleCellTable) {
@@ -1754,6 +1756,12 @@ md.handleParagraph = function(para) {
         gdc.writeStringToBuffer('<newline>');
       }
     }
+    return;
+  }
+
+  // For a standalone horizontal rule, no need for containing paragraph.
+  if (gdc.numChildren === 1 && para.getChild(0).getType() === HORIZONTAL_RULE) {
+    gdc.handleHorizontalRule();
     return;
   }
 
