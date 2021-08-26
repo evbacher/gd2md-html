@@ -1,7 +1,7 @@
 <!-----
 NEW: Check the "Suppress top comment" option to remove this info from the output.
 
-Conversion time: 1.362 seconds.
+Conversion time: 1.74 seconds.
 
 
 Using this HTML file:
@@ -13,8 +13,8 @@ Using this HTML file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β30
-* Thu Jul 01 2021 11:55:08 GMT-0700 (PDT)
+* Docs to Markdown version 1.0β31
+* Thu Aug 26 2021 12:22:58 GMT-0700 (PDT)
 * Source doc: MAIN: Docs to Markdown (GD2md-html)
 * Tables are currently converted to HTML tables.
 
@@ -759,6 +759,16 @@ Another paragraph with <strong>some bold text</strong>.
 <li>Another list item.
 </li>
 </ol>
+<h2>Horizontal rules</h2>
+
+
+<p>
+This is a horizontal rule:
+</p>
+<hr>
+<p>
+This is a regular paragraph.
+</p>
 <h2 id="bugs">Bugs</h2>
 
 
