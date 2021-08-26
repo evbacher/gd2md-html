@@ -1,7 +1,7 @@
 <!-----
 NEW: Check the "Suppress top comment" option to remove this info from the output.
 
-Conversion time: 2.63 seconds.
+Conversion time: 1.471 seconds.
 
 
 Using this Markdown file:
@@ -13,8 +13,8 @@ Using this Markdown file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β30
-* Thu Jul 01 2021 11:52:10 GMT-0700 (PDT)
+* Docs to Markdown version 1.0β31
+* Thu Aug 26 2021 12:21:46 GMT-0700 (PDT)
 * Source doc: MAIN: Docs to Markdown (GD2md-html)
 * Tables are currently converted to HTML tables.
 
@@ -606,6 +606,16 @@ Another paragraph with **some bold text**.
 
 1. A numbered list following a terminal subscript.
 2. Another list item.
+
+<h2>Horizontal rules</h2>
+
+
+This is a horizontal rule:
+
+
+---
+
+This is a regular paragraph.
 
 <h2 id="bugs">Bugs</h2>
 
