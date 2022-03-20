@@ -1,7 +1,9 @@
+<!-- Output copied to clipboard! -->
+
 <!-----
 NEW: Check the "Suppress top comment" option to remove this info from the output.
 
-Conversion time: 1.74 seconds.
+Conversion time: 9.863 seconds.
 
 
 Using this HTML file:
@@ -14,8 +16,8 @@ Using this HTML file:
 Conversion notes:
 
 * Docs to Markdown version 1.0β31
-* Thu Aug 26 2021 12:22:58 GMT-0700 (PDT)
-* Source doc: MAIN: Docs to Markdown (GD2md-html)
+* Sun Mar 20 2022 17:10:44 GMT-0400 (Eastern Daylight Time)
+* Source doc: Copy of dev verification doc (1.0β27 base): Docs to Markdown (gd2md-html)
 * Tables are currently converted to HTML tables.
 
 WARNING:
@@ -759,15 +761,11 @@ Another paragraph with <strong>some bold text</strong>.
 <li>Another list item.
 </li>
 </ol>
-<h2>Horizontal rules</h2>
+<h2>Chips</h2>
 
 
 <p>
-This is a horizontal rule:
-</p>
-<hr>
-<p>
-This is a regular paragraph.
+This is a date: Mar 20, 2022.
 </p>
 <h2 id="bugs">Bugs</h2>
 
@@ -777,11 +775,10 @@ This is a regular paragraph.
 <li>Current open bugs: <a href="https://github.com/evbacher/gd2md-html/issues">https://github.com/evbacher/gd2md-html/issues</a> 
 
 <li>New bug or feature request: <a href="https://github.com/evbacher/gd2md-html/issues/new">https://github.com/evbacher/gd2md-html/issues/new</a>. Thanks for helping to make Docs to Markdown better!
+
+<li>
 </li>
 </ul>
-<p>
-This document ends with a regular paragraph.
-</p>
 
 <!-- Footnotes themselves at the bottom. -->
 
