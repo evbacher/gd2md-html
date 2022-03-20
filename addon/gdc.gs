@@ -112,6 +112,9 @@ gdc.config = function(config) {
   if (config.suppressInfo === true) {
     gdc.suppressInfo = true;
   }
+  if (config.formatISODate === true) {
+    gdc.formatISODate = true;
+  }
 };
 
 // Setup for each conversion run.
@@ -371,7 +374,9 @@ var
   INLINE_DRAWING = DocumentApp.ElementType.INLINE_DRAWING,
   INLINE_IMAGE = DocumentApp.ElementType.INLINE_IMAGE,
   UNSUPPORTED = DocumentApp.ElementType.UNSUPPORTED,
-  EQUATION = DocumentApp.ElementType.EQUATION;
+  EQUATION = DocumentApp.ElementType.EQUATION,
+
+  DATE = DocumentApp.ElementType.DATE;
 
   // Heading links and ids gleaned from the TOC, if present.
   gdc.hasToc = false;
@@ -910,6 +915,15 @@ gdc.handleEquation = function() {
   // For now, at least, we should just call out equations in the output.
   gdc.alert('equation: use MathJax/LaTeX if your publishing platform supports it.');
 };
+
+gdc.handleDate = function(child) {
+  let d = child.asDate();
+  if (gdc.formatISODate) {
+    gdc.writeStringToBuffer(d.getTimestamp().toISOString().split("T")[0]);
+  } else {
+    gdc.writeStringToBuffer(d.getDisplayText());
+  }
+}
 
 // Warns/alerts that there are some inline drawings -- no API for that yet :( .
 gdc.handleInlineDrawing = function() {
@@ -1725,6 +1739,9 @@ md.handleChildElement = function(child) {
       break;
     case EQUATION:
       gdc.handleEquation();
+      break;
+    case DATE:
+      gdc.handleDate(child);
       break;
     case UNSUPPORTED:
       gdc.log('child element: UNSUPPORTED');

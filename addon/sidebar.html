@@ -126,6 +126,11 @@ Render HTML tags
 <input type="checkbox" id="suppress_info">
 Suppress top comment
 </label>
+<br>
+<label>
+<input type="checkbox" id="format_iso_date">
+Format dates as YYYY-MM-DD
+</label>
 
 <!-- Docs, bug link. -->
 <br>
@@ -175,6 +180,7 @@ For more details, click the Docs link above.`
     config.wrapHTML = false;
     config.renderHTMLTags = false;
     config.suppressInfo= false;
+    config.formatISODate = false;
 
     // Config settings from UI.
     if (document.getElementById('demote_headings').checked) {
@@ -191,6 +197,9 @@ For more details, click the Docs link above.`
     }
     if (document.getElementById('suppress_info').checked) {
       config.suppressInfo = true;
+    }
+    if (document.getElementById('format_iso_date').checked) {
+      config.formatISODate = true;
     }
 };
     
