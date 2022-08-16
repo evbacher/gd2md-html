@@ -27,12 +27,12 @@ var html = html || {
   boldOpen:   '<strong>',
   boldClose:  '</strong>',
   
-  // HTML code blocks (do not add \n at end of <pre>):
-  openCodeBlock:         '\n\n<pre class="prettyprint">',
-  openCodeBlockStart:    '\n\n<pre class="prettyprint lang-',
-  openCodeBlockEnd:      '">',
-  openCodeBlockLangNone: '\n\n<pre>',
-  closeCodeBlock:        '</pre>\n\n',
+  // Defaults for HTML code blocks (do not add \n at end of <pre>):
+openCodeBlock:         '\n\n<pre class="prettyprint">',
+openCodeBlockStart:    '\n\n<pre class="prettyprint lang-',
+openCodeBlockEnd:      '">',
+openCodeBlockLangNone: '\n\n<pre>',
+closeCodeBlock:        '</pre>\n\n',
 
   // non-semantic underline, since Docs supports it.
   underlineStart: '<span style="text-decoration:underline;">',
@@ -46,6 +46,17 @@ html.doHtml = function(config) {
   gdc.useHtml();
   
   gdc.config(config);
+  
+  if (gdc.usePreCode) {
+      //Override for HTML code blocks if use <code><pre> is selected
+      html.openCodeBlock='\n\n<pre class="line-numbers"><code class="language-none">'
+      html.openCodeBlockStart='\n\n<pre class="line-numbers"><code class="language-'
+      html.openCodeBlockEnd='">'
+      html.openCodeBlockLangNone='\n\n<code><pre>'
+      html.closeCodeBlock='</code></pre>\n\n'
+       gdc.info += '\n* codePre:' + gdc.usePreCode.valueOf();
+  } 
+    
   // Get the body elements.
   var elements = gdc.getElements();
 
