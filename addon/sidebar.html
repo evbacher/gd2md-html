@@ -125,8 +125,11 @@ Render HTML tags
 <label>
 <input type="checkbox" id="suppress_info">
 Suppress top comment
-</label>
-
+</label><br>
+<label>
+<input type="checkbox" id="use_pre_code"> 
+Use &lt;code&gt;&lt;pre&gt; for HTML code blocks
+</label>	
 <!-- Docs, bug link. -->
 <br>
 <div style="text-align: left;"> 
@@ -175,6 +178,7 @@ For more details, click the Docs link above.`
     config.wrapHTML = false;
     config.renderHTMLTags = false;
     config.suppressInfo= false;
+	  config.useCodePre= false;
 
     // Config settings from UI.
     if (document.getElementById('demote_headings').checked) {
@@ -192,6 +196,9 @@ For more details, click the Docs link above.`
     if (document.getElementById('suppress_info').checked) {
       config.suppressInfo = true;
     }
+	 if (document.getElementById('use_pre_code').checked) {
+      config.usePreCode = true;
+    }  
 };
     
   // Make the calls to the server, and send some callbacks for
