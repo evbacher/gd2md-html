@@ -112,6 +112,10 @@ gdc.config = function(config) {
   if (config.suppressInfo === true) {
     gdc.suppressInfo = true;
   }
+
+  if (config.usePreCode === true) {
+    gdc.usePreCode = true;
+  } 
 };
 
 // Setup for each conversion run.
@@ -152,6 +156,8 @@ gdc.init = function(docType) {
   gdc.info += '\n\nConversion notes:';
   gdc.info += '\n\n* ' + GDC_TITLE + ' version ' + GDC_VERSION;
   gdc.info += '\n* ' + Date();
+  
+  
 
   // Keep track of numbered lists.
   gdc.listCounters = {};
@@ -191,6 +197,7 @@ gdc.writeBuf = function() {};
 
 // Force H1 -> H2, etc.
 gdc.demoteHeadings = false;
+gdc.usePreCode = false;
 
 // Some state variables for handling lists.
 gdc.ul = 0;
