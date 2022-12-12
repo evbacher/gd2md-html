@@ -1,7 +1,13 @@
-<!-----
-NEW: Check the "Suppress top comment" option to remove this info from the output.
+<!-- Output copied to clipboard! -->
 
-Conversion time: 1.471 seconds.
+<!-----
+
+You have some errors, warnings, or alerts. If you are using reckless mode, turn it off to see inline alerts.
+* ERRORs: 0
+* WARNINGs: 2
+* ALERTS: 6
+
+Conversion time: 2.967 seconds.
 
 
 Using this Markdown file:
@@ -13,8 +19,8 @@ Using this Markdown file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β31
-* Thu Aug 26 2021 12:21:46 GMT-0700 (PDT)
+* Docs to Markdown version 1.0β34
+* Mon Dec 12 2022 10:51:41 GMT-0800 (PST)
 * Source doc: MAIN: Docs to Markdown (GD2md-html)
 * Tables are currently converted to HTML tables.
 
@@ -70,7 +76,7 @@ Docs to Markdown converts headings to the corresponding heading level in Markdow
 <h1 id="heading-ids">Heading IDs</h1>
 
 
-If you generate a table of contents in your Doc, Docs to Markdown will create IDs for each heading. If your Markdown environment does not handle heading attributes, you can chose the `HTML headings/IDs` option.
+If you generate a table of contents (with blue links) in your Doc, Docs to Markdown will create IDs for each heading—this also allows proper conversion of intra-doc links. If your Markdown environment does not handle heading attributes, you can choose the `HTML headings/IDs` option.
 
 <h1 id="blank-headings">Blank headings</h1>
 
