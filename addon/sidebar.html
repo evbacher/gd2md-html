@@ -120,7 +120,8 @@ Wrap HTML
 <label>
 <input type="checkbox" id="render_html_tags">
 Render HTML tags
-</label><br>
+</label>
+<br>
 <label>
 <input type="checkbox" id="suppress_info">
 Suppress info comment
@@ -128,6 +129,32 @@ Suppress info comment
 <label>
 <input type="checkbox" id="reckless_mode">
 Use reckless mode (no alerts)
+</label>
+<br>
+<br>
+
+Markdown bold delimiters:<br>
+<label>
+<input type="radio" name="md_bold_delimiters" id="md_bold_asterisks" value="asterisks" checked>
+Asterisks (eg. **text**)
+</label>
+<br>
+<label>
+<input type="radio" name="md_bold_delimiters" id="md_bold_underscores" value="underscores">
+Underscores (eg. __text__)
+</label>
+<br>
+<br>
+
+Markdown italic delimiters:<br>
+<label>
+<input type="radio" name="md_italic_delimiters" id="md_italic_asterisks" value="asterisks">
+Asterisks (eg. *text*)
+</label>
+<br>
+<label>
+<input type="radio" name="md_italic_delimiters" id="md_italic_underscores" value="underscores" checked>
+Underscores (eg. _text_)
 </label>
 
 <!-- Docs, bug link. -->
@@ -179,6 +206,8 @@ For more details, click the Docs link above.`
     config.renderHTMLTags = false;
     config.suppressInfo = false;
     config.recklessMode = false;
+    config.mdBoldAsteriskDelimiters = false;
+    config.mdItalicAsteriskDelimiters = false;
 
     // Config settings from UI.
     if (document.getElementById('demote_headings').checked) {
@@ -198,6 +227,12 @@ For more details, click the Docs link above.`
     }
     if (document.getElementById('reckless_mode').checked) {
       config.recklessMode = true;
+    }
+    if (document.getElementById('md_bold_asterisks').checked) {
+      config.mdBoldAsteriskDelimiters = true;
+    }
+    if (document.getElementById('md_italic_asterisks').checked) {
+      config.mdItalicAsteriskDelimiters = true;
     }
 };
     

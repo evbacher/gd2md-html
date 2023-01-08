@@ -118,6 +118,22 @@ gdc.config = function(config) {
   if (config.recklessMode === true) {
     gdc.recklessMode = true;
   }
+
+  if (config.mdBoldAsteriskDelimiters === true) {
+    gdc.mdMarkup.boldOpen = '**';
+    gdc.mdMarkup.boldClose = '**';
+  } else {
+    gdc.mdMarkup.boldOpen = '__';
+    gdc.mdMarkup.boldClose = '__';
+  }
+  
+  if (config.mdItalicAsteriskDelimiters === true) {
+    gdc.mdMarkup.italicOpen = '*';
+    gdc.mdMarkup.italicClose = '*';
+  } else {
+    gdc.mdMarkup.italicOpen = '_';
+    gdc.mdMarkup.italicClose = '_';
+  }
 };
 
 // Setup for each conversion run.
