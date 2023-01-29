@@ -1,7 +1,6 @@
 {
   "timeZone": "America/Los_Angeles",
-  "dependencies": {
-  },
+  "dependencies": {},
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "DEPRECATED_ES5"
 }
