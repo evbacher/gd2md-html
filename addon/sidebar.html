@@ -28,15 +28,6 @@ input[type="button"].invisible {background: transparent;border: none;font-size:0
 }
 </style>
 
-
-<!-- Top of sidebar UI elements. -->
-<input type="button" class="blue" value="Markdown" onclick="markdown()">
-<input type="button" class="blue" value="HTML" onclick="html()">
-
-<!--
-<input type="button" class="blue" value="Help" onclick="help()">
--->
-
 <style>
 /* Button style for link. */
 a.gdcButton {
@@ -47,11 +38,11 @@ background-clip:border-box;
 background-color:rgba(0, 0, 0, 0);
 background-image:-webkit-linear-gradient(top, rgb(77, 144, 254), rgb(71, 135, 237));
 */
-background-color: #F7882F;
+background-color: #008000;
 border-style: solid;
 border-width: 1px;
 border-radius: 2px;
-border-color: #F7882F;
+border-color: #008000;
 
 box-shadow:none;
 box-sizing:border-box;
@@ -93,8 +84,16 @@ writing-mode:horizontal-tb;
 -webkit-border-image:none;
 }
 </style>
-<a target="_blank" title="Donate for social justice!" class="gdcButton" href="https://www.buymeacoffee.com/docstomarkdown"> Coffee?</a>
+<a target="_blank" title="Donate for social justice!" class="gdcButton" href="https://www.buymeacoffee.com/docstomarkdown"> Donate</a>
 
+
+<!-- Top of sidebar UI elements. -->
+<input type="button" class="blue" value="Markdown" onclick="markdown()">
+<input type="button" class="blue" value="HTML" onclick="html()">
+
+<!--
+<input type="button" class="blue" value="Help" onclick="help()">
+-->
 
 <p>
 
@@ -110,7 +109,7 @@ Demote headings (H1 &rarr; H2, etc.)
 <br>
 <label>
 <input type="checkbox" id="html_headings">
-HTML headings/IDs
+Use HTML headings/IDs
 </label>
 <br>
 <label>
@@ -124,7 +123,11 @@ Render HTML tags
 </label><br>
 <label>
 <input type="checkbox" id="suppress_info">
-Suppress top comment
+Suppress info comment
+</label><br>
+<label>
+<input type="checkbox" id="reckless_mode">
+Use reckless mode (no alerts)
 </label>
 
 <!-- Docs, bug link. -->
@@ -141,7 +144,7 @@ Suppress top comment
 
 <script>
 var helpText = `
-Choose Markdown or HTML.
+Choose Markdown or HTML (or Donate!).
 
 * Default: convert entire doc.
 * Select text to limit scope.
@@ -174,7 +177,8 @@ For more details, click the Docs link above.`
     config.demoteHeadings = false;
     config.wrapHTML = false;
     config.renderHTMLTags = false;
-    config.suppressInfo= false;
+    config.suppressInfo = false;
+    config.recklessMode = false;
 
     // Config settings from UI.
     if (document.getElementById('demote_headings').checked) {
@@ -191,6 +195,9 @@ For more details, click the Docs link above.`
     }
     if (document.getElementById('suppress_info').checked) {
       config.suppressInfo = true;
+    }
+    if (document.getElementById('reckless_mode').checked) {
+      config.recklessMode = true;
     }
 };
     
