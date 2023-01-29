@@ -39,9 +39,12 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β31'; // based on 1.0β30
+var GDC_VERSION = '1.0β34'; // based on 1.0β33
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β34 (12 Dec. 2022): Clarify note about TOC -- needs blue links to create intra-doc links). (gdc)
+// - 1.0β33 (8 Jan. 2022): Add reckless mode (no warnings or inline alerts). (sidebar, gdc, html)
+// - 1.0β32 (7 Jan. 2022): Make the Donate button more obvious. (gdc, sidebar)
 // - 1.0β31 (24 Aug. 2021): Don't contain <hr> in <p> for HTML. (gdc)
 // - 1.0β30 (1 July 2021): Reduce whitespace after list item (bullets, numbers) in Markdown. (gdc)
 // - 1.0β29: Handle partial selections correctly (expand to whole paragraph). (gdc)
@@ -112,6 +115,9 @@ gdc.config = function(config) {
   if (config.suppressInfo === true) {
     gdc.suppressInfo = true;
   }
+  if (config.recklessMode === true) {
+    gdc.recklessMode = true;
+  }
 };
 
 // Setup for each conversion run.
@@ -152,6 +158,7 @@ gdc.init = function(docType) {
   gdc.info += '\n\nConversion notes:';
   gdc.info += '\n\n* ' + GDC_TITLE + ' version ' + GDC_VERSION;
   gdc.info += '\n* ' + Date();
+
 
   // Keep track of numbered lists.
   gdc.listCounters = {};
@@ -861,10 +868,10 @@ gdc.handleText = function(textElement) {
           url = '#' + gdc.headingLinks[url];
         } else {
           gdc.errorCount++;
-          gdc.alert('undefined internal link (link text: "' + linkText + '"). Did you generate a TOC?');
+          gdc.alert('undefined internal link (link text: "' + linkText + '"). Did you generate a TOC with blue links?');
           gdc.info += '\n\nERROR:\nundefined internal link to this URL: "' + url + '".'
             + 'link text: ' + linkText + '\n'
-            + '?Did you generate a TOC?\n';
+            + '?Did you generate a TOC with blue links?\n';
         }
       } else {
         gdc.isIntraDocLink = false;
@@ -1097,8 +1104,11 @@ gdc.flushFootnoteBuffer = function() {
 
 // Insert an alert message into the output.
 // And add a message at the top of the Markdown/HTML source too.
-gdc.alert = function(message) {
+gdc.alert = function(message) {  
   gdc.alertCount++;
+  // Do not write alerts if in reckless mode!
+  if (gdc.recklessMode) {return;}
+
   var id = 'gdcalert'+gdc.alertCount;
   var redBoldSpan = '<span style="color: red; font-weight: bold">';
   gdc.writeStringToBuffer('\n\n<p id="' + id + '" >' + redBoldSpan);
@@ -1122,6 +1132,9 @@ gdc.setAlertMessage = function() {
   
   // Common style for top alerts.
   var alertOpen = '\n<p style="color: red; font-weight: bold">';
+  // Skip if in recklessMode.
+  if (gdc.recklessMode) {return;}
+
   // Note ERRORs or WARNINGs or ALERTs if any.
   if ( gdc.errorCount || gdc.warningCount || gdc.alertCount) {
     gdc.alertMessage += alertOpen
@@ -1598,8 +1611,7 @@ md.closeCodeBlock = '```<newline><newline>';  // No leading \n here on purpose.
 
 // Add new information to the top of the info comment.
 // But don't get rid of the opening of the comment.
-gdc.topComment = '<!-----\n'
-+ 'NEW: Check the "Suppress top comment" option to remove this info from the output.\n\n'
+gdc.topComment = '<!-----\n\n'
 ;
   
 md.doMarkdown = function(config) {
@@ -1622,8 +1634,19 @@ md.doMarkdown = function(config) {
   
   // Record elapsed time.
   var eTime = (new Date().getTime() - gdc.startTime)/1000;
-  gdc.info = 'Conversion time: ' + eTime + ' seconds.\n' + gdc.info;
+  gdc.info = '\n\nConversion time: ' + eTime + ' seconds.\n' + gdc.info;
   
+  // Note ERRORs or WARNINGs or ALERTs at the top if there are any.
+  gdc.errorSummary = 'Yay, no errors, warnings, or alerts!'
+  if ( gdc.errorCount || gdc.warningCount || gdc.alertCount ) {
+    gdc.errorSummary = 'You have some errors, warnings, or alerts. '
+      + 'If you are using reckless mode, turn it off to see inline alerts.'
+      + '\n* ERRORs: '   + gdc.errorCount
+      + '\n* WARNINGs: ' + gdc.warningCount
+      + '\n* ALERTS: '   + gdc.alertCount;
+  }
+  gdc.info = gdc.errorSummary + gdc.info;
+
   gdc.info = gdc.topComment + gdc.info;
   // Warn at the top if DEBUG is true.
   if (DEBUG) {
@@ -1638,6 +1661,9 @@ md.doMarkdown = function(config) {
   // Add info comment if desired.
   if (!gdc.suppressInfo) {
     gdc.out = gdc.info + '\n----->\n\n' + gdc.out;
+  } else if (gdc.suppressInfo && gdc.errorSummary) {
+    // But notify if there are errors.
+    gdc.out = '<!-- ' + gdc.errorSummary + ' -->\n' + gdc.out;
   }
   
   return gdc.out;
