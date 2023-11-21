@@ -5,7 +5,7 @@ You have some errors, warnings, or alerts. If you are using reckless mode, turn 
 * WARNINGs: 2
 * ALERTS: 6
 
-Conversion time: 3.455 seconds.
+Conversion time: 2.472 seconds.
 
 
 Using this HTML file:
@@ -17,8 +17,8 @@ Using this HTML file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β34
-* Mon Dec 12 2022 11:04:00 GMT-0800 (PST)
+* Docs to Markdown version 1.0β35
+* Mon Nov 20 2023 16:37:11 GMT-0800 (PST)
 * Source doc: MAIN: Docs to Markdown (GD2md-html)
 * Tables are currently converted to HTML tables.
 
