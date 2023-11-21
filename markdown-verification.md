@@ -1,5 +1,3 @@
-<!-- Output copied to clipboard! -->
-
 <!-----
 
 You have some errors, warnings, or alerts. If you are using reckless mode, turn it off to see inline alerts.
@@ -7,7 +5,7 @@ You have some errors, warnings, or alerts. If you are using reckless mode, turn 
 * WARNINGs: 2
 * ALERTS: 6
 
-Conversion time: 2.967 seconds.
+Conversion time: 2.23 seconds.
 
 
 Using this Markdown file:
@@ -19,8 +17,8 @@ Using this Markdown file:
 
 Conversion notes:
 
-* Docs to Markdown version 1.0β34
-* Mon Dec 12 2022 10:51:41 GMT-0800 (PST)
+* Docs to Markdown version 1.0β35
+* Mon Nov 20 2023 16:34:25 GMT-0800 (PST)
 * Source doc: MAIN: Docs to Markdown (GD2md-html)
 * Tables are currently converted to HTML tables.
 
