@@ -1,62 +1,14 @@
-<!-----
-
-You have some errors, warnings, or alerts. If you are using reckless mode, turn it off to see inline alerts.
+<!-- You have some errors, warnings, or alerts. If you are using reckless mode, turn it off to see useful information and inline alerts.
 * ERRORs: 0
 * WARNINGs: 2
-* ALERTS: 6
+* ALERTS: 6 -->
 
-Conversion time: 2.23 seconds.
-
-
-Using this Markdown file:
-
-1. Paste this output into your source file.
-2. See the notes and action items below regarding this conversion run.
-3. Check the rendered output (headings, lists, code blocks, tables) for proper
-   formatting and use a linkchecker before you publish this page.
-
-Conversion notes:
-
-* Docs to Markdown version 1.0β35
-* Mon Nov 20 2023 16:34:25 GMT-0800 (PST)
-* Source doc: MAIN: Docs to Markdown (GD2md-html)
-* Tables are currently converted to HTML tables.
-
-WARNING:
-Inline drawings not supported: look for ">>>>>  gd2md-html alert:  inline drawings..." in output.
-
-
-WARNING:
-You have some equations: look for ">>>>>  gd2md-html alert:  equation..." in output.
-
-* This document has images: check for >>>>>  gd2md-html alert:  inline image link in generated source and store images to your server. NOTE: Images in exported zip file from Google Docs may not appear in  the same order as they do in your doc. Please check the images!
-
-
-WARNING:
-You have 3 H1 headings. You may want to use the "H1 -> H2" option to demote all headings by one level.
-
------>
-
-
-<p style="color: red; font-weight: bold">>>>>>  gd2md-html alert:  ERRORs: 0; WARNINGs: 3; ALERTS: 6.</p>
-<ul style="color: red; font-weight: bold"><li>See top comment block for details on ERRORs and WARNINGs. <li>In the converted Markdown or HTML, search for inline alerts that start with >>>>>  gd2md-html alert:  for specific instances that need correction.</ul>
-
-<p style="color: red; font-weight: bold">Links to alert messages:</p><a href="#gdcalert1">alert1</a>
-<a href="#gdcalert2">alert2</a>
-<a href="#gdcalert3">alert3</a>
-<a href="#gdcalert4">alert4</a>
-<a href="#gdcalert5">alert5</a>
-<a href="#gdcalert6">alert6</a>
-
-<p style="color: red; font-weight: bold">>>>>> PLEASE check and correct alert issues and delete this message and the inline alerts.<hr></p>
-
-
-This is a raw conversion from a Google Doc (HTML headings option for MD, no other options).
+This is a raw conversion from a Google Doc (For verification purposes: use HTML headings and Reckless mode options for Markdown conversion, no other options. Reckless mode only for HTML conversion).
 
 <h1>MAIN: Docs to Markdown (GD2md-html)</h1>
 
 
-This page demonstrates the features of Docs to Markdown conversion from a Google Doc to a simple Markdown or HTML file. 
+This page demonstrates the features of [Docs to Markdown](https://workspace.google.com/marketplace/app/docs_to_markdown/700168918607) conversion from a Google Doc to a simple Markdown or HTML file. 
 
 **Note**: Not all Markdown renderers support all Markdown features. For example github Markdown does not support a table of contents ([TOC]), footnotes, or definition lists. Also, some Markdown environments strip heading IDs and replace them with their own generated IDs. You’ll have to do some manual adjustments, depending on your target environment.
 
@@ -88,17 +40,22 @@ END BLANK HEADINGS
 
 This is a paragraph.[^1] (Docs to Markdown also supports footnotes) A sentence with `some embedded code`. Docs to Markdown changes “smart quotes” to straight quotes in code to guard against cut-and-paste errors.
 
+<h2>Basic font styling</h2>
+
+
+This is *italic* text. This is **bold** text. This is ***bold and italic*** text.
+
 <h2 id="font-attribute-runs-including-extra-whitespace-at-the-ends">Font attribute runs including extra whitespace at the ends</h2>
 
 
-For example a** bold run with some whitespace **on either end. Here’s an_ italic run _with added whitespace. And a~~ strikethrough run ~~with additional whitespace. And` some code `with added whitespace. And<span style="text-decoration:underline;"> some underline </span>with added whitespace. Links [http://www.google.com](http://www.google.com). Link with no space:[http://www.google.com](http://www.google.com).
+For example a** bold run with some whitespace **on either end. Here’s an* italic run *with added whitespace. And a~~ strikethrough run ~~with additional whitespace. And` some code `with added whitespace. And<span style="text-decoration:underline;"> some underline </span>with added whitespace. Links [http://www.google.com](http://www.google.com). Link with no space:[http://www.google.com](http://www.google.com).
 
-Some _italic**text**alternating**with**bold**italic**_ but no spaces between font changes.
+Some *italic**text**alternating**with**bold**italic*** but no spaces between font changes.
 
 <h2 id="mixed-font-spans">Mixed font spans</h2>
 
 
-Some regular text, _followed by an italic span_ **_with some embedded bold_** _text_. (Note: this may still be a problem, depending on how it’s formatted in the Google Doc. Like this: Some regular text, _followed by an italic span **with some embedded bold** text_.
+Some regular text, *followed by an italic span* ***with some embedded bold*** *text*. (Note: this may still be a problem, depending on how it’s formatted in the Google Doc. Like this: Some regular text, *followed by an italic span **with some embedded bold** text*.
 
 Some more regular text. Some ~~strikethrough text~~ here. 
 
@@ -264,7 +221,7 @@ term2
 :  First paragraph of definition.
 :  Second paragraph of definition.
 
-A term that has some **_crazy formatting_** and `characters` (not recommended)//.
+A term that has some ***crazy formatting*** and `characters` (not recommended)//.
 :  Definition of crazy term.
 
 
@@ -275,16 +232,12 @@ But a definition term cannot be empty:
 
 ?
 
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: Definition &darr;&darr; outside of definition list. Missing preceding term(s)? </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 : Empty term above causes an error here.
 
 <h2 id="code-blocks">Code blocks</h2>
 
 
-A code block (note that by default, Docs to Markdown does _not_ add language descriptors to code blocks, but see [Code Blocks with lang specification](#code-blocks-with-lang-specification)):
+A code block (note that by default, Docs to Markdown does *not* add language descriptors to code blocks, but see [Code Blocks with lang specification](#code-blocks-with-lang-specification)):
 
 
 ```
@@ -463,20 +416,12 @@ Some links with titles:
 A plain image:
 
 
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![alt_text](images/image1.png "image_tooltip")
 
 
 Note that the image link will be broken until you store the image file on your server and adjust the path and width if necessary.
 
 Alternatively, you can use a Drawing to display an image. Here's an example where we've pasted the image into a Drawing and referenced it after converting the doc:
-
-
-
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.jpg). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
 ![alt_text](images/image2.jpg "image_tooltip")
@@ -490,19 +435,11 @@ Tip: You can limit the width of an image in Markdown by adding (for example) `{w
 Google Docs does not provide an API for accessing the data in a Google Drawing. If you have an inline drawing, Docs to Markdown will warn and provide an alert in the converted output:
 
 
-
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline drawings not supported directly from Docs. You may want to copy the inline drawing to a standalone drawing and export by reference. See <a href="https://github.com/evbacher/gd2md-html/wiki/Google-Drawings-by-reference">Google Drawings by reference</a> for details. The img URL below is a placeholder. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![drawing](https://docs.google.com/drawings/d/12345/export/png)
 
 You can display Google Drawings (and images in Drawings) by reference. See [Google Drawings by reference](https://github.com/evbacher/gd2md-html/wiki/Google-Drawings-by-reference) for details.
 
 Here's an example where we've referred to a drawing by reference (after converting):
-
-
-
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline drawings not supported directly from Docs. You may want to copy the inline drawing to a standalone drawing and export by reference. See <a href="https://github.com/evbacher/gd2md-html/wiki/Google-Drawings-by-reference">Google Drawings by reference</a> for details. The img URL below is a placeholder. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
 ![drawing](https://docs.google.com/drawings/d/12345/export/png)
@@ -515,10 +452,6 @@ Tip: For any drawing that you display by reference, be sure to change the permis
 If you insert an equation using Google Docs, Docs to Markdown will warn and insert an alert message in the output. However, if your target publishing platform supports LaTeX equations, you can use LaTeX syntax directly.
 
 A Google Docs equation:
-
-
-
-<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: equation: use MathJax/LaTeX if your publishing platform supports it. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
 
@@ -600,7 +533,7 @@ This is some more regular text.
 
 A sentence with <sub>subscript</sub> and <sup>superscript</sup> and some more regular text and <sup><a href="http://www.google.com">a link to Google</a></sup>.
 
-And more <sub><strong>bold</strong></sub> and <sup><code>mixed<strong><em> </em>bold<em> italic </em></strong>code</code></sup> and some more text. Some _italic text_.
+And more <sub><strong>bold</strong></sub> and <sup><code>mixed<strong><em> </em>bold<em> italic </em></strong>code</code></sup> and some more text. Some *italic text*.
 
 Another paragraph with **some bold text**.
 
