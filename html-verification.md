@@ -1,65 +1,16 @@
-<!-----
-
-You have some errors, warnings, or alerts. If you are using reckless mode, turn it off to see inline alerts.
+<!-- You have some errors, warnings, or alerts. If you are using reckless mode, turn it off to see inline alerts.
 * ERRORs: 0
 * WARNINGs: 2
-* ALERTS: 6
-
-Conversion time: 2.472 seconds.
-
-
-Using this HTML file:
-
-1. Paste this output into your source file.
-2. See the notes and action items below regarding this conversion run.
-3. Check the rendered output (headings, lists, code blocks, tables) for proper
-   formatting and use a linkchecker before you publish this page.
-
-Conversion notes:
-
-* Docs to Markdown version 1.0β35
-* Mon Nov 20 2023 16:37:11 GMT-0800 (PST)
-* Source doc: MAIN: Docs to Markdown (GD2md-html)
-* Tables are currently converted to HTML tables.
-
-WARNING:
-Inline drawings not supported: look for ">>>>>  gd2md-html alert:  inline drawings..." in output.
-
-
-WARNING:
-You have some equations: look for ">>>>>  gd2md-html alert:  equation..." in output.
-
-* This document has images: check for >>>>>  gd2md-html alert:  inline image link in generated source and store images to your server. NOTE: Images in exported zip file from Google Docs may not appear in  the same order as they do in your doc. Please check the images!
-
-* Footnote support in HTML is alpha: please check your footnotes.
-
-WARNING:
-You have 3 H1 headings. You may want to use the "H1 -> H2" option to demote all headings by one level.
-
------>
-
-
-<p style="color: red; font-weight: bold">>>>>>  gd2md-html alert:  ERRORs: 0; WARNINGs: 3; ALERTS: 6.</p>
-<ul style="color: red; font-weight: bold"><li>See top comment block for details on ERRORs and WARNINGs. <li>In the converted Markdown or HTML, search for inline alerts that start with >>>>>  gd2md-html alert:  for specific instances that need correction.</ul>
-
-<p style="color: red; font-weight: bold">Links to alert messages:</p><a href="#gdcalert1">alert1</a>
-<a href="#gdcalert2">alert2</a>
-<a href="#gdcalert3">alert3</a>
-<a href="#gdcalert4">alert4</a>
-<a href="#gdcalert5">alert5</a>
-<a href="#gdcalert6">alert6</a>
-
-<p style="color: red; font-weight: bold">>>>>> PLEASE check and correct alert issues and delete this message and the inline alerts.<hr></p>
-
+* ALERTS: 6 -->
 
 <p>
-This is a raw conversion from a Google Doc (HTML headings option for MD, no other options).
+This is a raw conversion from a Google Doc (For verification purposes: use HTML headings option for Markdown conversion, no other options. No options for HTML conversion).
 </p>
 <h1>MAIN: Docs to Markdown (GD2md-html)</h1>
 
 
 <p>
-This page demonstrates the features of Docs to Markdown conversion from a Google Doc to a simple Markdown or HTML file. 
+This page demonstrates the features of <a href="https://workspace.google.com/marketplace/app/docs_to_markdown/700168918607">Docs to Markdown</a> conversion from a Google Doc to a simple Markdown or HTML file. 
 </p>
 <p>
 <strong>Note</strong>: Not all Markdown renderers support all Markdown features. For example github Markdown does not support a table of contents ([TOC]), footnotes, or definition lists. Also, some Markdown environments strip heading IDs and replace them with their own generated IDs. You’ll have to do some manual adjustments, depending on your target environment.
@@ -93,6 +44,12 @@ END BLANK HEADINGS
 
 <p>
 This is a paragraph.<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup> (Docs to Markdown also supports footnotes) A sentence with <code>some embedded code</code>. Docs to Markdown changes “smart quotes” to straight quotes in code to guard against cut-and-paste errors.
+</p>
+<h2>Basic font styling</h2>
+
+
+<p>
+This is <em>italic</em> text. This is <strong>bold</strong> text. This is <strong><em>bold and italic</em></strong> text.
 </p>
 <h2 id="font-attribute-runs-including-extra-whitespace-at-the-ends">Font attribute runs including extra whitespace at the ends</h2>
 
@@ -361,10 +318,6 @@ But a definition term cannot be empty:
 <p>
 ?
 </p>
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: Definition &darr;&darr; outside of definition list. Missing preceding term(s)? </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 <p>
 : Empty term above causes an error here.
 </p>
@@ -574,10 +527,6 @@ A plain image:
 </p>
 <p>
 
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 <img src="images/image1.png" width="" alt="alt_text" title="image_tooltip">
 
 </p>
@@ -588,10 +537,6 @@ Note that the image link will be broken until you store the image file on your s
 Alternatively, you can use a Drawing to display an image. Here's an example where we've pasted the image into a Drawing and referenced it after converting the doc:
 </p>
 <p>
-
-
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.jpg). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 <img src="images/image2.jpg" width="" alt="alt_text" title="image_tooltip">
 
@@ -607,10 +552,6 @@ Google Docs does not provide an API for accessing the data in a Google Drawing. 
 </p>
 <p>
 
-
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline drawings not supported directly from Docs. You may want to copy the inline drawing to a standalone drawing and export by reference. See <a href="https://github.com/evbacher/gd2md-html/wiki/Google-Drawings-by-reference">Google Drawings by reference</a> for details. The img URL below is a placeholder. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 <img src="https://docs.google.com/drawings/d/12345/export/png" width="80%" alt="drawing">
 
 </p>
@@ -621,10 +562,6 @@ You can display Google Drawings (and images in Drawings) by reference. See <a hr
 Here's an example where we've referred to a drawing by reference (after converting):
 </p>
 <p>
-
-
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline drawings not supported directly from Docs. You may want to copy the inline drawing to a standalone drawing and export by reference. See <a href="https://github.com/evbacher/gd2md-html/wiki/Google-Drawings-by-reference">Google Drawings by reference</a> for details. The img URL below is a placeholder. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 <img src="https://docs.google.com/drawings/d/12345/export/png" width="80%" alt="drawing">
 
@@ -642,10 +579,6 @@ If you insert an equation using Google Docs, Docs to Markdown will warn and inse
 A Google Docs equation:
 </p>
 <p>
-
-
-<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: equation: use MathJax/LaTeX if your publishing platform supports it. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 </p>
 <p>
