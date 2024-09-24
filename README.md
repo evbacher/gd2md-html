@@ -22,7 +22,8 @@ Use Google Docs styles for headings (Heading 1, Heading 2, etc.) so that Docs to
 
 ## Contributing
 
-If you want to contribute docs or code to this project, please read [CONTRIBUTING.md](CONTRIBUTING.md) and [dev.md](dev.md).
+(**Note**: Not currently accepting contributions.)
+For more information, please read [CONTRIBUTING.md](CONTRIBUTING.md) and [dev.md](dev.md) for the general philosophy of Docs to Markdown.
 
 ## Contributors
 
