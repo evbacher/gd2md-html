@@ -316,7 +316,7 @@ gdc.htmlMarkup = {
 
   pOpen:       '\n<p>\n',
   pClose:      '\n</p>',
-  pBlank:      '\n<p>&nbsp</p>',
+  pBlank:      '\n<p>&nbsp;</p>',
   ulOpen:      '\n<ul>',
   ulClose:     '\n</ul>',
   olOpen:      '\n<ol>',
