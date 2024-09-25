@@ -42,6 +42,7 @@ var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
 var GDC_VERSION = '1.0β34'; // based on 1.0β33
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β35 (25 Sep. 2024): Add target blank option. Add blank lines to HTML). (sidebar, gdc, html)
 // - 1.0β34 (12 Dec. 2022): Clarify note about TOC -- needs blue links to create intra-doc links). (gdc)
 // - 1.0β33 (8 Jan. 2022): Add reckless mode (no warnings or inline alerts). (sidebar, gdc, html)
 // - 1.0β32 (7 Jan. 2022): Make the Donate button more obvious. (gdc, sidebar)
@@ -117,6 +118,9 @@ gdc.config = function(config) {
   }
   if (config.recklessMode === true) {
     gdc.recklessMode = true;
+  }
+  if (config.targetBlank === true) {
+    gdc.targetBlank = true;
   }
 };
 
@@ -312,6 +316,7 @@ gdc.htmlMarkup = {
 
   pOpen:       '\n<p>\n',
   pClose:      '\n</p>',
+  pBlank:      '\n<p>&nbsp</p>',
   ulOpen:      '\n<ul>',
   ulClose:     '\n</ul>',
   olOpen:      '\n<ol>',
@@ -319,6 +324,7 @@ gdc.htmlMarkup = {
   ulItem:      '\n<li>',
   olItem:      '\n<li>',
   liClose:     '\n</li>',
+  
 
   hr:           '\n<hr>',
 
@@ -884,8 +890,13 @@ gdc.handleText = function(textElement) {
           gdc.setWriteBuf();
           offset = gdc.writeBuf(textElement, offset, urlEnd);
           gdc.writeStringToBuffer('](' + url + ')');
-      } else {  // Must be HTML, write standard link.
+      } else if (gdc.isHTML && !gdc.targetBlank ) {  // If we aren't adding target="_blank".
         gdc.writeStringToBuffer('<a href="' + url + '">');
+        gdc.setWriteBuf();
+        offset = gdc.writeBuf(textElement, offset, urlEnd);
+        gdc.writeStringToBuffer('</a>');
+      }  else if (gdc.isHTML && gdc.targetBlank ) {  // If target blank is selected
+        gdc.writeStringToBuffer('<a target="_blank" href="' + url + '">');
         gdc.setWriteBuf();
         offset = gdc.writeBuf(textElement, offset, urlEnd);
         gdc.writeStringToBuffer('</a>');
@@ -1295,6 +1306,8 @@ gdc.maybeCloseAttrs = function(currentAttrs) {
 // At the end of a paragraph or list item, we want to close all open attributes.
 // This is similar to maybeCloseAttrs, but we want to close all of them in
 // the openAttrs list (and we do not have an explicit attribute change here).
+
+// Needs to close when the attribute stops. Not at paragraph/word end. 
 gdc.closeAllAttrs = function() {
   while (gdc.openAttrs.length > 0) {
     var a = gdc.openAttrs.pop();
@@ -1773,7 +1786,7 @@ md.handleParagraph = function(para) {
   gdc.inHeading = false;
   gdc.state.isMixedCode = false;
   gdc.numChildren = para.getNumChildren();
-  // Do not bother with empty paragraphs (blank lines). (Except we preserve them for code blocks.)
+  // Preserve blank lines in body text as well as code blocks
   if (gdc.numChildren === 0) {
     if (gdc.inCodeBlock) {
       // Preserve newlines in code block (or single-cell table code block).
@@ -1781,6 +1794,9 @@ md.handleParagraph = function(para) {
         // Write a placeholder for newline: will replace after wrapping.
         gdc.writeStringToBuffer('<newline>');
       }
+    } else if (gdc.docType === gdc.docTypes.html) {
+      // Add blank lines in HTML by default
+      gdc.writeStringToBuffer(gdc.htmlMarkup.pBlank);
     }
     return;
   }
