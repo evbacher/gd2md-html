@@ -39,7 +39,7 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β34'; // based on 1.0β33
+var GDC_VERSION = '1.0β35'; // based on 1.0β33
 
 // Version notes: significant changes (latest on top). (files changed)
 // - 1.0β35 (25 Sep. 2024): Add target blank option. Add blank lines to HTML). (sidebar, gdc, html)
