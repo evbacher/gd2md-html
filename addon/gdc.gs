@@ -271,7 +271,6 @@ gdc.mixedMarkup = {
   underlineOpen: '<span style="text-decoration:underline;">',
   underlineClose: '</span>',
 
-
   // Paragraph, lists
   pOpen:        '<newline>',
   pClose:       '<newline>',
@@ -314,8 +313,6 @@ gdc.htmlMarkup = {
   strikethroughClose: '</del>',
   underlineOpen: '<span style="text-decoration:underline;">',
   underlineClose: '</span>',
-  centerOpen: '<center>',
-  centerClose: '</center>',
 
   pOpen:       '\n<p>\n',
   pClose:      '\n</p>',
