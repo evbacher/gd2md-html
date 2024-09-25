@@ -39,10 +39,10 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β35'; // based on 1.0β33
+var GDC_VERSION = '1.0β34'; // based on 1.0β33
 
 // Version notes: significant changes (latest on top). (files changed)
-// - 1.0β35 (25 Sep. 2024): Add target blank option. Add blank lines to HTML). (sidebar, gdc, html)
+// - 1.0β35 (25 Sep. 2024): Add target blank option. Add blank lines to HTML. Added center-alignment for HTML. (sidebar, gdc, html)
 // - 1.0β34 (12 Dec. 2022): Clarify note about TOC -- needs blue links to create intra-doc links). (gdc)
 // - 1.0β33 (8 Jan. 2022): Add reckless mode (no warnings or inline alerts). (sidebar, gdc, html)
 // - 1.0β32 (7 Jan. 2022): Make the Donate button more obvious. (gdc, sidebar)
@@ -271,6 +271,7 @@ gdc.mixedMarkup = {
   underlineOpen: '<span style="text-decoration:underline;">',
   underlineClose: '</span>',
 
+
   // Paragraph, lists
   pOpen:        '<newline>',
   pClose:       '<newline>',
@@ -313,6 +314,8 @@ gdc.htmlMarkup = {
   strikethroughClose: '</del>',
   underlineOpen: '<span style="text-decoration:underline;">',
   underlineClose: '</span>',
+  centerOpen: '<center>',
+  centerClose: '</center>',
 
   pOpen:       '\n<p>\n',
   pClose:      '\n</p>',
@@ -353,12 +356,14 @@ gdc.strikethrough = 's';
 gdc.underline = 'u';
 gdc.subscript = 'sub';
 gdc.superscript = 'sup';
+gdc.centered = 'center';
 
 // Constants for text alignment types.
 var
   NORMAL = DocumentApp.TextAlignment.NORMAL,
   SUBSCRIPT = DocumentApp.TextAlignment.SUBSCRIPT,
   SUPERSCRIPT = DocumentApp.TextAlignment.SUPERSCRIPT;
+  CENTERED = DocumentApp.HorizontalAlignment.CENTER;
 
 // Constants for the various element types. This is really for convenience.
 // These are types contained in BODY. See the enum DocumentApp.ElementType.
@@ -1891,6 +1896,13 @@ md.handleParagraph = function(para) {
   // Check horizontal alignment. We can style right alignment using an HTML paragraph.
   if (para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
     gdc.writeStringToBuffer('<p style="text-align: right">\n');
+    gdc.useHtml();
+    gdc.isRightAligned = true;
+  }
+
+  // Check horizontal alignment. We can style center alignment using an HTML paragraph.
+  if (para.getAlignment() === DocumentApp.HorizontalAlignment.CENTER && para.isLeftToRight()) {
+    gdc.writeStringToBuffer('<p style="text-align: center">\n');
     gdc.useHtml();
     gdc.isRightAligned = true;
   }
