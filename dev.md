@@ -16,19 +16,13 @@ Conversion notes:
 ----->
 
 
-<h2>Developer guide: contributing to Docs to Markdown </h2>
+<h2>Developer tips for Docs to Markdown</h2>
 
+**Note**: We are not currently updating the code with contributions, partly because I do not have much time and I am not good at managing contributions.
 
 [Docs to Markdown](https://gsuite.google.com/marketplace/app/docs_to_markdown/700168918607) is a Google Docs add-on that converts a Google Doc to simple, readable Markdown or HTML.
 
-**Note**: This is my first big open-source project, so I’m still figuring it out. If you have any suggestions, please file a bug or feature request.
-
-
-
-
-
 <h2 id="the-spirit-of-docs-to-markdown">The spirit of Docs to Markdown</h2>
-
 
 Docs to Markdown is meant to provide a simple conversion from Google Docs text content to Markdown. While Markdown is the primary target, because we sometimes need to convert things to HTML (like tables), we also provide a secondary HTML target.
 
@@ -102,13 +96,8 @@ There is an existing feature request for Markdown table output. This should be p
 
 <h3>New workflows </h3>
 
-
 Docs to Markdown is a simple filter. There are other tools available like Pandoc that provide good conversion from one document format to another. You may be able to combine Docs to Markdown with Pandoc or other tools to get to the target format. And Pandoc may provide better conversion for some workflows than Docs to Markdown can provide. There is no need for Docs to Markdown to try to compete with a tool like Pandoc. This enhancement may require more process documentation than code.
 
 <h3 id="existing-bugs-feature-requests">Existing bugs, feature requests</h3>
 
-
 Open issues for Docs to Markdown are at [/evbacher/gd2md-html/issues](https://github.com/evbacher/gd2md-html/issues).
-
-
-<!-- Docs to Markdown version 1.0β22 -->
