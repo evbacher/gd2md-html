@@ -39,7 +39,7 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β34'; // based on 1.0β33
+var GDC_VERSION = '1.0β36'; // based on 1.0β33
 
 // Version notes: significant changes (latest on top). (files changed)
 // - 1.0β36 (26 Sep. 2024): Moved the superscript/subscript open functions to be with the rest of the formatting functions. Moved maybeCloseAttrs() to the beginning of handleText() to ensure tags are closed before new tags are opened. (gdc)
