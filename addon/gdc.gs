@@ -42,6 +42,7 @@ var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
 var GDC_VERSION = '1.0β34'; // based on 1.0β33
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β36 (26 Sep. 2024): Moved the superscript/subscript open functions to be with the rest of the formatting functions. Moved maybeCloseAttrs() to the beginning of handleText() to ensure tags are closed before new tags are opened. (gdc)
 // - 1.0β35 (25 Sep. 2024): Add target blank option. Add blank lines to HTML. Added center-alignment for HTML. (sidebar, gdc, html)
 // - 1.0β34 (12 Dec. 2022): Clarify note about TOC -- needs blue links to create intra-doc links). (gdc)
 // - 1.0β33 (8 Jan. 2022): Add reckless mode (no warnings or inline alerts). (sidebar, gdc, html)
@@ -799,7 +800,6 @@ gdc.handleText = function(textElement) {
     }
 
     var currentAttrs = gdc.getCurrentAttributes(textElement, attrOff);
-    // Try closing again before adding new current attribute?
     // Attributes need to close for new text before opening any new attributes. This is for when words run together like italicsSUPERSCRIPT. or BOLDitalics 
     gdc.maybeCloseAttrs(currentAttrs);
 
