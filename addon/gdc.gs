@@ -1923,16 +1923,6 @@ md.handleParagraph = function(para) {
   // In case we're in a mixed code span, reset the markup.
   gdc.resetMarkup();
 
-  // if (gdc.isRightAligned) {
-  //   gdc.writeStringToBuffer('\n</p>');
-  //   gdc.isRightAligned = false;
-  // }
-
-  //if (gdc.isCentered) {
-  //  gdc.writeStringToBuffer('\n</center>');
-  //  gdc.isCentered = false;
-  //}
-
   // Now that we're at the end, close heading or paragraph if necessary.
   if (gdc.docType === gdc.docTypes.md && gdc.inHeading && !gdc.isHTML) {
     // Trim heading text to use as hash key (we trim it in gdc.makeId() ).
@@ -1964,7 +1954,6 @@ md.handleParagraph = function(para) {
     }
   }
   
-  //gdc.maybeCloseList(para);
 }; // end md.handleParagraph
 
 // Handle the heading type of the paragraph. Fall through for NORMAL.
