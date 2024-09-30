@@ -39,9 +39,10 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β36'; // based on 1.0β33
+var GDC_VERSION = '1.0β37'; // based on 1.0β36
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β37 (30 Sep. 2024): Modified how center/right alignment is handled. Placed inside html.handleHeading (gdc, html)
 // - 1.0β36 (26 Sep. 2024): Moved the superscript/subscript open functions to be with the rest of the formatting functions. Moved maybeCloseAttrs() to the beginning of handleText() to ensure tags are closed before new tags are opened. (gdc)
 // - 1.0β35 (25 Sep. 2024): Add target blank option. Add blank lines to HTML. Added center-alignment for HTML. (sidebar, gdc, html)
 // - 1.0β34 (12 Dec. 2022): Clarify note about TOC -- needs blue links to create intra-doc links). (gdc)
@@ -1819,7 +1820,6 @@ md.handleParagraph = function(para) {
   // blank lines.
   html.checkList();
 
-
 // Check to see if this is a constant-width paragraph (code block signal).
   if (gdc.isCodeLine(para) && !gdc.isTable) {
     // If we're starting a code block, open it up.
@@ -1874,8 +1874,19 @@ md.handleParagraph = function(para) {
       // do nothing: we also want to not add the tablePrefix.
       // But check for table cell or definition list.
     } else if (!gdc.startingTableCell && !gdc.inDlist) {
-      gdc.writeStringToBuffer(gdc.markup.pOpen);
-    }
+      // This is where we want to check for right/center alignment so that the proper paragraph style can be applied. 
+      if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
+        gdc.writeStringToBuffer('\n<p style="text-align: right">\n');
+        // Not sure what this does?
+        gdc.useHtml();
+      } else if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.CENTER && para.isLeftToRight()) {
+        gdc.writeStringToBuffer('\n<p style="text-align: center">\n');
+        gdc.useHtml();
+      } else {
+        gdc.writeStringToBuffer(gdc.markup.pOpen);
+      }
+    }  
+
     // We want paragraphs after the first text in a table cell.
     gdc.startingTableCell = false;
   }
@@ -1896,20 +1907,6 @@ md.handleParagraph = function(para) {
     }
   }
 
-  // Check horizontal alignment. We can style right alignment using an HTML paragraph.
-  if (para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
-    gdc.writeStringToBuffer('<p style="text-align: right">\n');
-    gdc.useHtml();
-    gdc.isRightAligned = true;
-  }
-
-  // Check horizontal alignment. We can style center alignment using an HTML paragraph.
-  if (para.getAlignment() === DocumentApp.HorizontalAlignment.CENTER && para.isLeftToRight()) {
-    gdc.writeStringToBuffer('<p style="text-align: center">\n');
-    gdc.useHtml();
-    gdc.isRightAligned = true;
-  }
-
   // Detects text direction.
   if (!para.isLeftToRight()) {
     gdc.writeStringToBuffer('<p dir="rtl">\n');
@@ -1926,10 +1923,15 @@ md.handleParagraph = function(para) {
   // In case we're in a mixed code span, reset the markup.
   gdc.resetMarkup();
 
-  if (gdc.isRightAligned) {
-    gdc.writeStringToBuffer('</p>\n');
-    gdc.isRightAligned = false;
-  }
+  // if (gdc.isRightAligned) {
+  //   gdc.writeStringToBuffer('\n</p>');
+  //   gdc.isRightAligned = false;
+  // }
+
+  //if (gdc.isCentered) {
+  //  gdc.writeStringToBuffer('\n</center>');
+  //  gdc.isCentered = false;
+  //}
 
   // Now that we're at the end, close heading or paragraph if necessary.
   if (gdc.docType === gdc.docTypes.md && gdc.inHeading && !gdc.isHTML) {
