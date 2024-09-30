@@ -1,12 +1,9 @@
 <!--
 Copyright 2020 Google LLC
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
     https://www.apache.org/licenses/LICENSE-2.0
-
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,15 +28,80 @@ input[type="button"].invisible {background: transparent;border: none;font-size:0
 }
 </style>
 
+<style>
+/* Button style for link. */
+a.gdcButton {
+/*
+align-items:flex-start;
+background-attachment:scroll;
+background-clip:border-box;
+background-color:rgba(0, 0, 0, 0);
+background-image:-webkit-linear-gradient(top, rgb(77, 144, 254), rgb(71, 135, 237));
+*/
+background-color: #008000;
+border-style: solid;
+border-width: 1px;
+border-radius: 2px;
+border-color: #008000;
+
+box-shadow:none;
+box-sizing:border-box;
+color:rgb(255, 255, 255);
+cursor:default;
+display:inline-block;
+font-family:arial, sans-serif;
+font-size:11px;
+font-stretch:100%;
+font-style:normal;
+
+font-weight:700;
+height:28.9941px;
+letter-spacing:normal;
+line-height:27px;
+margin-bottom:0px;
+margin-left:0px;
+margin-right:0px;
+margin-top:0px;
+min-width:72px;
+
+padding-bottom:0px;
+padding-left:8px;
+padding-right:8px;
+padding-top:0px;
+text-align:center;
+text-decoration: none;
+text-indent:0px;
+text-rendering:auto;
+text-shadow:none;
+text-transform:none;
+user-select:none;
+white-space:nowrap;
+width:72.3633px;
+word-spacing:0px;
+writing-mode:horizontal-tb;
+-webkit-appearance:none;
+-webkit-rtl-ordering:logical;
+-webkit-border-image:none;
+}
+</style>
+<a target="_blank" title="Donate for social justice!" class="gdcButton" href="https://www.buymeacoffee.com/docstomarkdown"> Donate</a>
+
 
 <!-- Top of sidebar UI elements. -->
 <input type="button" class="blue" value="Markdown" onclick="markdown()">
 <input type="button" class="blue" value="HTML" onclick="html()">
 
+<!--
+<input type="button" class="blue" value="Help" onclick="help()">
+-->
+
+<p>
+
+<!--
 <input class="invisible" type="button" onclick="html()" value="test">
+-->
 
 <!-- Options. -->
-<br>
 <label>
 <input type="checkbox" id="demote_headings">
 Demote headings (H1 &rarr; H2, etc.)
@@ -47,7 +109,7 @@ Demote headings (H1 &rarr; H2, etc.)
 <br>
 <label>
 <input type="checkbox" id="html_headings">
-HTML headings/IDs
+Use HTML headings/IDs
 </label>
 <br>
 <label>
@@ -58,26 +120,46 @@ Wrap HTML
 <label>
 <input type="checkbox" id="render_html_tags">
 Render HTML tags
+</label><br>
+<label>
+<input type="checkbox" id="suppress_info">
+Suppress info comment
+</label><br>
+<label>
+<input type="checkbox" id="reckless_mode">
+Use reckless mode (no alerts)
 </label>
 
 <!-- Docs, bug link. -->
 <br>
-<div style="text-align: right;">
-Help: 
+<div style="text-align: left;"> 
+<a target="_blank" onclick="help()">Help</a>,
 <a target="_blank" href="https://github.com/evbacher/gd2md-html/wiki">Docs</a>,
 <a target="_blank" href="https://github.com/evbacher/gd2md-html/issues">Bugs</a>
 </div>
 
 <!-- Text area for initial instructions and output. -->
 <textarea id="text" name="" class=mono rows=40 cols=32 border=none>
-
-Choose Markdown or HTML.
-
-* Default: convert entire doc.
-* Select text to limit scope.
 </textarea>
 
 <script>
+var helpText = `
+Choose Markdown or HTML (or Donate!).
+
+* Default: convert entire doc.
+* Select text to limit scope.
+
+For more details, click the Docs link above.`
+;
+   
+  function help() {
+    var text = document.getElementById('text');
+    text.value = helpText;
+  }
+  
+  // Set help text in textarea.
+  help();
+
 // Client-side JavaScript that initiates communication with the
 // server and handles messages from the server.
   
@@ -95,6 +177,8 @@ Choose Markdown or HTML.
     config.demoteHeadings = false;
     config.wrapHTML = false;
     config.renderHTMLTags = false;
+    config.suppressInfo = false;
+    config.recklessMode = false;
 
     // Config settings from UI.
     if (document.getElementById('demote_headings').checked) {
@@ -108,6 +192,12 @@ Choose Markdown or HTML.
     }
     if (document.getElementById('render_html_tags').checked) {
       config.renderHTMLTags = true;
+    }
+    if (document.getElementById('suppress_info').checked) {
+      config.suppressInfo = true;
+    }
+    if (document.getElementById('reckless_mode').checked) {
+      config.recklessMode = true;
     }
 };
     
@@ -152,6 +242,9 @@ Choose Markdown or HTML.
     // Show the server message in the text area.
     var text = document.getElementById('text');
     text.value = serverMessage;
+    // Save the result to the clipboard (and add an error message if the write fails).
+    // navigator.clipboard.writeText() returns a promise that we need to deal with.
+    navigator.clipboard.writeText(text.value).then(clipSuccess, clipError);
   }
   
   // Whatever the server returns is the serverError parameter.
@@ -159,4 +252,18 @@ Choose Markdown or HTML.
     var text = document.getElementById('text');
     text.value = serverError;
   }
+  
+  // Test to see the result of the Promise from writing to the clipboard.
+  function clipSuccess(result) {
+    // All is well: notify for now until everyone gets used to it.
+    text.value = '<!-- Output copied to clipboard! -->\n\n' + text.value;
+  }
+  function clipError(error) {
+    var text = document.getElementById('text');
+    // See https://bugs.chromium.org/p/chromium/issues/detail?id=1074489
+    // Don't bother people with error message: they'll need to cut and paste output as usual.
+    //text.value = '<!-- Output not copied to clipboard: See issue 1074489 at bugs.chromium.org -->\n\n' + text.value;
+    text.value = '<!-- Copy and paste the converted output. -->\n\n' + text.value;
+  }
+  
 </script>

@@ -16,19 +16,13 @@ Conversion notes:
 ----->
 
 
-<h2>Developer guide: contributing to Docs to Markdown </h2>
+<h2>Developer tips for Docs to Markdown</h2>
 
+**Note**: We are not currently updating the code with contributions, partly because I do not have much time and I am not good at managing contributions.
 
 [Docs to Markdown](https://gsuite.google.com/marketplace/app/docs_to_markdown/700168918607) is a Google Docs add-on that converts a Google Doc to simple, readable Markdown or HTML.
 
-**Note**: This is my first big open-source project, so I’m still figuring it out. If you have any suggestions, please file a bug or feature request.
-
-
-
-
-
 <h2 id="the-spirit-of-docs-to-markdown">The spirit of Docs to Markdown</h2>
-
 
 Docs to Markdown is meant to provide a simple conversion from Google Docs text content to Markdown. While Markdown is the primary target, because we sometimes need to convert things to HTML (like tables), we also provide a secondary HTML target.
 
@@ -65,18 +59,14 @@ The goal is to minimize the intrusiveness of Docs to Markdown. While it would be
 <h2 id="modifying-docs-to-markdown-code">Modifying Docs to Markdown code</h2>
 
 
-There is a [development/verification doc](https://docs.google.com/document/d/18gdpECY7PDFT6govm7l7M1fjgGqESDZWOYkhmJoy0U8/edit#heading=h.vrm03961beag) that you can use to develop changes to Docs to Markdown. Make a copy of the development/verification doc and change the source there :
-
-
+There is a [development/verification doc](https://docs.google.com/document/d/18gdpECY7PDFT6govm7l7M1fjgGqESDZWOYkhmJoy0U8/edit) that you can use to develop changes to Docs to Markdown. Make a copy of the development/verification doc and change the source there :
 
 1. Tools > Script Manager > New
 2. Create a new project and copy the add-on files there (keep the same names).
-3. Make your changes (and add any necessary test cases to the doc). Note that Docs to Markdown is currently running under the legacy Rhino runtime engine (not the Chrome V8 engine).
+3. Make your changes (and add any necessary test cases to the doc). Note that Docs to Markdown is currently running under the legacy Rhino runtime engine (not the Chrome V8 engine), so some fancy JavaScript features may not work. (**Note**: V8 engine seems to cause significantly longer conversion times.)
 4. Run your modified add-on against the doc (select the “HTML headings/ids” option for the Markdown conversion, no options for the HTML conversion).
-5. Fork the gd2md-html project and compare your output to the `markdown-verification.md` and `html-verification.`md files. Any diffs should be consistent with your changes (and they should not change any other rendered output).
-
+5. Fork the gd2md-html project and compare your output to the `markdown-verification.md` and `html-verification.md` files. Any diffs should be consistent with your changes (and they should not change any other rendered output).
 <h3 id="testing-your-changes">Testing your changes</h3>
-
 
 Convert your development doc to both Markdown and HTML (use the HTML headings option for Markdown, but no other options). On your forked copy of the gd2md-html repo, compare your output to the Markdown and HTML verification files. The diffs should be minimal, except for any test cases you have added to the master doc and any rendering changes that result from your change.
 
@@ -85,9 +75,9 @@ Convert your development doc to both Markdown and HTML (use the HTML headings op
 
 
 
-1. When you’re sure your changes are working well, send me a pull request, detailing the changes you’ve made. In the pull request comment, share a link to your copy of the development doc with me (view permission is good enough, since I’ll have the changed add-on code via your pull request) so that I can use it to verify any changes.
+1. When you’re sure your changes are working well, send me a pull request, detailing the changes you’ve made. In the pull request comment, share a link to your copy of the [development/verification doc](https://docs.google.com/document/d/18gdpECY7PDFT6govm7l7M1fjgGqESDZWOYkhmJoy0U8/edit) with me (with edit permission) so that I can use it to verify any changes.
 2. I will add your code changes to a development branch and verify that your changes work and are consistent with the spirit of Docs to Markdown.
-3. Once I publish a new version, I will add you to the project as a contributor (unless you prefer to remain anonymous).
+3. Once I publish a new version, I will acknowledge you as a contributor (unless you prefer to remain anonymous).
 
 <h2 id="potential-enhancements">Potential enhancements</h2>
 
@@ -106,13 +96,8 @@ There is an existing feature request for Markdown table output. This should be p
 
 <h3>New workflows </h3>
 
-
 Docs to Markdown is a simple filter. There are other tools available like Pandoc that provide good conversion from one document format to another. You may be able to combine Docs to Markdown with Pandoc or other tools to get to the target format. And Pandoc may provide better conversion for some workflows than Docs to Markdown can provide. There is no need for Docs to Markdown to try to compete with a tool like Pandoc. This enhancement may require more process documentation than code.
 
 <h3 id="existing-bugs-feature-requests">Existing bugs, feature requests</h3>
 
-
 Open issues for Docs to Markdown are at [/evbacher/gd2md-html/issues](https://github.com/evbacher/gd2md-html/issues).
-
-
-<!-- Docs to Markdown version 1.0β22 -->

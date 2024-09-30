@@ -39,9 +39,21 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β22'; // based on 1.0β19, 21
+var GDC_VERSION = '1.0β34'; // based on 1.0β33
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β34 (12 Dec. 2022): Clarify note about TOC -- needs blue links to create intra-doc links). (gdc)
+// - 1.0β33 (8 Jan. 2022): Add reckless mode (no warnings or inline alerts). (sidebar, gdc, html)
+// - 1.0β32 (7 Jan. 2022): Make the Donate button more obvious. (gdc, sidebar)
+// - 1.0β31 (24 Aug. 2021): Don't contain <hr> in <p> for HTML. (gdc)
+// - 1.0β30 (1 July 2021): Reduce whitespace after list item (bullets, numbers) in Markdown. (gdc)
+// - 1.0β29: Handle partial selections correctly (expand to whole paragraph). (gdc)
+// - 1.0β28: Add Coffee button. UI change only. (gdc, sidebar)
+// - 1.0β27: Copy output to clipboard. Print success/error messages for clipboard output (see chromium bug 1074489). (gdc, sidebar)
+// - 1.0β26: Render soft line breaks correctly in HTML (<br> not &lt;br>). (gdc)
+// - 1.0β25: Use image path in this form: images/image1.png, images/image2.png, etc. Clean up old zip image code. (gdc,html,sidebar)
+// - 1.0β24: Correct a spelling error (s/Supress/Suppress). (gdc)
+// - 1.0β23: Copy converted output to the clipboard. Add option to suppress top comment. Add copyright comment, note about Docs link. (gdc, html, sidebar, addon)
 // - 1.0β22: Roll back font-change runs for now (still causing problems), but keep table note. (gdc)
 // - 1.0β21: Add a note that tables are currently converted to HTML tables. No change to rendered conversion. (gdc, html)
 // - 1.0β20: Handle font-change runs with extra whitespace better (italic, bold, etc.). (gdc)
@@ -88,9 +100,6 @@ gdc.debug = function(text) {
 
 // Set up any config from client side config object.
 gdc.config = function(config) {
-  if (config.zipImages === true) {
-    gdc.zipImages = true;
-  }
   if (config.demoteHeadings === true) {
     gdc.demoteHeadings = true;
   }  
@@ -102,6 +111,12 @@ gdc.config = function(config) {
   }
   if (config.renderHTMLTags === true) {
     gdc.renderHTMLTags = true;
+  }
+  if (config.suppressInfo === true) {
+    gdc.suppressInfo = true;
+  }
+  if (config.recklessMode === true) {
+    gdc.recklessMode = true;
   }
 };
 
@@ -134,7 +149,7 @@ gdc.init = function(docType) {
   gdc.info =  '';
   // Hint about what to do with this output (note output type).
   gdc.info += '\n\nUsing this ' + gdc.docType + ' file:';
-  gdc.info += '\n\n1. Cut and paste this output into your source file.';
+  gdc.info += '\n\n1. Paste this output into your source file.';
   gdc.info += '\n2. See the notes and action items below regarding this conversion run.';
 
   gdc.info += '\n3. Check the rendered output (headings, lists, code blocks, tables) for proper';
@@ -143,6 +158,7 @@ gdc.init = function(docType) {
   gdc.info += '\n\nConversion notes:';
   gdc.info += '\n\n* ' + GDC_TITLE + ' version ' + GDC_VERSION;
   gdc.info += '\n* ' + Date();
+
 
   // Keep track of numbered lists.
   gdc.listCounters = {};
@@ -157,11 +173,8 @@ gdc.init = function(docType) {
   gdc.footnotes = [];
 
   // Images
-  gdc.zipImages = false;
-  gdc.zipName = '';
   gdc.defaultImagePath = 'images/'; // relative to page dir
   gdc.imgName = '';
-  gdc.imgBlobs = [];  // Save images for zip file.
   gdc.imageCounter = 0;
   gdc.attachments = [];
 
@@ -218,8 +231,8 @@ gdc.mdMarkup = {
   ulClose:      '<newline>',
   olOpen:       '<newline>',
   olClose:      '<newline>',
-  ulItem:       '*   ',
-  olItem:       '1.  ',
+  ulItem:       '* ',
+  olItem:       '1. ',
   liClose:      '',
 
   hr:           '<newline><newline>---<newline>',
@@ -261,8 +274,8 @@ gdc.mixedMarkup = {
   ulClose:      '',
   olOpen:       '',
   olClose:      '',
-  ulItem:       '*   ',
-  olItem:       '1.  ',
+  ulItem:       '* ',
+  olItem:       '1. ',
   liClose:      '',
 
   hr:           '<newline><newline>---<newline>',
@@ -402,17 +415,6 @@ gdc.getDoc = function(docsUrl) {
     return 'ERROR calling getName(): ' + e + '\n\n';
   }
 
-  // Create image file name using legal file name characters.
-  // Truncate doc name (if more than two words).
-  var tname = /\w+\s+\w+/.exec(gdc.docName);
-  if (tname) {
-    gdc.imgName = tname[0];
-  } else {
-    gdc.imgName = gdc.docName;
-  }
-  gdc.imgName = gdc.imgName.replace(/[^A-Za-z0-9]+/g,'-');
-  gdc.zipName = gdc.imgName + '_images.zip';
-
   return doc;
 };
 
@@ -472,7 +474,7 @@ gdc.getElements = function() {
     if (selChildren[0].isPartial()) {
       elements[0] = elements[0].getParent();
     }
-    if (selChildren[selChildren.length - 1].isPartial()) {
+    if (selChildren.length > 1 && selChildren[selChildren.length - 1].isPartial()) {
       // Note that selChildren and elements are the same size.
       elements[elements.length - 1] = elements[elements.length - 1].getParent();
     }
@@ -866,10 +868,10 @@ gdc.handleText = function(textElement) {
           url = '#' + gdc.headingLinks[url];
         } else {
           gdc.errorCount++;
-          gdc.alert('undefined internal link (link text: "' + linkText + '"). Did you generate a TOC?');
+          gdc.alert('undefined internal link (link text: "' + linkText + '"). Did you generate a TOC with blue links?');
           gdc.info += '\n\nERROR:\nundefined internal link to this URL: "' + url + '".'
             + 'link text: ' + linkText + '\n'
-            + '?Did you generate a TOC?\n';
+            + '?Did you generate a TOC with blue links?\n';
         }
       } else {
         gdc.isIntraDocLink = false;
@@ -939,8 +941,7 @@ gdc.handleInlineDrawing = function() {
 };
 
 gdc.handleImage = function(imageElement) {
-  // Figure out all the image file information for link.
-  // [Storage is optional.]
+  // Figure out image file information for the link.
   var img = imageElement.asInlineImage();
   var imgBlob = img.getBlob();
   var contentType = imgBlob.getContentType();
@@ -953,30 +954,23 @@ gdc.handleImage = function(imageElement) {
     fileType = '.gif';
   }
 
-  // Use current time to make file name unique (for loose files).
-  var fnameBase = gdc.imgName + gdc.imageCounter + fileType;
-  var fname = gdc.imgName + gdc.imageCounter + '_' + Date.now() + fileType;
+  // Create image path/file name: 
+  // Note that Google Docs export does not necessarily put them in order!
+  // But there's no way to predict, so users will need to check.
   gdc.imageCounter++;
-
-  // Save for zip if option available and selected.
-  // This is actually more useful than the preview option.
-  if (gdc.zipImages) {
-    // Add this image blob to the images array. We'll put them all in zip file later.
-    imgBlob.setName(fnameBase);
-    gdc.imgBlobs.push(imgBlob);
-  }
+  var imagePath = gdc.defaultImagePath + 'image' + gdc.imageCounter +fileType;
 
   // Put image markup here regardless of whether the image was stored or not.
   gdc.hasImages = true; // So we can provide a note at the top.
-  gdc.alert('inline image link here (to ' + gdc.defaultImagePath+fnameBase
-    + '). Store image on your image server and adjust path/filename if necessary.');
+  gdc.alert('inline image link here (to ' + imagePath
+    + '). Store image on your image server and adjust path/filename/extension if necessary.');
   if (gdc.isHTML) {
     // Width is an optional attribute for img tag, but let's leave the hint.
     gdc.writeStringToBuffer('\n<img src="'
-      + gdc.defaultImagePath+fnameBase
+      + imagePath
       + '" width="" alt="alt_text" title="image_tooltip">\n');
   } else {
-    gdc.writeStringToBuffer('<newline>![alt_text](' + gdc.defaultImagePath+fnameBase+' "image_tooltip")<newline>');
+    gdc.writeStringToBuffer('<newline>![alt_text](' + imagePath +' "image_tooltip")<newline>');
   }
 };
 
@@ -1110,8 +1104,11 @@ gdc.flushFootnoteBuffer = function() {
 
 // Insert an alert message into the output.
 // And add a message at the top of the Markdown/HTML source too.
-gdc.alert = function(message) {
+gdc.alert = function(message) {  
   gdc.alertCount++;
+  // Do not write alerts if in reckless mode!
+  if (gdc.recklessMode) {return;}
+
   var id = 'gdcalert'+gdc.alertCount;
   var redBoldSpan = '<span style="color: red; font-weight: bold">';
   gdc.writeStringToBuffer('\n\n<p id="' + id + '" >' + redBoldSpan);
@@ -1135,6 +1132,9 @@ gdc.setAlertMessage = function() {
   
   // Common style for top alerts.
   var alertOpen = '\n<p style="color: red; font-weight: bold">';
+  // Skip if in recklessMode.
+  if (gdc.recklessMode) {return;}
+
   // Note ERRORs or WARNINGs or ALERTs if any.
   if ( gdc.errorCount || gdc.warningCount || gdc.alertCount) {
     gdc.alertMessage += alertOpen
@@ -1155,14 +1155,6 @@ gdc.setAlertMessage = function() {
     gdc.alertMessage += '\n<p style="color: red; font-weight: bold">'
       + gdc.chevrons
       + 'PLEASE check and correct alert issues and delete this message and the inline alerts.<hr></p>\n\n';
-  }
-
-  // Provide link to images zip file if it exists.
-  if (gdc.imgBlobs.length > 0) {
-    gdc.alertMessage += alertOpen
-      + gdc.alertPrefix
-      + 'Images stored in <a href="' + gdc.imageZip.getUrl() + '">My Drive/' + gdc.zipName
-      + '</a></p>\n\n';
   }
 };
 
@@ -1541,6 +1533,7 @@ util.markNewlines = function(text) {
 util.replaceSpecial = function(text) {
   return text
     .replace(/<newline>/g, '\n')
+    .replace(/=linebreak=/g, '<br>')
     .replace(/<nbsp>/g, ' ')
     .replace(/<listindent>/g, '    ')
     .replace(/<footnoteindent>/g, '    ')
@@ -1551,7 +1544,7 @@ util.carriageReturns = function(text) {
   if (gdc.docType === gdc.docTypes.md) {
     return text.replace(/\r/g, ' \\\n');
   } else if (gdc.docType === gdc.docTypes.html) {
-    return text.replace(/\r/g, '<br>\n');
+    return text.replace(/\r/g, '=linebreak=');
   }
 };
 
@@ -1616,6 +1609,11 @@ md.preCodeBlock = '<newline><newline>';
 md.openCodeBlock = '```';
 md.closeCodeBlock = '```<newline><newline>';  // No leading \n here on purpose.
 
+// Add new information to the top of the info comment.
+// But don't get rid of the opening of the comment.
+gdc.topComment = '<!-----\n\n'
+;
+  
 md.doMarkdown = function(config) {
   gdc.config(config);
   // Get the body elements.
@@ -1627,21 +1625,29 @@ md.doMarkdown = function(config) {
     md.handleChildElement(elements[i]);
   }
 
-  // Write image zip if selected (and available).
-  if (gdc.zipImages) {
-    if (izip) {
-      izip.createImagesZip();
-    }
-  }
-
   if (gdc.hasImages) {
     gdc.info += '\n* This document has images: check for ' + gdc.alertPrefix;
     gdc.info += ' inline image link in generated source and store images to your server.';
+    gdc.info += ' NOTE: Images in exported zip file from Google Docs may not appear in ';
+    gdc.info += ' the same order as they do in your doc. Please check the images!\n';
   }
-  // Record elapsed time at the top of the info comment.
+  
+  // Record elapsed time.
   var eTime = (new Date().getTime() - gdc.startTime)/1000;
-  gdc.info = '<!----- Conversion time: ' + eTime + ' seconds.\n' + gdc.info;
+  gdc.info = '\n\nConversion time: ' + eTime + ' seconds.\n' + gdc.info;
+  
+  // Note ERRORs or WARNINGs or ALERTs at the top if there are any.
+  gdc.errorSummary = 'Yay, no errors, warnings, or alerts!'
+  if ( gdc.errorCount || gdc.warningCount || gdc.alertCount ) {
+    gdc.errorSummary = 'You have some errors, warnings, or alerts. '
+      + 'If you are using reckless mode, turn it off to see inline alerts.'
+      + '\n* ERRORs: '   + gdc.errorCount
+      + '\n* WARNINGs: ' + gdc.warningCount
+      + '\n* ALERTS: '   + gdc.alertCount;
+  }
+  gdc.info = gdc.errorSummary + gdc.info;
 
+  gdc.info = gdc.topComment + gdc.info;
   // Warn at the top if DEBUG is true.
   if (DEBUG) {
     gdc.info = '<!-- WARNING: DEBUG is TRUE!! -->\n\n' + gdc.info;
@@ -1651,10 +1657,15 @@ md.doMarkdown = function(config) {
   gdc.flushBuffer();
   gdc.flushFootnoteBuffer();
   gdc.setAlertMessage();
-  gdc.out = gdc.info + '\n----->\n\n' + gdc.alertMessage + gdc.out;
+  gdc.out = gdc.alertMessage + gdc.out;
+  // Add info comment if desired.
+  if (!gdc.suppressInfo) {
+    gdc.out = gdc.info + '\n----->\n\n' + gdc.out;
+  } else if (gdc.suppressInfo && gdc.errorSummary) {
+    // But notify if there are errors.
+    gdc.out = '<!-- ' + gdc.errorSummary + ' -->\n' + gdc.out;
+  }
   
-  gdc.out += '\n\n' + '<!-- ' + GDC_TITLE + ' version ' + GDC_VERSION + ' -->\n';
-
   return gdc.out;
 };
 
@@ -1761,8 +1772,9 @@ md.handleParagraph = function(para) {
   gdc.isMixedCode = false;
   gdc.inHeading = false;
   gdc.state.isMixedCode = false;
+  gdc.numChildren = para.getNumChildren();
   // Do not bother with empty paragraphs (blank lines). (Except we preserve them for code blocks.)
-  if (para.getNumChildren() === 0) {
+  if (gdc.numChildren === 0) {
     if (gdc.inCodeBlock) {
       // Preserve newlines in code block (or single-cell table code block).
       if ( gdc.isCodeLine(para.getNextSibling()) || gdc.isSingleCellTable) {
@@ -1770,6 +1782,12 @@ md.handleParagraph = function(para) {
         gdc.writeStringToBuffer('<newline>');
       }
     }
+    return;
+  }
+
+  // For a standalone horizontal rule, no need for containing paragraph.
+  if (gdc.numChildren === 1 && para.getChild(0).getType() === HORIZONTAL_RULE) {
+    gdc.handleHorizontalRule();
     return;
   }
 
