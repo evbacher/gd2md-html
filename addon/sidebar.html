@@ -256,14 +256,18 @@ For more details, click the Docs link above.`
   // Test to see the result of the Promise from writing to the clipboard.
   function clipSuccess(result) {
     // All is well: notify for now until everyone gets used to it.
-    text.value = '<!-- Output copied to clipboard! -->\n\n' + text.value;
+    if (!config.suppressInfo) {
+      text.value = '<!-- Output copied to clipboard! -->\n\n' + text.value;
+    }
   }
   function clipError(error) {
     var text = document.getElementById('text');
     // See https://bugs.chromium.org/p/chromium/issues/detail?id=1074489
     // Don't bother people with error message: they'll need to cut and paste output as usual.
     //text.value = '<!-- Output not copied to clipboard: See issue 1074489 at bugs.chromium.org -->\n\n' + text.value;
-    text.value = '<!-- Copy and paste the converted output. -->\n\n' + text.value;
+    if (!config.suppressInfo) {
+      text.value = '<!-- Copy and paste the converted output. -->\n\n' + text.value;
+    }
   }
   
 </script>
