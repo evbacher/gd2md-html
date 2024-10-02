@@ -527,6 +527,9 @@ html.handleListItem = function(listItem) {
   gdc.writeStringToBuffer(gdc.listPrefix + gdc.htmlMarkup.ulItem);
   md.childLoop(listItem);
   
+  // Need to close the li tag
+  html.closeListItem();
+
   // Check to see if we should close this list.
   gdc.maybeCloseList(listItem);
 };
@@ -541,7 +544,9 @@ html.checkList = function() {
 };
 // Closes list item. Not necessary for Markdown.
 html.closeListItem = function() {
-  gdc.writeStringToBuffer(gdc.markup.liClose);
+  gdc.writeStringToBuffer('</li>');
+  // I don't know why this one won't close the last item of an unordered list.
+  // gdc.writeStringToBuffer(gdc.markup.liClose);
 };
 html.maybeOpenList = function (listItem) {
   // Do we need to open a list?
@@ -579,7 +584,8 @@ html.openList = function() {
 // Close list and remove it's list type from the stack.
 html.closeList = function() {
   // Close the last item of the list.
-  html.closeListItem();
+  // Not needed since we are calling in the function? Not closing for the last item of an unordered list.
+  // html.closeListItem();
   if (html.listStack[0] === gdc.ul) {
     gdc.writeStringToBuffer(gdc.listPrefix + gdc.htmlMarkup.ulClose);
   }
