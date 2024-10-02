@@ -329,7 +329,7 @@ gdc.htmlMarkup = {
   olClose:     '\n</ol>',
   ulItem:      '\n<li>',
   olItem:      '\n<li>',
-  liClose:     '\n</li>',
+  liClose:     '</li>',
   
 
   hr:           '\n<hr>',
@@ -1214,15 +1214,16 @@ gdc.getUrlEnd = function(textElement, offset) {
 gdc.maybeCloseList = function(el) {
   // Check to see if we should close this list.
   var next = el.getNextSibling();
-  //var nestingLevel = gdc.nestLevel;
-  var nestingLevel = el.getNestingLevel();
-  if (next && next.toString() === "ListItem") {
-    var nextNestingLevel = next.getNestingLevel();
+  // var nestingLevel = gdc.nestLevel;
+  // var nestingLevel = el.getNestingLevel();
+  if (next.getType() == DocumentApp.ElementType.LIST_ITEM) {
+    // Add one because nesting level starts at 0? Is this the best way of doing this?
+    var nextNestingLevel = next.getNestingLevel() + 1;
     
     // This is closer to being correct with list closing, but we also need to
     // keep state in case there are paragraphs embedded in the list.
     if (gdc.isHTML) {
-      for (var nest = nestingLevel; nest > nextNestingLevel; nest--) {
+      for (var nest = html.listNestingLevel; nest > nextNestingLevel; nest--) {
         html.closeList();
       }
     }
@@ -1818,7 +1819,7 @@ md.handleParagraph = function(para) {
       }
     } else if (gdc.docType === gdc.docTypes.html) {
       // Add blank lines in HTML by default
-      gdc.writeStringToBuffer(gdc.htmlMarkup.pBlank);
+      // gdc.writeStringToBuffer(gdc.htmlMarkup.pBlank);
     }
     return;
   }
@@ -1936,16 +1937,6 @@ md.handleParagraph = function(para) {
   // In case we're in a mixed code span, reset the markup.
   gdc.resetMarkup();
 
-  // if (gdc.isRightAligned) {
-  //   gdc.writeStringToBuffer('\n</p>');
-  //   gdc.isRightAligned = false;
-  // }
-
-  //if (gdc.isCentered) {
-  //  gdc.writeStringToBuffer('\n</center>');
-  //  gdc.isCentered = false;
-  //}
-
   // Now that we're at the end, close heading or paragraph if necessary.
   if (gdc.docType === gdc.docTypes.md && gdc.inHeading && !gdc.isHTML) {
     // Trim heading text to use as hash key (we trim it in gdc.makeId() ).
@@ -1977,7 +1968,7 @@ md.handleParagraph = function(para) {
     }
   }
   
-  //gdc.maybeCloseList(para);
+  gdc.maybeCloseList(para); // Should this be earlier? Needs to close after code block?
 }; // end md.handleParagraph
 
 // Handle the heading type of the paragraph. Fall through for NORMAL.
