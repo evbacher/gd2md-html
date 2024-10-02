@@ -39,9 +39,10 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β37'; // based on 1.0β36
+var GDC_VERSION = '1.0β38'; // based on 1.0β33
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β38 (30 Sep. 2024): Added support for Markdown Checkboxes (gdc)
 // - 1.0β37 (30 Sep. 2024): Modified how center/right alignment is handled. Placed inside html.handleHeading (gdc, html)
 // - 1.0β36 (26 Sep. 2024): Moved the superscript/subscript open functions to be with the rest of the formatting functions. Moved maybeCloseAttrs() to the beginning of handleText() to ensure tags are closed before new tags are opened. (gdc)
 // - 1.0β35 (25 Sep. 2024): Add target blank option. Add blank lines to HTML. Added center-alignment for HTML. (sidebar, gdc, html)
@@ -239,7 +240,9 @@ gdc.mdMarkup = {
   olClose:      '<newline>',
   ulItem:       '* ',
   olItem:       '1. ',
+  cboxItem:     '- [ ] ',
   liClose:      '',
+  
 
   hr:           '<newline><newline>---<newline>',
 
@@ -282,6 +285,7 @@ gdc.mixedMarkup = {
   olClose:      '',
   ulItem:       '* ',
   olItem:       '1. ',
+  cboxItem:     '- [ ] ',
   liClose:      '',
 
   hr:           '<newline><newline>---<newline>',
@@ -998,9 +1002,18 @@ gdc.isBullet = function(glyphType) {
   if (   glyphType === DocumentApp.GlyphType.BULLET
       || glyphType === DocumentApp.GlyphType.HOLLOW_BULLET
       || glyphType === DocumentApp.GlyphType.SQUARE_BULLET) {
-      return true;
-  } else {
-    return false;
+      return 'bullet';
+  } else if (glyphType === null) {
+    // Since checkboxes currently return null and we know it is a list, this should work to find a checkbox item until Google adds another
+    return 'checkbox';
+  // Spelling out ordered list glyphs rather than relying on "everything but null"
+  // } else if (  glyphType === DocumentApp.GlyphType.NUMBER
+  //           || glyphType === DocumentApp.GlyphType.LATIN_UPPER 
+  //           || glyphType === DocumentApp.GlyphType.LATIN_LOWER
+  //           || glyphType === DocumentApp.GlyphType.ROMAN_UPPER 
+  //           || glyphType === DocumentApp.GlyphType.ROMAN_LOWER) { 
+  } else { 
+    return 'ordered list';
   }
 };
 
@@ -1923,6 +1936,16 @@ md.handleParagraph = function(para) {
   // In case we're in a mixed code span, reset the markup.
   gdc.resetMarkup();
 
+  // if (gdc.isRightAligned) {
+  //   gdc.writeStringToBuffer('\n</p>');
+  //   gdc.isRightAligned = false;
+  // }
+
+  //if (gdc.isCentered) {
+  //  gdc.writeStringToBuffer('\n</center>');
+  //  gdc.isCentered = false;
+  //}
+
   // Now that we're at the end, close heading or paragraph if necessary.
   if (gdc.docType === gdc.docTypes.md && gdc.inHeading && !gdc.isHTML) {
     // Trim heading text to use as hash key (we trim it in gdc.makeId() ).
@@ -1954,6 +1977,7 @@ md.handleParagraph = function(para) {
     }
   }
   
+  //gdc.maybeCloseList(para);
 }; // end md.handleParagraph
 
 // Handle the heading type of the paragraph. Fall through for NORMAL.
@@ -2041,9 +2065,9 @@ md.handleListItem = function(listItem) {
     prefix += '<listindent>';
   }
   // Check for bullet list.
-  if (gdc.isBullet(glyphType)) {
+  if (gdc.isBullet(glyphType) === 'bullet') {
     prefix += gdc.markup.ulItem;
-  } else {
+  } else if (gdc.isBullet(glyphType) === 'ordered list') {
     // Ordered list.
     var key = listItem.getListId() + '.' + nestLevel;
     // Initialize list counter.
@@ -2054,6 +2078,8 @@ md.handleListItem = function(listItem) {
     prefix += counter + '. ';
     // Alternative is to use 1. for all ordered list items, but less readable.
     //prefix += gdc.markup.olItem;
+  } else if (gdc.isBullet(glyphType) === 'checkbox') { // Maybe it's unecessary to spell out and just leave as an "else" statement.
+    prefix += gdc.markup.cboxItem
   }
   gdc.writeStringToBuffer(prefix);
 
