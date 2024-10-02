@@ -39,9 +39,10 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β38'; // based on 1.0β33
+var GDC_VERSION = '1.0β39'; // based on 1.0β33
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β39 (2 Oct. 2024): Changed how closing of lists and list items are handled to fix nested lists and embedded paragraphs in HTML lists. (gdc, html)
 // - 1.0β38 (30 Sep. 2024): Added support for Markdown Checkboxes (gdc)
 // - 1.0β37 (30 Sep. 2024): Modified how center/right alignment is handled. Placed inside html.handleHeading (gdc, html)
 // - 1.0β36 (26 Sep. 2024): Moved the superscript/subscript open functions to be with the rest of the formatting functions. Moved maybeCloseAttrs() to the beginning of handleText() to ensure tags are closed before new tags are opened. (gdc)
