@@ -544,6 +544,7 @@ html.checkList = function() {
 };
 // Closes list item. Not necessary for Markdown.
 html.closeListItem = function() {
+  // Make sure to close codeblocks before closing list items. 
   if (gdc.inCodeBlock) {
     gdc.writeStringToBuffer(html.closeCodeBlock);
     gdc.inCodeBlock = false;
