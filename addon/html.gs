@@ -28,10 +28,10 @@ var html = html || {
   boldClose:  '</strong>',
   
   // HTML code blocks (do not add \n at end of <pre>):
-  openCodeBlock:         '\n<pre class="prettyprint">',
-  openCodeBlockStart:    '\n<pre class="prettyprint lang-',
+  openCodeBlock:         '\n\n<pre class="prettyprint">',
+  openCodeBlockStart:    '\n\n<pre class="prettyprint lang-',
   openCodeBlockEnd:      '">',
-  openCodeBlockLangNone: '\n<pre>',
+  openCodeBlockLangNone: '\n\n<pre>',
   closeCodeBlock:        '</pre>\n\n',
 
   // non-semantic underline, since Docs supports it.
@@ -524,7 +524,7 @@ html.handleListItem = function(listItem) {
     html.maybeOpenList(listItem);
   }
   
-  // gdc.writeStringToBuffer('\n');
+  gdc.writeStringToBuffer('\n');
   // Note that ulItem, olItem are the same in HTML (<li>).
   gdc.writeStringToBuffer(gdc.listPrefix + gdc.htmlMarkup.ulItem);
   html.inListItem = true;
