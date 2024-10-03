@@ -1,12 +1,14 @@
-<!-- You have some errors, warnings, or alerts. If you are using reckless mode, turn it off to see useful information and inline alerts.
+<!-- Output copied to clipboard! -->
+
+<!-- You have some errors, warnings, or alerts. If you are using reckless mode, turn it off to see inline alerts.
 * ERRORs: 0
 * WARNINGs: 2
 * ALERTS: 6 -->
 
-This is a raw conversion from a Google Doc (For verification purposes: use HTML headings and Reckless mode options for Markdown conversion, no other options. Reckless mode only for HTML conversion).
+This is a raw conversion from a Google Doc (HTML headings option for MD, no other options).
 
-<h1>MAIN: Docs to Markdown (GD2md-html)</h1>
 
+# DEV VERIFICATION doc (1.0β27 base): Docs to Markdown (gd2md-html)
 
 This page demonstrates the features of [Docs to Markdown](https://workspace.google.com/marketplace/app/docs_to_markdown/700168918607) conversion from a Google Doc to a simple Markdown or HTML file. 
 
@@ -18,44 +20,39 @@ This page demonstrates the features of [Docs to Markdown](https://workspace.goog
 
 **Note**: If you find any bugs, please file them at [https://github.com/evbacher/gd2md-html/issues](https://github.com/evbacher/gd2md-html/issues). Thanks for helping to make Docs to Markdown better!
 
-<h1 id="headings">Headings</h1>
 
+# Headings {#headings}
 
 Docs to Markdown converts headings to the corresponding heading level in Markdown or HTML. If you use a lot of `Heading 1` headings in your Doc, but you want to adhere to the HTML convention of only a single H1 heading per page, you can use the `Demote headings` option.
 
-<h1 id="heading-ids">Heading IDs</h1>
+
+# Heading IDs {#heading-ids}
+
+If you generate a table of contents in your Doc, Docs to Markdown will create IDs for each heading. If your Markdown environment does not handle heading attributes, you can chose the `HTML headings/IDs` option.
 
 
-If you generate a table of contents (with blue links) in your Doc, Docs to Markdown will create IDs for each heading—this also allows proper conversion of intra-doc links. If your Markdown environment does not handle heading attributes, you can choose the `HTML headings/IDs` option.
-
-<h1 id="blank-headings">Blank headings</h1>
-
+# Blank headings {#blank-headings}
 
 From here to END BLANK HEADINGS are headings that are empty or contain only whitespace.
 
 END BLANK HEADINGS
 
-<h2 id="basic-paragraphs">Basic paragraphs</h2>
 
+## Basic paragraphs {#basic-paragraphs}
 
 This is a paragraph.[^1] (Docs to Markdown also supports footnotes) A sentence with `some embedded code`. Docs to Markdown changes “smart quotes” to straight quotes in code to guard against cut-and-paste errors.
 
-<h2>Basic font styling</h2>
+
+## Font attribute runs including extra whitespace at the ends {#font-attribute-runs-including-extra-whitespace-at-the-ends}
+
+For example a** bold run with some whitespace **on either end. Here’s an_ italic run _with added whitespace. And a~~ strikethrough run ~~with additional whitespace. And` some code `with added whitespace. And<span style="text-decoration:underline;"> some underline </span>with added whitespace. Links [http://www.google.com](http://www.google.com). Link with no space:[http://www.google.com](http://www.google.com).
+
+Some _italic**text**alternating**with**bold**italic**_ but no spaces between font changes.
 
 
-This is *italic* text. This is **bold** text. This is ***bold and italic*** text.
+## Mixed font spans {#mixed-font-spans}
 
-<h2 id="font-attribute-runs-including-extra-whitespace-at-the-ends">Font attribute runs including extra whitespace at the ends</h2>
-
-
-For example a** bold run with some whitespace **on either end. Here’s an* italic run *with added whitespace. And a~~ strikethrough run ~~with additional whitespace. And` some code `with added whitespace. And<span style="text-decoration:underline;"> some underline </span>with added whitespace. Links [http://www.google.com](http://www.google.com). Link with no space:[http://www.google.com](http://www.google.com).
-
-Some *italic**text**alternating**with**bold**italic*** but no spaces between font changes.
-
-<h2 id="mixed-font-spans">Mixed font spans</h2>
-
-
-Some regular text, *followed by an italic span* ***with some embedded bold*** *text*. (Note: this may still be a problem, depending on how it’s formatted in the Google Doc. Like this: Some regular text, *followed by an italic span **with some embedded bold** text*.
+Some regular text, _followed by an italic span_ **_with some embedded bold_** _text_. (Note: this may still be a problem, depending on how it’s formatted in the Google Doc. Like this: Some regular text, _followed by an italic span **with some embedded bold** text_.
 
 Some more regular text. Some ~~strikethrough text~~ here. 
 
@@ -63,18 +60,18 @@ Some ~~strikethrough text at the end of the paragraph.~~
 
 Followed by some regular text.
 
-<h2 id="mixed-code-spans">Mixed code spans</h2>
 
+## Mixed code spans {#mixed-code-spans}
 
 Docs to Markdown uses Markdown for most `inline code`, but it will also handle mixed code spans like this: <code>$ ls -l <strong><em>filename</em></strong></code>, by using HTML markup.
 
-<h2 id="lists">Lists</h2>
 
+## Lists {#lists}
 
 Docs to Markdown supports numbered lists, ordered lists, and definition lists.
 
-<h3 id="numbered-lists-ordered-lists">Numbered lists (ordered lists)</h3>
 
+### Numbered lists (ordered lists) {#numbered-lists-ordered-lists}
 
 Here is a numbered list:
 
@@ -83,8 +80,8 @@ Here is a numbered list:
 1. Item one.
 2. Item two.
 
-<h3 id="unordered-lists">Unordered lists</h3>
 
+### Unordered lists {#unordered-lists}
 
 And here is a bullet list:
 
@@ -94,8 +91,8 @@ And here is a bullet list:
 * A list item with an embedded command: `ps aux | grep conky | grep -v grep | awk '{print $2}' | xargs kill`
 * Some mixed-font code: <code>ls -l <strong><em>filename</em></strong></code>. Followed by some normal text.
 
-<h3 id="another-ordered-list">Another ordered list</h3>
 
+### Another ordered list {#another-ordered-list}
 
 
 
@@ -103,8 +100,8 @@ And here is a bullet list:
 2. Second item
 3. Third item
 
-<h3 id="a-nested-ordered-list">A nested ordered list</h3>
 
+### A nested ordered list {#a-nested-ordered-list}
 
 
 
@@ -114,8 +111,17 @@ And here is a bullet list:
     2. Second nested item
 3. Third item
 
-<h3 id="lists-with-code-blocks">Lists with code blocks</h3>
 
+### Checkbox List
+
+
+
+- [ ] First checklist item
+- [ ] Second checklist item
+- [ ] Third checklist item
+
+
+### Lists with code blocks {#lists-with-code-blocks}
 
 You can have a code block within a list item, as long as you indent the code  (in the Doc) the same amount as the list: 
 
@@ -139,8 +145,8 @@ You can have a code block within a list item, as long as you indent the code  (i
         ```
 
 
-<h3 id="lists-with-embedded-paragraphs">Lists with embedded paragraphs</h3>
 
+### Lists with embedded paragraphs {#lists-with-embedded-paragraphs}
 
 Note: Works for Markdown, still a known issue for HTML.
 
@@ -180,8 +186,8 @@ Note: Works for Markdown, still a known issue for HTML.
 
 A regular paragraph.
 
-<h3 id="definition-lists">Definition lists</h3>
 
+### Definition lists {#definition-lists}
 
 Because Google Docs does not have a definition list element, Docs to Markdown uses a simple but explicit syntax that is similar to the kramdown syntax for definition lists:
 
@@ -192,8 +198,8 @@ Because Google Docs does not have a definition list element, Docs to Markdown us
 ```
 
 
-<h3 id="definition-list-examples">Definition list examples</h3>
 
+### Definition list examples {#definition-list-examples}
 
 **Note**: Github-flavored Markdown does not support Markdown definition-list syntax. You can select a definition list in a Google Doc and convert it to HTML if you’re using it in a GFM page.
 
@@ -221,7 +227,7 @@ term2
 :  First paragraph of definition.
 :  Second paragraph of definition.
 
-A term that has some ***crazy formatting*** and `characters` (not recommended)//.
+A term that has some **_crazy formatting_** and `characters` (not recommended)//.
 :  Definition of crazy term.
 
 
@@ -234,10 +240,10 @@ But a definition term cannot be empty:
 
 : Empty term above causes an error here.
 
-<h2 id="code-blocks">Code blocks</h2>
 
+## Code blocks {#code-blocks}
 
-A code block (note that by default, Docs to Markdown does *not* add language descriptors to code blocks, but see [Code Blocks with lang specification](#code-blocks-with-lang-specification)):
+A code block (note that by default, Docs to Markdown does _not_ add language descriptors to code blocks, but see [Code Blocks with lang specification](#code-blocks-with-lang-specification)):
 
 
 ```
@@ -273,8 +279,8 @@ func main() {
 ```
 
 
-<h2 id="code-blocks-with-lang-specification">Code blocks with lang specification</h2>
 
+## Code blocks with lang specification {#code-blocks-with-lang-specification}
 
 Docs to Markdown supports an optional lang specification on the first line of the code sample (in the Doc source). The syntax is: <code>lang: <em>langspec</em></code>
 
@@ -302,8 +308,8 @@ public class HelloWorld {
 ```
 
 
-<h2 id="code-blocks-with-html">Code blocks with HTML</h2>
 
+## Code blocks with HTML {#code-blocks-with-html}
 
 Code with some embedded HTML tags that should be displayed, not interpreted:
 
@@ -327,8 +333,8 @@ Make a fenced code block in Markdown,
 ```
 
 
-<h2 id="tables">Tables</h2>
 
+## Tables {#tables}
 
 Docs to Markdown generates HTML tables.
 
@@ -349,9 +355,7 @@ A table:
    </td>
    <td>A list:
 <ul>
-
-<li><a href="https://en.wikipedia.org/wiki/Mozzarella">mozzarella cheese</a>
-</li>
+<li><a href="https://en.wikipedia.org/wiki/Mozzarella">mozzarella cheese</a></li>
 </ul>
    </td>
   </tr>
@@ -393,8 +397,8 @@ three
 </table>
 
 
-<h2 id="links">Links</h2>
 
+## Links {#links}
 
 Some regular URL links:
 
@@ -410,8 +414,8 @@ Some links with titles:
 * [Jason Kottke's blog](http://kottke.org/)
 * [Bean Road](https://beanroad.blogspot.com/)
 
-<h2 id="images">Images</h2>
 
+## Images {#images}
 
 A plain image:
 
@@ -429,8 +433,8 @@ Alternatively, you can use a Drawing to display an image. Here's an example wher
 
 Tip: You can limit the width of an image in Markdown by adding (for example) `{width="75%"}` after the link markup (if your Markdown engine supports such syntax). For HTML, just add a `width="75%"` attribute to the `img` tag.
 
-<h2 id="drawings">Drawings</h2>
 
+## Drawings {#drawings}
 
 Google Docs does not provide an API for accessing the data in a Google Drawing. If you have an inline drawing, Docs to Markdown will warn and provide an alert in the converted output:
 
@@ -446,8 +450,8 @@ Here's an example where we've referred to a drawing by reference (after converti
 
 Tip: For any drawing that you display by reference, be sure to change the permissions to make it viewable by anyone with the link.
 
-<h2 id="equations">Equations</h2>
 
+## Equations {#equations}
 
 If you insert an equation using Google Docs, Docs to Markdown will warn and insert an alert message in the output. However, if your target publishing platform supports LaTeX equations, you can use LaTeX syntax directly.
 
@@ -467,19 +471,18 @@ renders as:
 
 $$e^{i\pi } = -1$$
 
-<h2 id="right-to-left-text">Right-to-left text</h2>
 
+## Right-to-left text {#right-to-left-text}
 
 A few Arabic words هذه فقرة تجريبية inside an English paragraph:
 
 They should appear as in this RTL paragraph:
 
 <p dir="rtl">
-هذه فقرة تجريبية </p>
+هذه فقرة تجريبية 
 
 
-<h2 id="soft-line-breaks">Soft line-breaks</h2>
-
+## Soft line-breaks {#soft-line-breaks}
 
 lineBreak \
 This line contains a shift-enter soft line-break here \
@@ -492,8 +495,8 @@ This paragraph has an explicit line-break (Enter) here.
 
 And this is a separate paragraph.
 
-<h2 id="special-characters-feature-request">Special characters (FEATURE REQUEST)</h2>
 
+## Special characters (FEATURE REQUEST) {#special-characters-feature-request}
 
 FEATURE REQUEST: Angle bracket escapes:
 
@@ -528,12 +531,12 @@ This is a single-cell table code block with some <html> tags.
 
 This is some more regular text.
 
-<h2 id="subscript-and-superscript-processing">Subscript and superscript processing</h2>
 
+## Subscript and superscript processing {#subscript-and-superscript-processing}
 
 A sentence with <sub>subscript</sub> and <sup>superscript</sup> and some more regular text and <sup><a href="http://www.google.com">a link to Google</a></sup>.
 
-And more <sub><strong>bold</strong></sub> and <sup><code>mixed<strong><em> </em>bold<em> italic </em></strong>code</code></sup> and some more text. Some *italic text*.
+And more **<sub>bold</sub>** and <code><sup>mixed<strong><em> </em>bold<em> italic </em></strong>code</sup>` and some more text. Some _italic text_.
 
 Another paragraph with **some bold text**.
 
@@ -544,26 +547,48 @@ Another paragraph with **some bold text**.
 1. A numbered list following a terminal subscript.
 2. Another list item.
 
-<h2>Horizontal rules</h2>
+_Italics_<sup>superscript </sup>should render correctly
 
+_Italics_ <sup>superscript </sup>should render correctly
+
+_Italics_**bold**
+
+**Bold**<sub>subscript</sub>_italics_
+
+
+## **Horizontal rules**
 
 This is a horizontal rule:
 
 
 ---
 
+
+## Blank Lines
+
+Line 1
+
+Line 2
+
+
+## Centered/Right aligned text
+
+Right aligned
+
+Center aligned
+
+
+##### Center Aligned Heading
+
 This is a regular paragraph.
 
-<h2 id="bugs">Bugs</h2>
 
+## Bugs {#bugs}
 
 
 
 * Current open bugs: [https://github.com/evbacher/gd2md-html/issues](https://github.com/evbacher/gd2md-html/issues) 
 * New bug or feature request: [https://github.com/evbacher/gd2md-html/issues/new](https://github.com/evbacher/gd2md-html/issues/new). Thanks for helping to make Docs to Markdown better!
-
-This document ends with a regular paragraph.
-
 
 <!-- Footnotes themselves at the bottom. -->
 ## Notes

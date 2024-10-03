@@ -1,12 +1,14 @@
+<!-- Copy and paste the converted output. -->
+
 <!-- You have some errors, warnings, or alerts. If you are using reckless mode, turn it off to see inline alerts.
 * ERRORs: 0
 * WARNINGs: 2
 * ALERTS: 6 -->
 
 <p>
-This is a raw conversion from a Google Doc (For verification purposes: use HTML headings option for Markdown conversion, no other options. No options for HTML conversion).
+This is a raw conversion from a Google Doc (HTML headings option for MD, no other options).
 </p>
-<h1>MAIN: Docs to Markdown (GD2md-html)</h1>
+<h1>DEV VERIFICATION doc (1.0β27 base): Docs to Markdown (gd2md-html)</h1>
 
 
 <p>
@@ -28,7 +30,7 @@ Docs to Markdown converts headings to the corresponding heading level in Markdow
 
 
 <p>
-If you generate a table of contents (with blue links) in your Doc, Docs to Markdown will create IDs for each heading—this also allows proper conversion of intra-doc links. If your Markdown environment does not handle heading attributes, you can choose the <code>HTML headings/IDs</code> option.
+If you generate a table of contents in your Doc, Docs to Markdown will create IDs for each heading. If your Markdown environment does not handle heading attributes, you can chose the <code>HTML headings/IDs</code> option.
 </p>
 <h1 id="blank-headings">Blank headings</h1>
 
@@ -44,12 +46,6 @@ END BLANK HEADINGS
 
 <p>
 This is a paragraph.<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup> (Docs to Markdown also supports footnotes) A sentence with <code>some embedded code</code>. Docs to Markdown changes “smart quotes” to straight quotes in code to guard against cut-and-paste errors.
-</p>
-<h2>Basic font styling</h2>
-
-
-<p>
-This is <em>italic</em> text. This is <strong>bold</strong> text. This is <strong><em>bold and italic</em></strong> text.
 </p>
 <h2 id="font-attribute-runs-including-extra-whitespace-at-the-ends">Font attribute runs including extra whitespace at the ends</h2>
 
@@ -94,11 +90,8 @@ Docs to Markdown supports numbered lists, ordered lists, and definition lists.
 Here is a numbered list:
 </p>
 <ol>
-
-<li>Item one.
-
-<li>Item two.
-</li>
+<li>Item one.</li>
+<li>Item two.</li>
 </ol>
 <h3 id="unordered-lists">Unordered lists</h3>
 
@@ -107,44 +100,37 @@ Here is a numbered list:
 And here is a bullet list:
 </p>
 <ul>
-
-<li>A list item without any punctuation
-
-<li>A list item with an embedded command: <code>ps aux | grep conky | grep -v grep | awk '{print $2}' | xargs kill</code>
-
-<li>Some mixed-font code: <code>ls -l <strong><em>filename</em></strong></code>. Followed by some normal text.
-</li>
+<li>A list item without any punctuation</li>
+<li>A list item with an embedded command: <code>ps aux | grep conky | grep -v grep | awk '{print $2}' | xargs kill</code></li>
+<li>Some mixed-font code: <code>ls -l <strong><em>filename</em></strong></code>. Followed by some normal text.</li>
 </ul>
 <h3 id="another-ordered-list">Another ordered list</h3>
 
 
 <ol>
-
-<li>First item
-
-<li>Second item
-
-<li>Third item
-</li>
+<li>First item</li>
+<li>Second item</li>
+<li>Third item</li>
 </ol>
 <h3 id="a-nested-ordered-list">A nested ordered list</h3>
 
 
 <ol>
-
-<li>First item
-
-<li>Second item 
-<ol>
- 
-<li>First nested item
- 
-<li>Second nested item
-</li> 
+<li>First item</li>
+<li>Second item</li> 
+<ol> 
+<li>First nested item</li> 
+<li>Second nested item</li> 
 </ol>
+<li>Third item</li>
+</ol>
+<h3>Checkbox List</h3>
 
-<li>Third item
-</li>
+
+<ol>
+<li>First checklist item</li>
+<li>Second checklist item</li>
+<li>Third checklist item</li>
 </ol>
 <h3 id="lists-with-code-blocks">Lists with code blocks</h3>
 
@@ -153,36 +139,26 @@ And here is a bullet list:
 You can have a code block within a list item, as long as you indent the code  (in the Doc) the same amount as the list: 
 </p>
 <ul>
-
 <li>A text item, followed by a code block that's indented and should be part of this item:
 
     
-
 <pre class="prettyprint">// A comment.
 some code;
   callFunction();
 </pre>
 
-
-<ul>
-
-<li>Another item. 
-<ul>
- 
+</li>
+<li>Another item.</li> 
+<ul> 
 <li>A nested list item with a command:
 
         
-
 <pre class="prettyprint">$ cat file | grep dog | wc
+</pre>
 
 </li> 
+</ul> 
 </ul>
-</li> 
-</ul>
-</li> 
-</ul></pre>
-
-
 <h3 id="lists-with-embedded-paragraphs">Lists with embedded paragraphs</h3>
 
 
@@ -190,7 +166,6 @@ some code;
 Note: Works for Markdown, still a known issue for HTML.
 </p>
 <ul>
-
 <li>A bullet list with an additional paragraph:
 <p>
 
@@ -199,12 +174,9 @@ Note: Works for Markdown, still a known issue for HTML.
 <p>
 
     This is a new paragraph, but also part of this list item. It should be indented
-</p>
-<ul>
-
-<li>Another item. 
-<ul>
- 
+</p></li>
+<li>Another item.</li> 
+<ul> 
 <li>A nested item.
 <p>
 
@@ -212,49 +184,30 @@ Note: Works for Markdown, still a known issue for HTML.
 </p>
 
         
-
 <pre class="prettyprint">// Some code after a nested paragraph.
 callSomeFunction();
 </pre>
 
-
-<ul>
-
-<li>Another list item.
-
-<li>And another. 
-<ul>
- 
+</li> 
+</ul>
+<li>Another list item.</li>
+<li>And another.</li> 
+<ul> 
 <li>Nested
 <p>
 
         A paragraph within a list item.
-</p>  
-<ul>
-  
+</p></li>  
+<ul>  
 <li>Nested
 <p>
 
             A paragraph within a list item.
-</p> 
-<ul>
- 
-<li>Reducing the nesting level.
-</li> 
+</p></li>  
+</ul> 
+<li>Reducing the nesting level.</li> 
 </ul>
-
-<li>First-level list item.
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>First-level list item.</li>
 </ul>
 <p>
 A regular paragraph.
@@ -265,7 +218,6 @@ A regular paragraph.
 <p>
 Because Google Docs does not have a definition list element, Docs to Markdown uses a simple but explicit syntax that is similar to the kramdown syntax for definition lists:
 </p>
-
 
 
 <pre class="prettyprint">?term on a line by itself (starting with a question mark)
@@ -279,7 +231,6 @@ Because Google Docs does not have a definition list element, Docs to Markdown us
 <p>
 <strong>Note</strong>: Github-flavored Markdown does not support Markdown definition-list syntax. You can select a definition list in a Google Doc and convert it to HTML if you’re using it in a GFM page.
 </p>
-
 
 
 <pre class="prettyprint">? term
@@ -329,7 +280,6 @@ A code block (note that by default, Docs to Markdown does <em>not</em> add langu
 </p>
 
 
-
 <pre class="prettyprint">package main
 
 import "fmt"
@@ -345,7 +295,6 @@ A single-cell table also becomes a code block:
 </p>
 
 
-
 <pre class="prettyprint">#include&lt;stdio.h>
 main()
 {
@@ -356,7 +305,6 @@ main()
 <p>
 If you have “smart quotes” in regular text, they should be preserved. But if you have any smart quotes in <code>"code"</code> or code blocks, Docs to Markdown removes them during the conversion:
 </p>
-
 
 
 <pre class="prettyprint">func main() {
@@ -376,7 +324,6 @@ For example, here is a code block that specifies <code>lang:c</code> on the firs
 </p>
 
 
-
 <pre class="prettyprint lang-c">#include&lt;stdio.h>
 main()
 {
@@ -388,7 +335,6 @@ main()
 <p>
 This also works in single-cell tables: here is a single-cell table that specifies <code>lang: java</code> on the first line:
 </p>
-
 
 
 <pre class="prettyprint lang-java">
@@ -407,7 +353,6 @@ Code with some embedded HTML tags that should be displayed, not interpreted:
 </p>
 
 
-
 <pre class="prettyprint lang-html">This is &lt;code>some code&lt;/code>
 and some &lt;strong>bold text&lt;/strong>.
 </pre>
@@ -416,7 +361,6 @@ and some &lt;strong>bold text&lt;/strong>.
 <p>
 A single-cell table with some HTML inside:
 </p>
-
 
 
 <pre class="prettyprint">This is some code
@@ -451,9 +395,7 @@ A table:
    </td>
    <td>A list:
 <ul>
-
-<li><a href="https://en.wikipedia.org/wiki/Mozzarella">mozzarella cheese</a>
-</li>
+<li><a href="https://en.wikipedia.org/wiki/Mozzarella">mozzarella cheese</a></li>
 </ul>
    </td>
   </tr>
@@ -503,21 +445,15 @@ three
 Some regular URL links:
 </p>
 <ul>
-
-<li><a href="http://www.google.com/">http://www.google.com/</a>
-
-<li><a href="https://fivethirtyeight.com/">https://fivethirtyeight.com/</a>
-</li>
+<li><a href="http://www.google.com/">http://www.google.com/</a></li>
+<li><a href="https://fivethirtyeight.com/">https://fivethirtyeight.com/</a></li>
 </ul>
 <p>
 Some links with titles:
 </p>
 <ul>
-
-<li><a href="http://kottke.org/">Jason Kottke's blog</a>
-
-<li><a href="https://beanroad.blogspot.com/">Bean Road</a>
-</li>
+<li><a href="http://kottke.org/">Jason Kottke's blog</a></li>
+<li><a href="https://beanroad.blogspot.com/">Bean Road</a></li>
 </ul>
 <h2 id="images">Images</h2>
 
@@ -578,13 +514,12 @@ If you insert an equation using Google Docs, Docs to Markdown will warn and inse
 <p>
 A Google Docs equation:
 </p>
-<p>
+<p style="text-align: center">
 
 </p>
 <p>
 A LaTeX equation:
 </p>
-
 
 
 <pre class="prettyprint">$$e^{i\pi } = -1$$
@@ -608,8 +543,7 @@ They should appear as in this RTL paragraph:
 </p>
 <p>
 <p dir="rtl">
-هذه فقرة تجريبية </p>
-
+هذه فقرة تجريبية 
 </p>
 <h2 id="soft-line-breaks">Soft line-breaks</h2>
 
@@ -633,15 +567,10 @@ And this is a separate paragraph.
 FEATURE REQUEST: Angle bracket escapes:
 </p>
 <ul>
-
-<li>Angle brackets: If you put angle brackets in your text: &lt; or >, we don't want that to render as an HTML tag. So, we use &amp;lt; for the opening bracket by default. However, if you select the Render HTML tags option, the opening &lt; will not be replaced.
-
-<li>Test: it seems that loose angle brackets &lt; and > do not behave like HTML tags. But when there is no whitespace: &lt;some text>, they do behave like HTML tags. To change that behavior, we’ll need to (by default) escape the opening angle bracket and turn it into &amp;lt;. 
-
-<li>But if you really want an angle bracket while using the default setting (to insert a few HTML tags), you can escape it: <tag>, <div class=’someclass’>. Not escaped: &lt;tag>. Also not escaped: &lt;p>This is an HTML paragraph.&lt;p>
-
-<li>Escaped: <p>This is an HTML paragraph.<p>
-</li>
+<li>Angle brackets: If you put angle brackets in your text: &lt; or >, we don't want that to render as an HTML tag. So, we use &amp;lt; for the opening bracket by default. However, if you select the Render HTML tags option, the opening &lt; will not be replaced.</li>
+<li>Test: it seems that loose angle brackets &lt; and > do not behave like HTML tags. But when there is no whitespace: &lt;some text>, they do behave like HTML tags. To change that behavior, we’ll need to (by default) escape the opening angle bracket and turn it into &amp;lt;. </li>
+<li>But if you really want an angle bracket while using the default setting (to insert a few HTML tags), you can escape it: <tag>, <div class=’someclass’>. Not escaped: &lt;tag>. Also not escaped: &lt;p>This is an HTML paragraph.&lt;p></li>
+<li>Escaped: <p>This is an HTML paragraph.<p></li>
 </ul>
 <p>
 Note that we need to replace the opening &lt;, even if it occurs at the beginning of a line, like this:
@@ -657,7 +586,6 @@ Apparently, it's not a problem in code blocks (the tags are never rendered):
 </p>
 
 
-
 <pre class="prettyprint">This is a code block with some &lt;html> tags.
 </pre>
 
@@ -665,7 +593,6 @@ Apparently, it's not a problem in code blocks (the tags are never rendered):
 <p>
 This is some regular text.
 </p>
-
 
 
 <pre class="prettyprint">This is a single-cell table code block with some &lt;html> tags.</pre>
@@ -681,8 +608,8 @@ This is some more regular text.
 A sentence with <sub>subscript</sub> and <sup>superscript</sup> and some more regular text and <sup><a href="http://www.google.com">a link to Google</a></sup>.
 </p>
 <p>
-And more <sub><strong>bold</strong></sub> and <sup><code>mixed<strong><em> </em>bold<em> italic </em></strong>code</code></sup> and some more text. Some <em>italic text</em>.
-
+And more <strong><sub>bold</sub></strong> and <code><sup>mixed<strong><em> </em>bold<em> italic </em></strong>code</sup></code> and some more text. Some <em>italic text</em>.
+</p>
 <p>
 Another paragraph with <strong>some bold text</strong>.
 </p>
@@ -690,19 +617,49 @@ Another paragraph with <strong>some bold text</strong>.
 <sup>SUP</sup>A subscript or superscript at the beginning or end of a paragraph should not break things:<sub>SUB</sub>
 </p>
 <ol>
-
-<li>A numbered list following a terminal subscript.
-
-<li>Another list item.
-</li>
+<li>A numbered list following a terminal subscript.</li>
+<li>Another list item.</li>
 </ol>
-<h2>Horizontal rules</h2>
+<p>
+<em>Italics</em><sup>superscript </sup>should render correctly
+</p>
+<p>
+<em>Italics</em> <sup>superscript </sup>should render correctly
+</p>
+<p>
+<em>Italics</em><strong>bold</strong>
+</p>
+<p>
+<strong>Bold</strong><sub>subscript</sub><em>italics</em>
+</p>
+<h2><strong>Horizontal rules</strong></h2>
 
 
 <p>
 This is a horizontal rule:
 </p>
 <hr>
+<h2>Blank Lines</h2>
+
+
+<p>
+Line 1
+</p>
+<p>
+Line 2
+</p>
+<h2>Centered/Right aligned text</h2>
+
+
+<p style="text-align: right">
+Right aligned
+</p>
+<p style="text-align: center">
+Center aligned
+</p>
+<h5 style="text-align: center">Center Aligned Heading</h5>
+
+
 <p>
 This is a regular paragraph.
 </p>
@@ -710,15 +667,9 @@ This is a regular paragraph.
 
 
 <ul>
-
-<li>Current open bugs: <a href="https://github.com/evbacher/gd2md-html/issues">https://github.com/evbacher/gd2md-html/issues</a> 
-
-<li>New bug or feature request: <a href="https://github.com/evbacher/gd2md-html/issues/new">https://github.com/evbacher/gd2md-html/issues/new</a>. Thanks for helping to make Docs to Markdown better!
-</li>
+<li>Current open bugs: <a href="https://github.com/evbacher/gd2md-html/issues">https://github.com/evbacher/gd2md-html/issues</a> </li>
+<li>New bug or feature request: <a href="https://github.com/evbacher/gd2md-html/issues/new">https://github.com/evbacher/gd2md-html/issues/new</a>. Thanks for helping to make Docs to Markdown better!</li>
 </ul>
-<p>
-This document ends with a regular paragraph.
-</p>
 
 <!-- Footnotes themselves at the bottom. -->
 
