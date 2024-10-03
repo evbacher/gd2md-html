@@ -1217,6 +1217,8 @@ gdc.maybeCloseList = function(el) {
   var next = el.getNextSibling();
   // var nestingLevel = gdc.nestLevel;
   // var nestingLevel = el.getNestingLevel();
+  // Not sure why exactly, but sometimes next is null, breaking the script.
+  if (!next) { return; }
   if (next.getType() == DocumentApp.ElementType.LIST_ITEM) {
     // Add one because nesting level starts at 0? Is this the best way of doing this?
     var nextNestingLevel = next.getNestingLevel() + 1;
@@ -1969,7 +1971,7 @@ md.handleParagraph = function(para) {
     }
   }
   
-  gdc.maybeCloseList(para); // Should this be earlier? Needs to close after code block?
+  gdc.maybeCloseList(para);
 }; // end md.handleParagraph
 
 // Handle the heading type of the paragraph. Fall through for NORMAL.
