@@ -1850,8 +1850,19 @@ md.handleParagraph = function(para) {
       // do nothing: we also want to not add the tablePrefix.
       // But check for table cell or definition list.
     } else if (!gdc.startingTableCell && !gdc.inDlist) {
-      gdc.writeStringToBuffer(gdc.markup.pOpen);
+      // This is where we want to check for right/center alignment so that the proper paragraph style can be applied. 
+      if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
+        gdc.writeStringToBuffer('\n<p style="text-align: right">\n');
+        // Not sure what this does?
+        gdc.useHtml();
+      } else if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.CENTER && para.isLeftToRight()) {
+        gdc.writeStringToBuffer('\n<p style="text-align: center">\n');
+        gdc.useHtml();
+      } else {
+        gdc.writeStringToBuffer(gdc.markup.pOpen);
+      }
     }
+
     // We want paragraphs after the first text in a table cell.
     gdc.startingTableCell = false;
   }
