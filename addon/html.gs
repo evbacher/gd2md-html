@@ -423,6 +423,16 @@ html.handleHeading = function(heading, para) {
     gdc.writeStringToBuffer(' style="text-align: center"');
   }
   
+  // Check for right alignment before closing the tag
+  if (para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
+    gdc.writeStringToBuffer(' style="text-align: right"');
+  }
+
+  // Check for center alignment before closing the tag
+  if (para.getAlignment() === DocumentApp.HorizontalAlignment.CENTER && para.isLeftToRight()) {
+    gdc.writeStringToBuffer(' style="text-align: center"');
+  }
+
   // Close the tag.
   gdc.writeStringToBuffer('>');
 };

@@ -128,6 +128,10 @@ Suppress info comment
 <label>
 <input type="checkbox" id="reckless_mode">
 Use reckless mode (no alerts)
+</label><br>
+<label>
+<input type="checkbox" id="target_blank">
+Add target="_blank" to HTML links
 </label>
 
 <!-- Docs, bug link. -->
@@ -179,6 +183,7 @@ For more details, click the Docs link above.`
     config.renderHTMLTags = false;
     config.suppressInfo = false;
     config.recklessMode = false;
+    config.targetBlank = false;
 
     // Config settings from UI.
     if (document.getElementById('demote_headings').checked) {
@@ -198,6 +203,9 @@ For more details, click the Docs link above.`
     }
     if (document.getElementById('reckless_mode').checked) {
       config.recklessMode = true;
+    }
+    if (document.getElementById('target_blank').checked) {
+      config.targetBlank = true;
     }
 };
     
