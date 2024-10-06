@@ -1883,13 +1883,6 @@ md.handleParagraph = function(para) {
     }
   }
 
-  // Check horizontal alignment. We can style right alignment using an HTML paragraph.
-  if (para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
-    gdc.writeStringToBuffer('<p style="text-align: right">\n');
-    gdc.useHtml();
-    gdc.isRightAligned = true;
-  }
-
   // Detects text direction.
   if (!para.isLeftToRight()) {
     gdc.writeStringToBuffer('<p dir="rtl">\n');
