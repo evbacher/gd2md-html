@@ -39,9 +39,10 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β34'; // based on 1.0β33
+var GDC_VERSION = '1.0β35'; // based on 1.0β33
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β35 (6 Oct. 2024): Added center-alignment for HTML. Changed how center/right alignment are handled. Placed inside html.handleHeading  (sidebar, gdc, html)
 // - 1.0β34 (12 Dec. 2022): Clarify note about TOC -- needs blue links to create intra-doc links). (gdc)
 // - 1.0β33 (8 Jan. 2022): Add reckless mode (no warnings or inline alerts). (sidebar, gdc, html)
 // - 1.0β32 (7 Jan. 2022): Make the Donate button more obvious. (gdc, sidebar)
