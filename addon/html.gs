@@ -77,7 +77,7 @@ html.doHtml = function(config) {
   gdc.info = '\n\nConversion time: ' + eTime + ' seconds.\n' + gdc.info;
 
   // Note ERRORs or WARNINGs or ALERTs at the top if there are any.
-  gdc.errorSummary = 'Yay, no errors, warnings, or alerts!'
+  gdc.errorSummary = '';
   if ( gdc.errorCount || gdc.warningCount || gdc.alertCount ) {
     gdc.errorSummary = 'You have some errors, warnings, or alerts. '
       + 'If you are using reckless mode, turn it off to see inline alerts.'
@@ -101,7 +101,7 @@ html.doHtml = function(config) {
   // Add info comment if desired.
   if (!gdc.suppressInfo) {
     gdc.out = gdc.info + '\n----->\n\n' + gdc.out;
-  } else if (gdc.suppressInfo && gdc.errorSummary) {
+  } else if (gdc.suppressInfo && gdc.errorSummary !== '') {
     // But notify if there are errors.
     gdc.out = '<!-- ' + gdc.errorSummary + ' -->\n' + gdc.out;
   }
