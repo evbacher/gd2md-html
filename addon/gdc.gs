@@ -39,9 +39,18 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β34'; // based on 1.0β33
+var GDC_VERSION = '1.0β39'; // based on 1.0β38a
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β38 (21 Sept 2024): Italic/bold markup default is now */**: _/__ is now an option. Reckless mode now includes Suppress info comment (removed sidebar option too). Also add a News link to gd2md-html news page in sidebar. (sidebar, gdc)
+// - 1.0β37 (31 August 2024): Add a Questions link to gd2md-html Google group in sidebar (no functional changes).
+/* - 1.0β36 (26 April 2024): Update required permissions: set explicitly in appsscript.json. No code changes. Using these Oauth scopes:
+    "oauthScopes": [
+        "https://www.googleapis.com/auth/documents.currentonly",
+        "https://www.googleapis.com/auth/script.container.ui"
+        ],
+*/
+// - 1.0β35 (20 Nov. 2023): No info comments if "Suppress info comments selected." Also remove clipboard success text. If errors, there will be an informational error comment.
 // - 1.0β34 (12 Dec. 2022): Clarify note about TOC -- needs blue links to create intra-doc links). (gdc)
 // - 1.0β33 (8 Jan. 2022): Add reckless mode (no warnings or inline alerts). (sidebar, gdc, html)
 // - 1.0β32 (7 Jan. 2022): Make the Donate button more obvious. (gdc, sidebar)
@@ -99,7 +108,11 @@ gdc.debug = function(text) {
 };
 
 // Set up any config from client side config object.
+// Don't change original config values.
 gdc.config = function(config) {
+  if (config.italicBoldUnderscores === true) {
+    gdc.italicBoldUnderscores = true;
+  }
   if (config.demoteHeadings === true) {
     gdc.demoteHeadings = true;
   }  
@@ -117,10 +130,11 @@ gdc.config = function(config) {
   }
   if (config.recklessMode === true) {
     gdc.recklessMode = true;
+    gdc.suppressInfo = true;
   }
 };
 
-// Setup for each conversion run.
+// Setup for each conversion run (called from addon.gs).
 gdc.init = function(docType) {
   gdc.docType = docType;
   
@@ -129,7 +143,8 @@ gdc.init = function(docType) {
   gdc.inCodeBlock = false;
 
   // Current markup to use. See gdc.useMarkdown(), gdc.useHtml().
-  gdc.markup = gdc.mdMarkup;
+  gdc.useMarkdown();
+  //gdc.markup = gdc.mdMarkup;
 
   gdc.startTime = new Date().getTime();
 
@@ -180,6 +195,7 @@ gdc.init = function(docType) {
 
 }; // end gdc.init()
 
+
 // Some flag defaults. (Should these be in state object?)
 gdc.isHTML = false;
 gdc.isTable = false;
@@ -215,8 +231,8 @@ gdc.mdMarkup = {
   // Font changes
   codeOpen:    '`',
   codeClose:   '`',
-  italicOpen:  '_',
-  italicClose: '_',
+  italicOpen:  '*',
+  italicClose: '*',
   boldOpen:    '**',
   boldClose:   '**',
   strikethroughOpen:  '~~',
@@ -770,7 +786,6 @@ gdc.handleText = function(textElement) {
     gdc.setWriteBuf();
     offset = gdc.writeBuf(textElement, offset, attrOff);
 
-
     // Check the attributes at the current attribute offset.
     // This should be an object.
     var url = textElement.getLinkUrl(attrOff),
@@ -812,6 +827,7 @@ gdc.handleText = function(textElement) {
     // Open attributes (in alphabetical order).
     // Open bold.
     if (!gdc.isBold && bold) {
+      // Check for leading or trailing space.
       gdc.isBold = true;
       gdc.openAttrs.push(gdc.bold);
       gdc.writeStringToBuffer(gdc.markup.boldOpen);
@@ -834,12 +850,14 @@ gdc.handleText = function(textElement) {
     }
     // Open italic.
     if (!gdc.isItalic && italic) {
+      // Check for leading or trailing space.
       gdc.isItalic = true;
       gdc.openAttrs.push(gdc.italic);
       gdc.writeStringToBuffer(gdc.markup.italicOpen);
     }
     // Open strikethrough.    
     if (!gdc.isStrikethrough && strikethrough) {
+      // Check for leading or trailing space.
       gdc.isStrikethrough = true;
       gdc.openAttrs.push(gdc.strikethrough);
       gdc.writeStringToBuffer(gdc.markup.strikethroughOpen);
@@ -985,9 +1003,17 @@ gdc.isBullet = function(glyphType) {
 };
 
 // Sets appropriate markup object.
-gdc.useMarkdown = function(){
+gdc.useMarkdown = function() {
   gdc.isHTML = false;
   gdc.markup = gdc.mdMarkup;
+
+  if (gdc.italicBoldUnderscores) {
+    // * and ** are the default.
+    gdc.markup.italicOpen = '_';
+    gdc.markup.italicClose = '_';
+    gdc.markup.boldOpen = '__';
+    gdc.markup.boldClose = '__';
+  }
 };
 gdc.useHtml = function(){
   gdc.isHTML = true;
@@ -1615,7 +1641,10 @@ gdc.topComment = '<!-----\n\n'
 ;
   
 md.doMarkdown = function(config) {
+  // Call config first!
   gdc.config(config);
+  gdc.useMarkdown();
+
   // Get the body elements.
   var elements = gdc.getElements();
 
@@ -1637,10 +1666,10 @@ md.doMarkdown = function(config) {
   gdc.info = '\n\nConversion time: ' + eTime + ' seconds.\n' + gdc.info;
   
   // Note ERRORs or WARNINGs or ALERTs at the top if there are any.
-  gdc.errorSummary = 'Yay, no errors, warnings, or alerts!'
+  gdc.errorSummary = '';
   if ( gdc.errorCount || gdc.warningCount || gdc.alertCount ) {
     gdc.errorSummary = 'You have some errors, warnings, or alerts. '
-      + 'If you are using reckless mode, turn it off to see inline alerts.'
+      + 'If you are using reckless mode, turn it off to see useful information and inline alerts.'
       + '\n* ERRORs: '   + gdc.errorCount
       + '\n* WARNINGs: ' + gdc.warningCount
       + '\n* ALERTS: '   + gdc.alertCount;
@@ -1661,7 +1690,7 @@ md.doMarkdown = function(config) {
   // Add info comment if desired.
   if (!gdc.suppressInfo) {
     gdc.out = gdc.info + '\n----->\n\n' + gdc.out;
-  } else if (gdc.suppressInfo && gdc.errorSummary) {
+  } else if (gdc.suppressInfo && gdc.errorSummary !== '') {
     // But notify if there are errors.
     gdc.out = '<!-- ' + gdc.errorSummary + ' -->\n' + gdc.out;
   }

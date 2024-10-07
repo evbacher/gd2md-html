@@ -4,7 +4,7 @@
 * ALERTS: 6 -->
 
 <p>
-This is a raw conversion from a Google Doc (For verification purposes: use HTML headings option for Markdown conversion, no other options. No options for HTML conversion).
+This is a raw conversion from a Google Doc (For verification purposes: use HTML headings and Reckless mode options for Markdown conversion, no other options. Reckless mode only for HTML conversion).
 </p>
 <h1>MAIN: Docs to Markdown (GD2md-html)</h1>
 
@@ -705,6 +705,35 @@ This is a horizontal rule:
 <hr>
 <p>
 This is a regular paragraph.
+</p>
+<h2>Blank Lines</h2>
+
+
+<p>
+Line 1
+</p>
+<p>
+Line 2
+</p>
+<h2>Centered/Right aligned text</h2>
+
+
+<p>
+Handle centered, right aligned text for Markdown/HTML (in progress).
+</p>
+<p>
+<p style="text-align: right">
+Right aligned</p>
+
+</p>
+<p>
+Center aligned
+</p>
+<h5>Center Aligned Heading</h5>
+
+
+<p>
+Regular paragraph
 </p>
 <h2 id="bugs">Bugs</h2>
 

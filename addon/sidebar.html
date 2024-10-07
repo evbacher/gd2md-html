@@ -102,6 +102,10 @@ writing-mode:horizontal-tb;
 -->
 
 <!-- Options. -->
+<label><input type="checkbox" id="italic_bold_underscores">
+_/__ for italic/bold (*/** default)
+</label>
+<br>
 <label>
 <input type="checkbox" id="demote_headings">
 Demote headings (H1 &rarr; H2, etc.)
@@ -122,20 +126,26 @@ Wrap HTML
 Render HTML tags
 </label><br>
 <label>
+
+<!-- Collapsing suppress_info and reckless_mode for now.
 <input type="checkbox" id="suppress_info">
-Suppress info comment
+Suppress info comments
 </label><br>
+-->
+
 <label>
 <input type="checkbox" id="reckless_mode">
-Use reckless mode (no alerts)
+Reckless mode (no info or inline alerts)
 </label>
 
 <!-- Docs, bug link. -->
 <br>
 <div style="text-align: left;"> 
-<a target="_blank" onclick="help()">Help</a>,
-<a target="_blank" href="https://github.com/evbacher/gd2md-html/wiki">Docs</a>,
-<a target="_blank" href="https://github.com/evbacher/gd2md-html/issues">Bugs</a>
+<a target="_blank" onclick="help()">Help</a> |
+<a target="_blank" href="https://github.com/evbacher/gd2md-html/wiki">Docs</a> |
+<a target="_blank" href="https://github.com/evbacher/gd2md-html/issues">Bugs</a> |
+<a target="_blank" href="https://groups.google.com/g/gd2md-html">Questions</a> |
+<a target="_blank" href="https://github.com/evbacher/gd2md-html/wiki/news">News</a>
 </div>
 
 <!-- Text area for initial instructions and output. -->
@@ -149,7 +159,9 @@ Choose Markdown or HTML (or Donate!).
 * Default: convert entire doc.
 * Select text to limit scope.
 
-For more details, click the Docs link above.`
+For more details, use the Docs link above.
+
+If you have questions for the Docs to Markdown community, use the Questions link above.`
 ;
    
   function help() {
@@ -172,6 +184,7 @@ For more details, click the Docs link above.`
   // Set config options for each conversion run.
   var setConfig = function() {  
     // Default settings.
+    config.italicBoldUnderscores = false;
     config.htmlHeadings = false;
     config.zipImages = false;
     config.demoteHeadings = false;
@@ -181,6 +194,9 @@ For more details, click the Docs link above.`
     config.recklessMode = false;
 
     // Config settings from UI.
+    if (document.getElementById('italic_bold_underscores').checked) {
+      config.italicBoldUnderscores = true;
+    }
     if (document.getElementById('demote_headings').checked) {
       config.demoteHeadings = true;
     }
@@ -193,9 +209,13 @@ For more details, click the Docs link above.`
     if (document.getElementById('render_html_tags').checked) {
       config.renderHTMLTags = true;
     }
+
+    /* Collapsing suppress_info and reckless_mode
     if (document.getElementById('suppress_info').checked) {
       config.suppressInfo = true;
     }
+    */
+
     if (document.getElementById('reckless_mode').checked) {
       config.recklessMode = true;
     }
@@ -204,7 +224,7 @@ For more details, click the Docs link above.`
   // Make the calls to the server, and send some callbacks for
   // the server to call when the conversion is done.
   
-  // Markdown conversion.
+  // Markdown conversion. Calls the server and runs the Markdown conversion with config.
   function markdown() {  
     setConfig();
     var text = document.getElementById('text');
@@ -220,7 +240,7 @@ For more details, click the Docs link above.`
       .convertToMarkdown(config);
   }
   
-  // HTML conversion.
+  // HTML conversion. Calls the server and runs the HTML conversion with config.
   function html() {
     setConfig();
     var text = document.getElementById('text');
@@ -256,7 +276,7 @@ For more details, click the Docs link above.`
   // Test to see the result of the Promise from writing to the clipboard.
   function clipSuccess(result) {
     // All is well: notify for now until everyone gets used to it.
-    text.value = '<!-- Output copied to clipboard! -->\n\n' + text.value;
+    // text.value = '<!-- Output copied to clipboard! -->\n\n' + text.value;
   }
   function clipError(error) {
     var text = document.getElementById('text');
