@@ -1881,10 +1881,11 @@ md.handleParagraph = function(para) {
       // But check for table cell or definition list.
     } else if (!gdc.startingTableCell && !gdc.inDlist) {
       // This is where we want to check for right/center alignment so that the proper paragraph style can be applied. 
-      if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
+      if (para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
         gdc.writeStringToBuffer('\n<p style="text-align: right">\n');
         // Not sure what this does?
         gdc.useHtml();
+        gdc.isRightAligned = true;
       } else if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.CENTER && para.isLeftToRight()) {
         gdc.writeStringToBuffer('\n<p style="text-align: center">\n');
         gdc.useHtml();
