@@ -554,6 +554,29 @@ This is a horizontal rule:
 
 This is a regular paragraph.
 
+<h2>Blank Lines</h2>
+
+
+Line 1
+
+Line 2
+
+<h2>Centered/Right aligned text</h2>
+
+
+Handle centered, right aligned text for Markdown/HTML (in progress).
+
+<p style="text-align: right">
+Right aligned</p>
+
+
+Center aligned
+
+<h5>Center Aligned Heading</h5>
+
+
+Regular paragraph
+
 <h2 id="bugs">Bugs</h2>
 
 
