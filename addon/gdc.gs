@@ -39,9 +39,10 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β39'; // based on 1.0β38
+var GDC_VERSION = '1.0β40'; // based on 1.0β39
 
-// Version notes: significant changes (latest on top). (files changed)
+// Version notes: significant changes (latest on top). (files changed)\
+// - 1.0β40 (7 Oct 2024): Fixes handling of superscript/subscript to close old styles before opening new style. Moves opening superscript/subscript later in process. (gdc)
 // - 1.0β39 (7 Oct 2024): Added center/right alignment to HTML paragraph and heading handling. Will add text-align: center/right depending on paragraph formatting. (html, gdc)
 // - 1.0β38 (21 Sept 2024): Italic/bold markup default is now */**: _/__ is now an option. Reckless mode now includes Suppress info comment (removed sidebar option too). Also add a News link to gd2md-html news page in sidebar. (sidebar, gdc)
 // - 1.0β37 (31 August 2024): Add a Questions link to gd2md-html Google group in sidebar (no functional changes).
