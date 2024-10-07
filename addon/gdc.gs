@@ -806,19 +806,10 @@ gdc.handleText = function(textElement) {
     if (alignment === SUPERSCRIPT) {
       superscript = true;
     }
-    if (!gdc.isSubscript && subscript) {
-      gdc.useHtml();
-      gdc.isSubscript = true;
-      gdc.openAttrs.push(gdc.subscript);
-      gdc.writeStringToBuffer(gdc.markup.subOpen);
-    }
-    if (!gdc.isSuperscript && superscript) {
-      gdc.useHtml();
-      gdc.isSuperscript = true;
-      gdc.openAttrs.push(gdc.superscript);
-      gdc.writeStringToBuffer(gdc.markup.superOpen);
-    }
+   
     var currentAttrs = gdc.getCurrentAttributes(textElement, attrOff);
+    // Attributes need to close for new text before opening any new attributes. This is for when words run together like italicsSUPERSCRIPT. or BOLDitalics 
+    gdc.maybeCloseAttrs(currentAttrs);
 
     // A philosophical question: should we define gdc.isItalic and friends up
     // top in gdc.gs, or just let them be defined here at first use? Might
@@ -863,6 +854,20 @@ gdc.handleText = function(textElement) {
       gdc.openAttrs.push(gdc.strikethrough);
       gdc.writeStringToBuffer(gdc.markup.strikethroughOpen);
     }
+    // Open subscript
+    if (!gdc.isSubscript && subscript) {
+      gdc.useHtml();
+      gdc.isSubscript = true;
+      gdc.openAttrs.push(gdc.subscript);
+      gdc.writeStringToBuffer(gdc.markup.subOpen);
+    }
+    // Open superscript
+    if (!gdc.isSuperscript && superscript) {
+      gdc.useHtml();
+      gdc.isSuperscript = true;
+      gdc.openAttrs.push(gdc.superscript);
+      gdc.writeStringToBuffer(gdc.markup.superOpen);
+    }
     // Open underline (uses HTML always). This should really be discouraged!
     if (!gdc.isUnderline && underline && !url) {
       gdc.isUnderline = true;
@@ -870,7 +875,8 @@ gdc.handleText = function(textElement) {
       gdc.writeStringToBuffer(gdc.markup.underlineOpen);
     }
 
-    gdc.maybeCloseAttrs(currentAttrs);
+    // Needs to run again to clear any formatting?
+    // gdc.maybeCloseAttrs(currentAttrs);
 
     // URL handling.
 
