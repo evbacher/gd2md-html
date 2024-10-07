@@ -109,7 +109,11 @@ gdc.debug = function(text) {
 };
 
 // Set up any config from client side config object.
+// Don't change original config values.
 gdc.config = function(config) {
+  if (config.italicBoldUnderscores === true) {
+    gdc.italicBoldUnderscores = true;
+  }
   if (config.demoteHeadings === true) {
     gdc.demoteHeadings = true;
   }  
@@ -127,13 +131,11 @@ gdc.config = function(config) {
   }
   if (config.recklessMode === true) {
     gdc.recklessMode = true;
-  }
-  if (config.targetBlank === true) {
-    gdc.targetBlank = true;
+    gdc.suppressInfo = true;
   }
 };
 
-// Setup for each conversion run.
+// Setup for each conversion run (called from addon.gs).
 gdc.init = function(docType) {
   gdc.docType = docType;
   
@@ -142,7 +144,8 @@ gdc.init = function(docType) {
   gdc.inCodeBlock = false;
 
   // Current markup to use. See gdc.useMarkdown(), gdc.useHtml().
-  gdc.markup = gdc.mdMarkup;
+  gdc.useMarkdown();
+  //gdc.markup = gdc.mdMarkup;
 
   gdc.startTime = new Date().getTime();
 
@@ -193,6 +196,7 @@ gdc.init = function(docType) {
 
 }; // end gdc.init()
 
+
 // Some flag defaults. (Should these be in state object?)
 gdc.isHTML = false;
 gdc.isTable = false;
@@ -228,8 +232,8 @@ gdc.mdMarkup = {
   // Font changes
   codeOpen:    '`',
   codeClose:   '`',
-  italicOpen:  '_',
-  italicClose: '_',
+  italicOpen:  '*',
+  italicClose: '*',
   boldOpen:    '**',
   boldClose:   '**',
   strikethroughOpen:  '~~',
@@ -325,7 +329,6 @@ gdc.htmlMarkup = {
 
   pOpen:       '\n<p>\n',
   pClose:      '\n</p>',
-  pBlank:      '\n<p>&nbsp;</p>',
   ulOpen:      '\n<ul>',
   ulClose:     '\n</ul>',
   olOpen:      '\n<ol>',
@@ -333,7 +336,6 @@ gdc.htmlMarkup = {
   ulItem:      '\n<li>',
   olItem:      '\n<li>',
   liClose:     '\n</li>',
-  
 
   hr:           '\n<hr>',
 
@@ -362,14 +364,12 @@ gdc.strikethrough = 's';
 gdc.underline = 'u';
 gdc.subscript = 'sub';
 gdc.superscript = 'sup';
-gdc.centered = 'center';
 
 // Constants for text alignment types.
 var
   NORMAL = DocumentApp.TextAlignment.NORMAL,
   SUBSCRIPT = DocumentApp.TextAlignment.SUBSCRIPT,
   SUPERSCRIPT = DocumentApp.TextAlignment.SUPERSCRIPT;
-  CENTERED = DocumentApp.HorizontalAlignment.CENTER;
 
 // Constants for the various element types. This is really for convenience.
 // These are types contained in BODY. See the enum DocumentApp.ElementType.
@@ -806,10 +806,19 @@ gdc.handleText = function(textElement) {
     if (alignment === SUPERSCRIPT) {
       superscript = true;
     }
-
+    if (!gdc.isSubscript && subscript) {
+      gdc.useHtml();
+      gdc.isSubscript = true;
+      gdc.openAttrs.push(gdc.subscript);
+      gdc.writeStringToBuffer(gdc.markup.subOpen);
+    }
+    if (!gdc.isSuperscript && superscript) {
+      gdc.useHtml();
+      gdc.isSuperscript = true;
+      gdc.openAttrs.push(gdc.superscript);
+      gdc.writeStringToBuffer(gdc.markup.superOpen);
+    }
     var currentAttrs = gdc.getCurrentAttributes(textElement, attrOff);
-    // Attributes need to close for new text before opening any new attributes. This is for when words run together like italicsSUPERSCRIPT. or BOLDitalics 
-    gdc.maybeCloseAttrs(currentAttrs);
 
     // A philosophical question: should we define gdc.isItalic and friends up
     // top in gdc.gs, or just let them be defined here at first use? Might
@@ -819,6 +828,7 @@ gdc.handleText = function(textElement) {
     // Open attributes (in alphabetical order).
     // Open bold.
     if (!gdc.isBold && bold) {
+      // Check for leading or trailing space.
       gdc.isBold = true;
       gdc.openAttrs.push(gdc.bold);
       gdc.writeStringToBuffer(gdc.markup.boldOpen);
@@ -841,29 +851,17 @@ gdc.handleText = function(textElement) {
     }
     // Open italic.
     if (!gdc.isItalic && italic) {
+      // Check for leading or trailing space.
       gdc.isItalic = true;
       gdc.openAttrs.push(gdc.italic);
       gdc.writeStringToBuffer(gdc.markup.italicOpen);
     }
     // Open strikethrough.    
     if (!gdc.isStrikethrough && strikethrough) {
+      // Check for leading or trailing space.
       gdc.isStrikethrough = true;
       gdc.openAttrs.push(gdc.strikethrough);
       gdc.writeStringToBuffer(gdc.markup.strikethroughOpen);
-    }
-    // Open subscript
-    if (!gdc.isSubscript && subscript) {
-      gdc.useHtml();
-      gdc.isSubscript = true;
-      gdc.openAttrs.push(gdc.subscript);
-      gdc.writeStringToBuffer(gdc.markup.subOpen);
-    }
-    // Open superscript
-    if (!gdc.isSuperscript && superscript) {
-      gdc.useHtml();
-      gdc.isSuperscript = true;
-      gdc.openAttrs.push(gdc.superscript);
-      gdc.writeStringToBuffer(gdc.markup.superOpen);
     }
     // Open underline (uses HTML always). This should really be discouraged!
     if (!gdc.isUnderline && underline && !url) {
@@ -872,8 +870,7 @@ gdc.handleText = function(textElement) {
       gdc.writeStringToBuffer(gdc.markup.underlineOpen);
     }
 
-    // Needs to run again to clear any formatting?
-    // gdc.maybeCloseAttrs(currentAttrs);
+    gdc.maybeCloseAttrs(currentAttrs);
 
     // URL handling.
 
@@ -906,13 +903,8 @@ gdc.handleText = function(textElement) {
           gdc.setWriteBuf();
           offset = gdc.writeBuf(textElement, offset, urlEnd);
           gdc.writeStringToBuffer('](' + url + ')');
-      } else if (gdc.isHTML && !gdc.targetBlank ) {  // If we aren't adding target="_blank".
+      } else {  // Must be HTML, write standard link.
         gdc.writeStringToBuffer('<a href="' + url + '">');
-        gdc.setWriteBuf();
-        offset = gdc.writeBuf(textElement, offset, urlEnd);
-        gdc.writeStringToBuffer('</a>');
-      }  else if (gdc.isHTML && gdc.targetBlank ) {  // If target blank is selected
-        gdc.writeStringToBuffer('<a target="_blank" href="' + url + '">');
         gdc.setWriteBuf();
         offset = gdc.writeBuf(textElement, offset, urlEnd);
         gdc.writeStringToBuffer('</a>');
@@ -1012,9 +1004,17 @@ gdc.isBullet = function(glyphType) {
 };
 
 // Sets appropriate markup object.
-gdc.useMarkdown = function(){
+gdc.useMarkdown = function() {
   gdc.isHTML = false;
   gdc.markup = gdc.mdMarkup;
+
+  if (gdc.italicBoldUnderscores) {
+    // * and ** are the default.
+    gdc.markup.italicOpen = '_';
+    gdc.markup.italicClose = '_';
+    gdc.markup.boldOpen = '__';
+    gdc.markup.boldClose = '__';
+  }
 };
 gdc.useHtml = function(){
   gdc.isHTML = true;
@@ -1322,8 +1322,6 @@ gdc.maybeCloseAttrs = function(currentAttrs) {
 // At the end of a paragraph or list item, we want to close all open attributes.
 // This is similar to maybeCloseAttrs, but we want to close all of them in
 // the openAttrs list (and we do not have an explicit attribute change here).
-
-// Needs to close when the attribute stops. Not at paragraph/word end. 
 gdc.closeAllAttrs = function() {
   while (gdc.openAttrs.length > 0) {
     var a = gdc.openAttrs.pop();
@@ -1644,7 +1642,10 @@ gdc.topComment = '<!-----\n\n'
 ;
   
 md.doMarkdown = function(config) {
+  // Call config first!
   gdc.config(config);
+  gdc.useMarkdown();
+
   // Get the body elements.
   var elements = gdc.getElements();
 
@@ -1666,10 +1667,10 @@ md.doMarkdown = function(config) {
   gdc.info = '\n\nConversion time: ' + eTime + ' seconds.\n' + gdc.info;
   
   // Note ERRORs or WARNINGs or ALERTs at the top if there are any.
-  gdc.errorSummary = 'Yay, no errors, warnings, or alerts!'
+  gdc.errorSummary = '';
   if ( gdc.errorCount || gdc.warningCount || gdc.alertCount ) {
     gdc.errorSummary = 'You have some errors, warnings, or alerts. '
-      + 'If you are using reckless mode, turn it off to see inline alerts.'
+      + 'If you are using reckless mode, turn it off to see useful information and inline alerts.'
       + '\n* ERRORs: '   + gdc.errorCount
       + '\n* WARNINGs: ' + gdc.warningCount
       + '\n* ALERTS: '   + gdc.alertCount;
@@ -1690,7 +1691,7 @@ md.doMarkdown = function(config) {
   // Add info comment if desired.
   if (!gdc.suppressInfo) {
     gdc.out = gdc.info + '\n----->\n\n' + gdc.out;
-  } else if (gdc.suppressInfo && gdc.errorSummary) {
+  } else if (gdc.suppressInfo && gdc.errorSummary !== '') {
     // But notify if there are errors.
     gdc.out = '<!-- ' + gdc.errorSummary + ' -->\n' + gdc.out;
   }
@@ -1802,7 +1803,7 @@ md.handleParagraph = function(para) {
   gdc.inHeading = false;
   gdc.state.isMixedCode = false;
   gdc.numChildren = para.getNumChildren();
-  // Preserve blank lines in body text as well as code blocks
+  // Do not bother with empty paragraphs (blank lines). (Except we preserve them for code blocks.)
   if (gdc.numChildren === 0) {
     if (gdc.inCodeBlock) {
       // Preserve newlines in code block (or single-cell table code block).
@@ -1810,9 +1811,6 @@ md.handleParagraph = function(para) {
         // Write a placeholder for newline: will replace after wrapping.
         gdc.writeStringToBuffer('<newline>');
       }
-    } else if (gdc.docType === gdc.docTypes.html) {
-      // Add blank lines in HTML by default
-      gdc.writeStringToBuffer(gdc.htmlMarkup.pBlank);
     }
     return;
   }
@@ -1826,6 +1824,7 @@ md.handleParagraph = function(para) {
   // Check for list after we deal with empty paragraphs. do not want to close list for
   // blank lines.
   html.checkList();
+
 
 // Check to see if this is a constant-width paragraph (code block signal).
   if (gdc.isCodeLine(para) && !gdc.isTable) {
@@ -1930,6 +1929,12 @@ md.handleParagraph = function(para) {
   // In case we're in a mixed code span, reset the markup.
   gdc.resetMarkup();
 
+  // Is this necessary?
+  if (gdc.isRightAligned) {
+    gdc.writeStringToBuffer('</p>\n');
+    gdc.isRightAligned = false;
+  }
+
   // Now that we're at the end, close heading or paragraph if necessary.
   if (gdc.docType === gdc.docTypes.md && gdc.inHeading && !gdc.isHTML) {
     // Trim heading text to use as hash key (we trim it in gdc.makeId() ).
@@ -1961,6 +1966,7 @@ md.handleParagraph = function(para) {
     }
   }
   
+  //gdc.maybeCloseList(para);
 }; // end md.handleParagraph
 
 // Handle the heading type of the paragraph. Fall through for NORMAL.
