@@ -39,7 +39,7 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β41'; // based on 1.0β40
+var GDC_VERSION = '1.0β42'; // based on 1.0β41
 
 // Version notes: significant changes (latest on top). (files changed)
 // - 1.0β42 (7 Oct 2024): Add option for adding target="_blank" to links (gdc, sidebar)
