@@ -36,7 +36,14 @@ var html = html || {
 
   // non-semantic underline, since Docs supports it.
   underlineStart: '<span style="text-decoration:underline;">',
-  underlineEnd:   '</span>'
+  underlineEnd:   '</span>',
+
+
+  // I think we need to track these independently because the previous/next sibling won't always be a list item, 
+  // thus not giving reliable nesting level. 
+  listNestingLevel: 0,
+  // This will also help us know if a list item needs to be closed before opening a new one. 
+  inListItem: false
 };
 
 html.tablePrefix = '  ';
@@ -499,12 +506,10 @@ html.handleListItem = function(listItem) {
 
   html.nestingLevel = listItem.getNestingLevel();
 
-  // Check if we're in a code block and end if so.
-  if (gdc.inCodeBlock) {
-    gdc.writeStringToBuffer(html.closeCodeBlock);
-    gdc.inCodeBlock = false;
+  // Check if a list item is already open, and if so, close it. We will always want to close a listItem before opening a new one.
+  if (html.inListItem) {
+    html.closeListItem();
   }
-
 
   gdc.listPrefix = '';
   for (var i = 0; i < html.nestingLevel; i++) {
@@ -525,6 +530,7 @@ html.handleListItem = function(listItem) {
   gdc.writeStringToBuffer('\n');
   // Note that ulItem, olItem are the same in HTML (<li>).
   gdc.writeStringToBuffer(gdc.listPrefix + gdc.htmlMarkup.ulItem);
+  html.inListItem = true;
   md.childLoop(listItem);
   
   // Check to see if we should close this list.
@@ -541,7 +547,14 @@ html.checkList = function() {
 };
 // Closes list item. Not necessary for Markdown.
 html.closeListItem = function() {
+  // Check if we're in a code block and end if so. Always close codeblocks before closing list items. 
+  if (gdc.inCodeBlock) {
+    gdc.writeStringToBuffer(html.closeCodeBlock);
+    gdc.inCodeBlock = false;
+  }
+
   gdc.writeStringToBuffer(gdc.markup.liClose);
+  html.inListItem = false;
 };
 html.maybeOpenList = function (listItem) {
   // Do we need to open a list?
@@ -552,13 +565,23 @@ html.maybeOpenList = function (listItem) {
   }
   // Open list if last sibling was not a list item.
   if (previousType !== DocumentApp.ElementType.LIST_ITEM) {
-    html.openList();
-  } else
+    // We need to check if a list is already opened first. Is a global variable to track list level the best solution here? 
+    // The previous sibling won't return the list level if it's a paragraph. 
+
+    // Could we also use:
+    // if (html.nestingLevel == 0 && gdc.isList == false) {
+
+    if (html.nestingLevel >= html.listNestingLevel) {
+      html.openList();
+    } 
+  } else if (previousType == DocumentApp.ElementType.LIST_ITEM) {
     // Open a new list if nesting level increases.
-    if (html.nestingLevel > previous.getNestingLevel()) {
-    html.openList();
+      if (html.nestingLevel > previous.getNestingLevel()) {
+      html.openList();
+      }
   }
 };
+
 // Open list and save current list type to stack.
 html.openList = function() {
   gdc.isList = true;
@@ -575,22 +598,28 @@ html.openList = function() {
     gdc.writeStringToBuffer(gdc.listPrefix + gdc.htmlMarkup.olOpen);
     html.listStack.unshift(gdc.ol);
   }
+  html.listNestingLevel++;
 };
+
 // Close list and remove it's list type from the stack.
 html.closeList = function() {
-  // Close the last item of the list.
+  // Close the last item of the list. This will always need to be called.
   html.closeListItem();
+
   if (html.listStack[0] === gdc.ul) {
     gdc.writeStringToBuffer(gdc.listPrefix + gdc.htmlMarkup.ulClose);
+    html.listNestingLevel--;
   }
   if (html.listStack[0] === gdc.ol) {
     gdc.writeStringToBuffer(gdc.listPrefix + gdc.htmlMarkup.olClose);
+    html.listNestingLevel--;
   }
   html.listStack.shift();
   if (html.listStack.length === 0) {
     gdc.isList = false;
   }
 };
+
 // But what about a table that's in a list item?
 html.closeAllLists = function() {
   var list = html.listStack[0];
