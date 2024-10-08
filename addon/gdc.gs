@@ -42,7 +42,7 @@ var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
 var GDC_VERSION = '1.0β43'; // based on 1.0β42
 
 // Version notes: significant changes (latest on top). (files changed)
-// - 1.0β43 (8 Oct 2024): Close list items before opening a new item. Close at the end of the list.
+// - 1.0β43 (8 Oct 2024): Close list items before opening a new item. Close at the end of the list. (gdc, html)
 // - 1.0β42 (7 Oct 2024): Add option for adding target="_blank" to links (gdc, sidebar)
 // - 1.0β41 (7 Oct 2024): Add support for Markdown checkbox lists. (gdc)
 // - 1.0β40 (7 Oct 2024): Fixes handling of superscript/subscript to close old styles before opening new style. Moves opening superscript/subscript later in process. (gdc)
