@@ -39,9 +39,10 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β39'; // based on 1.0β38
+var GDC_VERSION = '1.0β40'; // based on 1.0β39
 
-// Version notes: significant changes (latest on top). (files changed)
+// Version notes: significant changes (latest on top). (files changed)\
+// - 1.0β40 (7 Oct 2024): Fixes handling of superscript/subscript to close old styles before opening new style. Moves opening superscript/subscript later in process. (gdc)
 // - 1.0β39 (7 Oct 2024): Added center/right alignment to HTML paragraph and heading handling. Will add text-align: center/right depending on paragraph formatting. (html, gdc)
 // - 1.0β38 (21 Sept 2024): Italic/bold markup default is now */**: _/__ is now an option. Reckless mode now includes Suppress info comment (removed sidebar option too). Also add a News link to gd2md-html news page in sidebar. (sidebar, gdc)
 // - 1.0β37 (31 August 2024): Add a Questions link to gd2md-html Google group in sidebar (no functional changes).
@@ -806,19 +807,10 @@ gdc.handleText = function(textElement) {
     if (alignment === SUPERSCRIPT) {
       superscript = true;
     }
-    if (!gdc.isSubscript && subscript) {
-      gdc.useHtml();
-      gdc.isSubscript = true;
-      gdc.openAttrs.push(gdc.subscript);
-      gdc.writeStringToBuffer(gdc.markup.subOpen);
-    }
-    if (!gdc.isSuperscript && superscript) {
-      gdc.useHtml();
-      gdc.isSuperscript = true;
-      gdc.openAttrs.push(gdc.superscript);
-      gdc.writeStringToBuffer(gdc.markup.superOpen);
-    }
+   
     var currentAttrs = gdc.getCurrentAttributes(textElement, attrOff);
+    // Attributes need to close for new text before opening any new attributes. This is for when words run together like italicsSUPERSCRIPT. or BOLDitalics 
+    gdc.maybeCloseAttrs(currentAttrs);
 
     // A philosophical question: should we define gdc.isItalic and friends up
     // top in gdc.gs, or just let them be defined here at first use? Might
@@ -863,6 +855,20 @@ gdc.handleText = function(textElement) {
       gdc.openAttrs.push(gdc.strikethrough);
       gdc.writeStringToBuffer(gdc.markup.strikethroughOpen);
     }
+    // Open subscript
+    if (!gdc.isSubscript && subscript) {
+      gdc.useHtml();
+      gdc.isSubscript = true;
+      gdc.openAttrs.push(gdc.subscript);
+      gdc.writeStringToBuffer(gdc.markup.subOpen);
+    }
+    // Open superscript
+    if (!gdc.isSuperscript && superscript) {
+      gdc.useHtml();
+      gdc.isSuperscript = true;
+      gdc.openAttrs.push(gdc.superscript);
+      gdc.writeStringToBuffer(gdc.markup.superOpen);
+    }
     // Open underline (uses HTML always). This should really be discouraged!
     if (!gdc.isUnderline && underline && !url) {
       gdc.isUnderline = true;
@@ -870,7 +876,8 @@ gdc.handleText = function(textElement) {
       gdc.writeStringToBuffer(gdc.markup.underlineOpen);
     }
 
-    gdc.maybeCloseAttrs(currentAttrs);
+    // Needs to run again to clear any formatting?
+    // gdc.maybeCloseAttrs(currentAttrs);
 
     // URL handling.
 
@@ -1881,7 +1888,7 @@ md.handleParagraph = function(para) {
       // But check for table cell or definition list.
     } else if (!gdc.startingTableCell && !gdc.inDlist) {
       // This is where we want to check for right/center alignment so that the proper paragraph style can be applied. 
-      if (para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
+      if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
         gdc.writeStringToBuffer('\n<p style="text-align: right">\n');
         // Not sure what this does?
         gdc.useHtml();
