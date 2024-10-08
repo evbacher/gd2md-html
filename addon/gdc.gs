@@ -39,9 +39,10 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β42'; // based on 1.0β41
+var GDC_VERSION = '1.0β43'; // based on 1.0β42
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β43 (8 Oct 2024): Close list items before opening a new item. Close at the end of the list.
 // - 1.0β42 (7 Oct 2024): Add option for adding target="_blank" to links (gdc, sidebar)
 // - 1.0β41 (7 Oct 2024): Add support for Markdown checkbox lists. (gdc)
 // - 1.0β40 (7 Oct 2024): Fixes handling of superscript/subscript to close old styles before opening new style. Moves opening superscript/subscript later in process. (gdc)
@@ -343,7 +344,7 @@ gdc.htmlMarkup = {
   olClose:     '\n</ol>',
   ulItem:      '\n<li>',
   olItem:      '\n<li>',
-  liClose:     '\n</li>',
+  liClose:     '</li>',
 
   hr:           '\n<hr>',
 
@@ -1236,15 +1237,17 @@ gdc.getUrlEnd = function(textElement, offset) {
 gdc.maybeCloseList = function(el) {
   // Check to see if we should close this list.
   var next = el.getNextSibling();
-  //var nestingLevel = gdc.nestLevel;
-  var nestingLevel = el.getNestingLevel();
-  if (next && next.toString() === "ListItem") {
-    var nextNestingLevel = next.getNestingLevel();
+  // Not sure why exactly, but sometimes next is null, breaking the script.
+  if (!next) { return; }
+  if (next.getType() == DocumentApp.ElementType.LIST_ITEM) {
+  // Add one because nesting level starts at 0? Is this the best way of doing this?
+  var nextNestingLevel = next.getNestingLevel() + 1;
     
     // This is closer to being correct with list closing, but we also need to
     // keep state in case there are paragraphs embedded in the list.
     if (gdc.isHTML) {
-      for (var nest = nestingLevel; nest > nextNestingLevel; nest--) {
+      // Maybe there is a cleaner way to track nesting level. I've found that the document nesting level isn't accurate. 
+      for (var nest = html.listNestingLevel; nest > nextNestingLevel; nest--) {
         html.closeList();
       }
     }
@@ -1350,6 +1353,8 @@ gdc.maybeCloseAttrs = function(currentAttrs) {
 // At the end of a paragraph or list item, we want to close all open attributes.
 // This is similar to maybeCloseAttrs, but we want to close all of them in
 // the openAttrs list (and we do not have an explicit attribute change here).
+
+// Needs to close when the attribute stops. Not at paragraph/word end. 
 gdc.closeAllAttrs = function() {
   while (gdc.openAttrs.length > 0) {
     var a = gdc.openAttrs.pop();
@@ -1853,8 +1858,7 @@ md.handleParagraph = function(para) {
   // blank lines.
   html.checkList();
 
-
-// Check to see if this is a constant-width paragraph (code block signal).
+  // Check to see if this is a constant-width paragraph (code block signal).
   if (gdc.isCodeLine(para) && !gdc.isTable) {
     // If we're starting a code block, open it up.
     if (!gdc.inCodeBlock) {
@@ -1993,8 +1997,9 @@ md.handleParagraph = function(para) {
       gdc.writeStringToBuffer(gdc.markup.pClose);
     }
   }
-  
-  //gdc.maybeCloseList(para);
+
+  // We also want to check here. 
+  gdc.maybeCloseList(para);
 }; // end md.handleParagraph
 
 // Handle the heading type of the paragraph. Fall through for NORMAL.
