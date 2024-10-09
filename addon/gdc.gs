@@ -1020,6 +1020,7 @@ gdc.isBullet = function(glyphType) {
       return 'bullet';
   } else if (glyphType === null) {
     // Since checkboxes currently return null and we know it is a list, this should work to find a checkbox item until Google adds another
+    // See https://developers.google.com/apps-script/reference/document/glyph-type for glyph enum if this breaks.
     return 'checkbox';
   // Spelling out ordered list glyphs rather than relying on "everything but null"
   // } else if (  glyphType === DocumentApp.GlyphType.NUMBER
@@ -1916,7 +1917,8 @@ md.handleParagraph = function(para) {
       if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
         gdc.writeStringToBuffer('\n<p style="text-align: right">\n');
         // Not sure what this does?
-        gdc.useHtml();
+        gdc.useHtml(); // TODO: check this!
+        //gdc.isRightAligned = true; // TODO: check this!
       } else if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.CENTER && para.isLeftToRight()) {
         gdc.writeStringToBuffer('\n<p style="text-align: center">\n');
         gdc.useHtml();
