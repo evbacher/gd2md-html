@@ -43,6 +43,7 @@ var GDC_VERSION = '1.0β42'; // based on 1.0β41
 
 // Version notes: significant changes (latest on top). (files changed)
 // - 1.0β42 (7 Oct 2024): Add option for adding target="_blank" to links (gdc, sidebar)
+// Version notes: significant changes (latest on top). (files changed)
 // - 1.0β41 (7 Oct 2024): Add support for Markdown checkbox lists. (gdc)
 // - 1.0β40 (7 Oct 2024): Fixes handling of superscript/subscript to close old styles before opening new style. Moves opening superscript/subscript later in process. (gdc)
 // - 1.0β39 (7 Oct 2024): Added center/right alignment to HTML paragraph and heading handling. Will add text-align: center/right depending on paragraph formatting. (html, gdc)
@@ -1019,8 +1020,8 @@ gdc.isBullet = function(glyphType) {
       return 'bullet';
   } else if (glyphType === null) {
     // Since checkboxes currently return null and we know it is a list, this should work to find a checkbox item until Google adds another
-    return 'checkbox';
     // See https://developers.google.com/apps-script/reference/document/glyph-type for glyph enum if this breaks.
+    return 'checkbox';
   // Spelling out ordered list glyphs rather than relying on "everything but null"
   // } else if (  glyphType === DocumentApp.GlyphType.NUMBER
   //           || glyphType === DocumentApp.GlyphType.LATIN_UPPER 
@@ -1913,7 +1914,8 @@ md.handleParagraph = function(para) {
       if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
         gdc.writeStringToBuffer('\n<p style="text-align: right">\n');
         // Not sure what this does?
-        gdc.useHtml();
+        gdc.useHtml(); // TODO: check this!
+        //gdc.isRightAligned = true; // TODO: check this!
       } else if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.CENTER && para.isLeftToRight()) {
         gdc.writeStringToBuffer('\n<p style="text-align: center">\n');
         gdc.useHtml();
