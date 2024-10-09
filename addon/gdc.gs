@@ -1903,7 +1903,8 @@ md.handleParagraph = function(para) {
       if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
         gdc.writeStringToBuffer('\n<p style="text-align: right">\n');
         // Not sure what this does?
-        gdc.useHtml();
+        gdc.useHtml(); // TODO: check this!
+        //gdc.isRightAligned = true; // TODO: check this!
       } else if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.CENTER && para.isLeftToRight()) {
         gdc.writeStringToBuffer('\n<p style="text-align: center">\n');
         gdc.useHtml();
