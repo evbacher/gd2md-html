@@ -39,8 +39,10 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β41'; // based on 1.0β40
+var GDC_VERSION = '1.0β42'; // based on 1.0β41
 
+// Version notes: significant changes (latest on top). (files changed)
+// - 1.0β42 (7 Oct 2024): Add option for adding target="_blank" to links (gdc, sidebar)
 // Version notes: significant changes (latest on top). (files changed)
 // - 1.0β41 (7 Oct 2024): Add support for Markdown checkbox lists. (gdc)
 // - 1.0β40 (7 Oct 2024): Fixes handling of superscript/subscript to close old styles before opening new style. Moves opening superscript/subscript later in process. (gdc)
@@ -130,6 +132,9 @@ gdc.config = function(config) {
   }
   if (config.suppressInfo === true) {
     gdc.suppressInfo = true;
+  }
+  if (config.targetBlank === true) {
+    gdc.targetBlank = true;
   }
   if (config.recklessMode === true) {
     gdc.recklessMode = true;
@@ -913,8 +918,13 @@ gdc.handleText = function(textElement) {
           gdc.setWriteBuf();
           offset = gdc.writeBuf(textElement, offset, urlEnd);
           gdc.writeStringToBuffer('](' + url + ')');
-      } else {  // Must be HTML, write standard link.
+      } else if (gdc.isHTML && !gdc.targetBlank ) {  // If we aren't adding target="_blank".
         gdc.writeStringToBuffer('<a href="' + url + '">');
+        gdc.setWriteBuf();
+        offset = gdc.writeBuf(textElement, offset, urlEnd);
+        gdc.writeStringToBuffer('</a>');
+      }  else if (gdc.isHTML && gdc.targetBlank ) {  // If target blank is selected
+        gdc.writeStringToBuffer('<a target="_blank" href="' + url + '">');
         gdc.setWriteBuf();
         offset = gdc.writeBuf(textElement, offset, urlEnd);
         gdc.writeStringToBuffer('</a>');
@@ -1010,6 +1020,7 @@ gdc.isBullet = function(glyphType) {
       return 'bullet';
   } else if (glyphType === null) {
     // Since checkboxes currently return null and we know it is a list, this should work to find a checkbox item until Google adds another
+    // See https://developers.google.com/apps-script/reference/document/glyph-type for glyph enum if this breaks.
     return 'checkbox';
   // Spelling out ordered list glyphs rather than relying on "everything but null"
   // } else if (  glyphType === DocumentApp.GlyphType.NUMBER
