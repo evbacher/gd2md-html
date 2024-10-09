@@ -1020,6 +1020,7 @@ gdc.isBullet = function(glyphType) {
   } else if (glyphType === null) {
     // Since checkboxes currently return null and we know it is a list, this should work to find a checkbox item until Google adds another
     return 'checkbox';
+    // See https://developers.google.com/apps-script/reference/document/glyph-type for glyph enum if this breaks.
   // Spelling out ordered list glyphs rather than relying on "everything but null"
   // } else if (  glyphType === DocumentApp.GlyphType.NUMBER
   //           || glyphType === DocumentApp.GlyphType.LATIN_UPPER 
