@@ -39,9 +39,13 @@
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β38'; // based on 1.0β37
+var GDC_VERSION = '1.0β42'; // based on 1.0β41
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β42 (8 Oct 2024): Close list items before opening a new item. Close at the end of the list. (gdc, html)
+// - 1.0β41 (7 Oct 2024): Add support for Markdown checkbox lists. (gdc)
+// - 1.0β40 (7 Oct 2024): Fixes handling of superscript/subscript to close old styles before opening new style. Moves opening superscript/subscript later in process. (gdc)
+// - 1.0β39 (7 Oct 2024): Added center/right alignment to HTML paragraph and heading handling. Will add text-align: center/right depending on paragraph formatting. (html, gdc)
 // - 1.0β38 (21 Sept 2024): Italic/bold markup default is now */**: _/__ is now an option. Reckless mode now includes Suppress info comment (removed sidebar option too). Also add a News link to gd2md-html news page in sidebar. (sidebar, gdc)
 // - 1.0β37 (31 August 2024): Add a Questions link to gd2md-html Google group in sidebar (no functional changes).
 /* - 1.0β36 (26 April 2024): Update required permissions: set explicitly in appsscript.json. No code changes. Using these Oauth scopes:
@@ -249,6 +253,7 @@ gdc.mdMarkup = {
   olClose:      '<newline>',
   ulItem:       '* ',
   olItem:       '1. ',
+  cboxItem:     '- [ ] ',
   liClose:      '',
 
   hr:           '<newline><newline>---<newline>',
@@ -292,6 +297,7 @@ gdc.mixedMarkup = {
   olClose:      '',
   ulItem:       '* ',
   olItem:       '1. ',
+  cboxItem:     '- [ ] ',
   liClose:      '',
 
   hr:           '<newline><newline>---<newline>',
@@ -334,7 +340,7 @@ gdc.htmlMarkup = {
   olClose:     '\n</ol>',
   ulItem:      '\n<li>',
   olItem:      '\n<li>',
-  liClose:     '\n</li>',
+  liClose:     '</li>',
 
   hr:           '\n<hr>',
 
@@ -805,19 +811,10 @@ gdc.handleText = function(textElement) {
     if (alignment === SUPERSCRIPT) {
       superscript = true;
     }
-    if (!gdc.isSubscript && subscript) {
-      gdc.useHtml();
-      gdc.isSubscript = true;
-      gdc.openAttrs.push(gdc.subscript);
-      gdc.writeStringToBuffer(gdc.markup.subOpen);
-    }
-    if (!gdc.isSuperscript && superscript) {
-      gdc.useHtml();
-      gdc.isSuperscript = true;
-      gdc.openAttrs.push(gdc.superscript);
-      gdc.writeStringToBuffer(gdc.markup.superOpen);
-    }
+   
     var currentAttrs = gdc.getCurrentAttributes(textElement, attrOff);
+    // Attributes need to close for new text before opening any new attributes. This is for when words run together like italicsSUPERSCRIPT. or BOLDitalics 
+    gdc.maybeCloseAttrs(currentAttrs);
 
     // A philosophical question: should we define gdc.isItalic and friends up
     // top in gdc.gs, or just let them be defined here at first use? Might
@@ -862,6 +859,20 @@ gdc.handleText = function(textElement) {
       gdc.openAttrs.push(gdc.strikethrough);
       gdc.writeStringToBuffer(gdc.markup.strikethroughOpen);
     }
+    // Open subscript
+    if (!gdc.isSubscript && subscript) {
+      gdc.useHtml();
+      gdc.isSubscript = true;
+      gdc.openAttrs.push(gdc.subscript);
+      gdc.writeStringToBuffer(gdc.markup.subOpen);
+    }
+    // Open superscript
+    if (!gdc.isSuperscript && superscript) {
+      gdc.useHtml();
+      gdc.isSuperscript = true;
+      gdc.openAttrs.push(gdc.superscript);
+      gdc.writeStringToBuffer(gdc.markup.superOpen);
+    }
     // Open underline (uses HTML always). This should really be discouraged!
     if (!gdc.isUnderline && underline && !url) {
       gdc.isUnderline = true;
@@ -869,7 +880,8 @@ gdc.handleText = function(textElement) {
       gdc.writeStringToBuffer(gdc.markup.underlineOpen);
     }
 
-    gdc.maybeCloseAttrs(currentAttrs);
+    // Needs to run again to clear any formatting?
+    // gdc.maybeCloseAttrs(currentAttrs);
 
     // URL handling.
 
@@ -902,7 +914,7 @@ gdc.handleText = function(textElement) {
           gdc.setWriteBuf();
           offset = gdc.writeBuf(textElement, offset, urlEnd);
           gdc.writeStringToBuffer('](' + url + ')');
-      } else {  // Must be HTML, write standard link.
+      } else {  // Must be HTML, write standard link.        
         gdc.writeStringToBuffer('<a href="' + url + '">');
         gdc.setWriteBuf();
         offset = gdc.writeBuf(textElement, offset, urlEnd);
@@ -996,9 +1008,19 @@ gdc.isBullet = function(glyphType) {
   if (   glyphType === DocumentApp.GlyphType.BULLET
       || glyphType === DocumentApp.GlyphType.HOLLOW_BULLET
       || glyphType === DocumentApp.GlyphType.SQUARE_BULLET) {
-      return true;
-  } else {
-    return false;
+      return 'bullet';
+  } else if (glyphType === null) {
+    // Since checkboxes currently return null and we know it is a list, this should work to find a checkbox item until Google adds another
+    // See https://developers.google.com/apps-script/reference/document/glyph-type for glyph enum if this breaks.
+    return 'checkbox';
+  // Spelling out ordered list glyphs rather than relying on "everything but null"
+  // } else if (  glyphType === DocumentApp.GlyphType.NUMBER
+  //           || glyphType === DocumentApp.GlyphType.LATIN_UPPER 
+  //           || glyphType === DocumentApp.GlyphType.LATIN_LOWER
+  //           || glyphType === DocumentApp.GlyphType.ROMAN_UPPER 
+  //           || glyphType === DocumentApp.GlyphType.ROMAN_LOWER) { 
+  } else { 
+    return 'ordered list';
   }
 };
 
@@ -1207,15 +1229,17 @@ gdc.getUrlEnd = function(textElement, offset) {
 gdc.maybeCloseList = function(el) {
   // Check to see if we should close this list.
   var next = el.getNextSibling();
-  //var nestingLevel = gdc.nestLevel;
-  var nestingLevel = el.getNestingLevel();
-  if (next && next.toString() === "ListItem") {
-    var nextNestingLevel = next.getNestingLevel();
+  // Not sure why exactly, but sometimes next is null, breaking the script.
+  if (!next) { return; }
+  if (next.getType() == DocumentApp.ElementType.LIST_ITEM) {
+  // Add one because nesting level starts at 0? Is this the best way of doing this?
+  var nextNestingLevel = next.getNestingLevel() + 1;
     
     // This is closer to being correct with list closing, but we also need to
     // keep state in case there are paragraphs embedded in the list.
     if (gdc.isHTML) {
-      for (var nest = nestingLevel; nest > nextNestingLevel; nest--) {
+      // Maybe there is a cleaner way to track nesting level. I've found that the document nesting level isn't accurate. 
+      for (var nest = html.listNestingLevel; nest > nextNestingLevel; nest--) {
         html.closeList();
       }
     }
@@ -1321,6 +1345,8 @@ gdc.maybeCloseAttrs = function(currentAttrs) {
 // At the end of a paragraph or list item, we want to close all open attributes.
 // This is similar to maybeCloseAttrs, but we want to close all of them in
 // the openAttrs list (and we do not have an explicit attribute change here).
+
+// Needs to close when the attribute stops. Not at paragraph/word end. 
 gdc.closeAllAttrs = function() {
   while (gdc.openAttrs.length > 0) {
     var a = gdc.openAttrs.pop();
@@ -1824,8 +1850,7 @@ md.handleParagraph = function(para) {
   // blank lines.
   html.checkList();
 
-
-// Check to see if this is a constant-width paragraph (code block signal).
+  // Check to see if this is a constant-width paragraph (code block signal).
   if (gdc.isCodeLine(para) && !gdc.isTable) {
     // If we're starting a code block, open it up.
     if (!gdc.inCodeBlock) {
@@ -1879,8 +1904,20 @@ md.handleParagraph = function(para) {
       // do nothing: we also want to not add the tablePrefix.
       // But check for table cell or definition list.
     } else if (!gdc.startingTableCell && !gdc.inDlist) {
-      gdc.writeStringToBuffer(gdc.markup.pOpen);
-    }
+      // This is where we want to check for right/center alignment so that the proper paragraph style can be applied. 
+      if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
+        gdc.writeStringToBuffer('\n<p style="text-align: right">\n');
+        // Not sure what this does?
+        gdc.useHtml(); // TODO: check this!
+        //gdc.isRightAligned = true; // TODO: check this!
+      } else if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.CENTER && para.isLeftToRight()) {
+        gdc.writeStringToBuffer('\n<p style="text-align: center">\n');
+        gdc.useHtml();
+      } else {
+        gdc.writeStringToBuffer(gdc.markup.pOpen);
+      } 
+    }  
+
     // We want paragraphs after the first text in a table cell.
     gdc.startingTableCell = false;
   }
@@ -1901,13 +1938,6 @@ md.handleParagraph = function(para) {
     }
   }
 
-  // Check horizontal alignment. We can style right alignment using an HTML paragraph.
-  if (para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
-    gdc.writeStringToBuffer('<p style="text-align: right">\n');
-    gdc.useHtml();
-    gdc.isRightAligned = true;
-  }
-
   // Detects text direction.
   if (!para.isLeftToRight()) {
     gdc.writeStringToBuffer('<p dir="rtl">\n');
@@ -1924,6 +1954,7 @@ md.handleParagraph = function(para) {
   // In case we're in a mixed code span, reset the markup.
   gdc.resetMarkup();
 
+  // Is this necessary?
   if (gdc.isRightAligned) {
     gdc.writeStringToBuffer('</p>\n');
     gdc.isRightAligned = false;
@@ -1959,8 +1990,9 @@ md.handleParagraph = function(para) {
       gdc.writeStringToBuffer(gdc.markup.pClose);
     }
   }
-  
-  //gdc.maybeCloseList(para);
+
+  // We also want to check here. 
+  gdc.maybeCloseList(para);
 }; // end md.handleParagraph
 
 // Handle the heading type of the paragraph. Fall through for NORMAL.
@@ -2048,9 +2080,9 @@ md.handleListItem = function(listItem) {
     prefix += '<listindent>';
   }
   // Check for bullet list.
-  if (gdc.isBullet(glyphType)) {
+  if (gdc.isBullet(glyphType) === 'bullet') {
     prefix += gdc.markup.ulItem;
-  } else {
+  } else if (gdc.isBullet(glyphType) === 'ordered list') {
     // Ordered list.
     var key = listItem.getListId() + '.' + nestLevel;
     // Initialize list counter.
@@ -2060,8 +2092,11 @@ md.handleListItem = function(listItem) {
     // Increment ordered list counter.
     prefix += counter + '. ';
     // Alternative is to use 1. for all ordered list items, but less readable.
-    //prefix += gdc.markup.olItem;
+    // prefix += gdc.markup.olItem;
+  } else if (gdc.isBullet(glyphType) === 'checkbox') { // Maybe it's unecessary to spell out and just leave as an "else" statement.
+    prefix += gdc.markup.cboxItem
   }
+
   gdc.writeStringToBuffer(prefix);
 
   // Prefix set, now deal with the content.
