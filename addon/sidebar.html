@@ -124,11 +124,8 @@ Wrap HTML
 <label>
 <input type="checkbox" id="render_html_tags">
 Render HTML tags
-</label><br>
-<label>
-<input type="checkbox" id="target_blank">
-Add target="_blank" to HTML links
-</label><br>
+</label>
+<br>
 
 <!-- Collapsing suppress_info and reckless_mode for now.
 <label>
@@ -196,7 +193,6 @@ If you have questions for the Docs to Markdown community, use the Questions link
     config.renderHTMLTags = false;
     config.suppressInfo = false;
     config.recklessMode = false;
-    config.targetBlank = false;
 
     // Config settings from UI.
     if (document.getElementById('italic_bold_underscores').checked) {
@@ -210,9 +206,6 @@ If you have questions for the Docs to Markdown community, use the Questions link
     }
     if (document.getElementById('wrap_html').checked) {
       config.wrapHTML = true;
-    }
-    if (document.getElementById('target_blank').checked) {
-      config.targetBlank = true;
     }
     if (document.getElementById('render_html_tags').checked) {
       config.renderHTMLTags = true;
