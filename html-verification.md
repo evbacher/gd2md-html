@@ -4,7 +4,7 @@
 * ALERTS: 6 -->
 
 <p>
-This is a raw conversion from a Google Doc (For verification purposes: use HTML headings and Reckless mode options for Markdown conversion, no other options. Reckless mode only for HTML conversion).
+This is a raw conversion from a Google Doc (For verification purposes: use HTML headings and Reckless mode options for Markdown conversion, no other options).
 </p>
 <h1>MAIN: Docs to Markdown (GD2md-html)</h1>
 
@@ -28,7 +28,7 @@ Docs to Markdown converts headings to the corresponding heading level in Markdow
 
 
 <p>
-If you generate a table of contents (with blue links) in your Doc, Docs to Markdown will create IDs for each heading—this also allows proper conversion of intra-doc links. If your Markdown environment does not handle heading attributes, you can choose the <code>HTML headings/IDs</code> option.
+If you generate a table of contents (with blue links) in your Doc, Docs to Markdown will create IDs for each heading—this also allows proper conversion of intra-doc links. If your Markdown environment does not handle heading attributes, you can choose the <code>HTML headings/IDs</code> option. See <a href="#internal-links">Links</a> for some internal link tests. A link to a different heading with the same words, <a href="#heading-ids">Heading IDs</a>, should go to that heading.
 </p>
 <h1 id="blank-headings">Blank headings</h1>
 
@@ -45,7 +45,7 @@ END BLANK HEADINGS
 <p>
 This is a paragraph.<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup> (Docs to Markdown also supports footnotes) A sentence with <code>some embedded code</code>. Docs to Markdown changes “smart quotes” to straight quotes in code to guard against cut-and-paste errors.
 </p>
-<h2>Basic font styling</h2>
+<h2 id="basic-font-styling">Basic font styling</h2>
 
 
 <p>
@@ -134,7 +134,7 @@ And here is a bullet list:
 
 <li>First item
 
-<li>Second item 
+<li>Second item (this item has nested items below it) 
 <ol>
  
 <li>First nested item
@@ -194,7 +194,7 @@ Note: Works for Markdown, still a known issue for HTML.
 <li>A bullet list with an additional paragraph:
 <p>
 
-    This is another paragraph.
+    This is another paragraph (Note that GitHub renders an indented HTML paragraph under a list item as a code block! markdownlivepreview.com renders it properly as a paragraph.)
 </p>
 <p>
 
@@ -496,6 +496,25 @@ three
 </table>
 
 
+<h2 id="internal-links">Internal links</h2>
+
+
+<p>
+Some internal links to headings in this doc (note that you need to generate a TOC with blue links in this doc for these intra-doc links to work):
+</p>
+<ul>
+
+<li><a href="#heading-ids">Heading IDs</a>
+
+<li><a href="#code-blocks">Code blocks</a>
+</li>
+</ul>
+<h2 id="heading-ids">Heading IDs</h2>
+
+
+<p>
+This is a duplicate heading (on purpose). An internal link to this heading should come here, not to <a href="#heading-ids">Heading IDs</a> up top.
+</p>
 <h2 id="links">Links</h2>
 
 
@@ -696,7 +715,7 @@ Another paragraph with <strong>some bold text</strong>.
 <li>Another list item.
 </li>
 </ol>
-<h2>Horizontal rules</h2>
+<h2 id="horizontal-rules">Horizontal rules</h2>
 
 
 <p>
@@ -706,7 +725,7 @@ This is a horizontal rule:
 <p>
 This is a regular paragraph.
 </p>
-<h2>Blank Lines</h2>
+<h2 id="blank-lines">Blank Lines</h2>
 
 
 <p>
@@ -715,25 +734,31 @@ Line 1
 <p>
 Line 2
 </p>
-<h2>Centered/Right aligned text</h2>
+<h2 id="centered-right-aligned-text">Centered/Right aligned text</h2>
 
 
 <p>
-Handle centered, right aligned text for Markdown/HTML (in progress).
+Handle centered, right-aligned text for Markdown/HTML (in progress).
 </p>
 <p>
 <p style="text-align: right">
-Right aligned</p>
+Right-aligned paragraph.</p>
 
 </p>
 <p>
-Center aligned
+Left-aligned paragraph.
 </p>
-<h5>Center Aligned Heading</h5>
+<p>
+Center-aligned paragraph.
+</p>
+<p>
+Left-aligned paragraph.
+</p>
+<h3 id="center-aligned-heading">Center-aligned Heading</h3>
 
 
 <p>
-Regular paragraph
+Regular paragraph.
 </p>
 <h2 id="bugs">Bugs</h2>
 
@@ -745,8 +770,11 @@ Regular paragraph
 <li>New bug or feature request: <a href="https://github.com/evbacher/gd2md-html/issues/new">https://github.com/evbacher/gd2md-html/issues/new</a>. Thanks for helping to make Docs to Markdown better!
 </li>
 </ul>
+<h2 id="end">End</h2>
+
+
 <p>
-This document ends with a regular paragraph.
+This document ends with this regular paragraph (though footnotes may follow).
 </p>
 
 <!-- Footnotes themselves at the bottom. -->
