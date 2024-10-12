@@ -1,3 +1,5 @@
+// *** gdc.gs ***
+
 /*
  * Copyright 2020 Google LLC
  *
@@ -35,13 +37,25 @@
 
 // General note: be careful about putting newlines or whitespace into Markdown output.
 
+// The gdc object, which contains many important functions and values.
+var gdc = gdc || {};
+
 // NOTE: Check these before publishing! (and remove β if appropriate)
+// Use banner comment (very rarely) to communicate important information
+// (like recent bugs affecting output) at the top of the conversion test.
+gdc.banner = ''; // This is the general case.
+/*
+gdc.banner = '<!-- NOTICE: Google recently added tabs to Google Docs: '
+  + 'Internal links in converted text do not work now. '
+  + 'We are working on a fix. See News link for more details. -->\n\n';
+*/
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β38'; // based on 1.0β37
+var GDC_VERSION = '1.0β39'; // based on 1.0β38
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β39 (12 October 2024): Google Docs recently added a tab interface, which changes the TOC-generated id. This breaks internal links. This release fixes that bug. (gdc, html)
 // - 1.0β38 (21 Sept 2024): Italic/bold markup default is now */**: _/__ is now an option. Reckless mode now includes Suppress info comment (removed sidebar option too). Also add a News link to gd2md-html news page in sidebar. (sidebar, gdc)
 // - 1.0β37 (31 August 2024): Add a Questions link to gd2md-html Google group in sidebar (no functional changes).
 /* - 1.0β36 (26 April 2024): Update required permissions: set explicitly in appsscript.json. No code changes. Using these Oauth scopes:
@@ -86,8 +100,6 @@ var GDC_VERSION = '1.0β38'; // based on 1.0β37
 // - 1.0β3: Escape angle brackets (<) in HTML code blocks. (gdc, html)
 // - 1.0β2: Check for spurious 0-row table. Fix image path for placeholder links. (gdc, html)
 // - 1.0β: initial release of gd2md-html (addon, gdc, html, sidebar)
-
-var gdc = gdc || {};
 
 gdc.docTypes = {
   md: 'Markdown',
@@ -879,9 +891,14 @@ gdc.handleText = function(textElement) {
       var linkText = textElement.getText().substring(offset, urlEnd);
 
       // Check for links to #heading* (internal links).
-      // Replace hashed link with corresponding id link (from generated TOC).
-      if ((/^#heading/).test(url)) {
+      // If so, replace hashed link with corresponding id link (from generated TOC).
+      // This is where we will test to see if this is an internal link of the form:
+      // ?tab=t.0#heading=h.wr02dnpl3pog
+      // Remove any tab information from the URL. This is the hashUrl without tab info.
+      url = url.replace(/\?tab=t\.\d+/gm, '');
+      if ((/#heading/).test(url)) {
         gdc.isIntraDocLink = true;
+        // Link to the unique ID identified by the url.
         if (gdc.headingLinks[url]) {
           url = '#' + gdc.headingLinks[url];
         } else {
@@ -1361,6 +1378,7 @@ gdc.closeAllAttrs = function() {
 };
 
 // Grab links to headings from TOC, if present.
+// Heading URLs are used for internal links.
 // Also add [TOC] if Markdown (and not a partial selection).
 gdc.handleTOC = function(toc) {
   gdc.hasToc = true;
@@ -1373,9 +1391,14 @@ gdc.handleTOC = function(toc) {
         text = heading.getText(),
         id = gdc.makeId(text),
         url = heading.getLinkUrl();
+        // hashUrl and hashId remove the tab info before the #heading...
+        hashUrl = url.replace(/\?tab=t\.\d+/gm, '');
+        hashId = id.replace(/\?tab=t\.\d+/gm, ''); // Note: id doesn't have tab info.
+        //DEBUG code for internal links.
+        //gdc.writeStringToBuffer('\ntext: ' + text + '\nid: '+ id + '\nurl: ' + url + '\nhashId: ' + hashId + '\nhashUrl: ' + hashUrl + '\n\n')
 
-    // Save this url and id for later.
-    gdc.headingLinks[url] = id;
+    // Save this url and id for later. The hash url is unique.
+    gdc.headingLinks[hashUrl] = id;
     gdc.headingIds[text] = id;
   }
 };
@@ -1390,9 +1413,12 @@ gdc.makeId = function(headingText) {
   id = id.replace(/^-+/, '').replace(/-+$/, '').replace(/-{2,}/g, '-');
   id = id.toLowerCase();
 
-  if (!gdc.hasToc) {
+  /* Handle duplicate headings: needs work still.
+  if (gdc.hasToc) {
     id = gdc.dupHeadingCheck(id);
   }
+  */
+
   return id;
 };
 
@@ -1694,6 +1720,9 @@ md.doMarkdown = function(config) {
     // But notify if there are errors.
     gdc.out = '<!-- ' + gdc.errorSummary + ' -->\n' + gdc.out;
   }
+
+  // Always include the banner.
+  gdc.out = gdc.banner + gdc.out;
   
   return gdc.out;
 };
@@ -1932,6 +1961,7 @@ md.handleParagraph = function(para) {
   // Now that we're at the end, close heading or paragraph if necessary.
   if (gdc.docType === gdc.docTypes.md && gdc.inHeading && !gdc.isHTML) {
     // Trim heading text to use as hash key (we trim it in gdc.makeId() ).
+    // NOTE: This doesn't deal with duplicate headings (yet).
     var id = gdc.headingIds[para.getText().trim()];
     if (id && !gdc.htmlHeadings) {
       gdc.writeStringToBuffer(' {#' + id + '}');
