@@ -1,3 +1,5 @@
+// *** html.gs ***
+
 /*
  * Copyright 2020 Google LLC
  *
@@ -112,6 +114,10 @@ html.doHtml = function(config) {
     // But notify if there are errors.
     gdc.out = '<!-- ' + gdc.errorSummary + ' -->\n' + gdc.out;
   }
+
+  // Always include the banner.
+  gdc.out = gdc.banner + gdc.out;
+
   
   // Output content.
   gdc.flushBuffer();
