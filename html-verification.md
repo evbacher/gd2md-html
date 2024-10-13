@@ -4,13 +4,16 @@
 * ALERTS: 6 -->
 
 <p>
-This is a raw conversion from a Google Doc (For verification purposes: use HTML headings and Reckless mode options for Markdown conversion, no other options).
+<strong>version</strong>: 1.0β40 (13 Oct 2024)
+</p>
+<p>
+This is a raw conversion from a Google Doc (For verification purposes: use HTML headings and Reckless mode options for both Markdown and HTML conversion, no other options).
 </p>
 <h1>MAIN: Docs to Markdown (GD2md-html)</h1>
 
 
 <p>
-This page demonstrates the features of <a href="https://workspace.google.com/marketplace/app/docs_to_markdown/700168918607">Docs to Markdown</a> conversion from a Google Doc to a simple Markdown or HTML file. 
+This page both demonstrates and tests the features of <a href="https://workspace.google.com/marketplace/app/docs_to_markdown/700168918607">Docs to Markdown</a> conversion from a Google Doc to a simple Markdown or HTML file. 
 </p>
 <p>
 <strong>Note</strong>: Not all Markdown renderers support all Markdown features. For example github Markdown does not support a table of contents ([TOC]), footnotes, or definition lists. Also, some Markdown environments strip heading IDs and replace them with their own generated IDs. You’ll have to do some manual adjustments, depending on your target environment.
@@ -95,10 +98,9 @@ Here is a numbered list:
 </p>
 <ol>
 
-<li>Item one.
+<li>Item one.</li>
 
-<li>Item two.
-</li>
+<li>Item two.</li>
 </ol>
 <h3 id="unordered-lists">Unordered lists</h3>
 
@@ -108,43 +110,39 @@ And here is a bullet list:
 </p>
 <ul>
 
-<li>A list item without any punctuation
+<li>A list item without any punctuation</li>
 
-<li>A list item with an embedded command: <code>ps aux | grep conky | grep -v grep | awk '{print $2}' | xargs kill</code>
+<li>A list item with an embedded command: <code>ps aux | grep conky | grep -v grep | awk '{print $2}' | xargs kill</code></li>
 
-<li>Some mixed-font code: <code>ls -l <strong><em>filename</em></strong></code>. Followed by some normal text.
-</li>
+<li>Some mixed-font code: <code>ls -l <strong><em>filename</em></strong></code>. Followed by some normal text.</li>
 </ul>
 <h3 id="another-ordered-list">Another ordered list</h3>
 
 
 <ol>
 
-<li>First item
+<li>First item</li>
 
-<li>Second item
+<li>Second item</li>
 
-<li>Third item
-</li>
+<li>Third item</li>
 </ol>
 <h3 id="a-nested-ordered-list">A nested ordered list</h3>
 
 
 <ol>
 
-<li>First item
+<li>First item</li>
 
-<li>Second item (this item has nested items below it) 
+<li>Second item (this item has nested items below it)</li> 
 <ol>
  
-<li>First nested item
+<li>First nested item</li>
  
-<li>Second nested item
-</li> 
+<li>Second nested item</li> 
 </ol>
 
-<li>Third item
-</li>
+<li>Third item</li>
 </ol>
 <h3 id="lists-with-code-blocks">Lists with code blocks</h3>
 
@@ -163,10 +161,9 @@ some code;
   callFunction();
 </pre>
 
+</li>
 
-<ul>
-
-<li>Another item. 
+<li>Another item.</li> 
 <ul>
  
 <li>A nested list item with a command:
@@ -174,15 +171,11 @@ some code;
         
 
 <pre class="prettyprint">$ cat file | grep dog | wc
+</pre>
 
 </li> 
+</ul></li> 
 </ul>
-</li> 
-</ul>
-</li> 
-</ul></pre>
-
-
 <h3 id="lists-with-embedded-paragraphs">Lists with embedded paragraphs</h3>
 
 
@@ -199,10 +192,9 @@ Note: Works for Markdown, still a known issue for HTML.
 <p>
 
     This is a new paragraph, but also part of this list item. It should be indented
-</p>
-<ul>
+</p></li>
 
-<li>Another item. 
+<li>Another item.</li> 
 <ul>
  
 <li>A nested item.
@@ -217,48 +209,45 @@ Note: Works for Markdown, still a known issue for HTML.
 callSomeFunction();
 </pre>
 
+</li> 
+</ul>
 
-<ul>
+<li>Another list item.</li>
 
-<li>Another list item.
-
-<li>And another. 
+<li>And another.</li> 
 <ul>
  
 <li>Nested
 <p>
 
         A paragraph within a list item.
-</p>  
+</p></li>  
 <ul>
   
 <li>Nested
 <p>
 
             A paragraph within a list item.
-</p> 
-<ul>
+</p></li>  
+</ul>
  
-<li>Reducing the nesting level.
-</li> 
+<li>Reducing the nesting level.</li> 
 </ul>
 
-<li>First-level list item.
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>First-level list item.</li>
 </ul>
 <p>
 A regular paragraph.
 </p>
+<h3>Checkbox lists</h3>
+
+
+<ol>
+
+<li>Task 1 (completed)</li>
+
+<li>Task 2</li>
+</ol>
 <h3 id="definition-lists">Definition lists</h3>
 
 
@@ -452,8 +441,7 @@ A table:
    <td>A list:
 <ul>
 
-<li><a href="https://en.wikipedia.org/wiki/Mozzarella">mozzarella cheese</a>
-</li>
+<li><a href="https://en.wikipedia.org/wiki/Mozzarella">mozzarella cheese</a></li>
 </ul>
    </td>
   </tr>
@@ -504,10 +492,9 @@ Some internal links to headings in this doc (note that you need to generate a TO
 </p>
 <ul>
 
-<li><a href="#heading-ids">Heading IDs</a>
+<li><a href="#heading-ids">Heading IDs</a></li>
 
-<li><a href="#code-blocks">Code blocks</a>
-</li>
+<li><a href="#code-blocks">Code blocks</a></li>
 </ul>
 <h2 id="heading-ids">Heading IDs</h2>
 
@@ -523,20 +510,18 @@ Some regular URL links:
 </p>
 <ul>
 
-<li><a href="http://www.google.com/">http://www.google.com/</a>
+<li><a href="http://www.google.com/">http://www.google.com/</a></li>
 
-<li><a href="https://fivethirtyeight.com/">https://fivethirtyeight.com/</a>
-</li>
+<li><a href="https://fivethirtyeight.com/">https://fivethirtyeight.com/</a></li>
 </ul>
 <p>
 Some links with titles:
 </p>
 <ul>
 
-<li><a href="http://kottke.org/">Jason Kottke's blog</a>
+<li><a href="http://kottke.org/">Jason Kottke's blog</a></li>
 
-<li><a href="https://beanroad.blogspot.com/">Bean Road</a>
-</li>
+<li><a href="https://beanroad.blogspot.com/">Bean Road</a></li>
 </ul>
 <h2 id="images">Images</h2>
 
@@ -597,7 +582,7 @@ If you insert an equation using Google Docs, Docs to Markdown will warn and inse
 <p>
 A Google Docs equation:
 </p>
-<p>
+<p style="text-align: center">
 
 </p>
 <p>
@@ -653,14 +638,13 @@ FEATURE REQUEST: Angle bracket escapes:
 </p>
 <ul>
 
-<li>Angle brackets: If you put angle brackets in your text: &lt; or >, we don't want that to render as an HTML tag. So, we use &amp;lt; for the opening bracket by default. However, if you select the Render HTML tags option, the opening &lt; will not be replaced.
+<li>Angle brackets: If you put angle brackets in your text: &lt; or >, we don't want that to render as an HTML tag. So, we use &amp;lt; for the opening bracket by default. However, if you select the Render HTML tags option, the opening &lt; will not be replaced.</li>
 
-<li>Test: it seems that loose angle brackets &lt; and > do not behave like HTML tags. But when there is no whitespace: &lt;some text>, they do behave like HTML tags. To change that behavior, we’ll need to (by default) escape the opening angle bracket and turn it into &amp;lt;. 
+<li>Test: it seems that loose angle brackets &lt; and > do not behave like HTML tags. But when there is no whitespace: &lt;some text>, they do behave like HTML tags. To change that behavior, we’ll need to (by default) escape the opening angle bracket and turn it into &amp;lt;. </li>
 
-<li>But if you really want an angle bracket while using the default setting (to insert a few HTML tags), you can escape it: <tag>, <div class=’someclass’>. Not escaped: &lt;tag>. Also not escaped: &lt;p>This is an HTML paragraph.&lt;p>
+<li>But if you really want an angle bracket while using the default setting (to insert a few HTML tags), you can escape it: <tag>, <div class=’someclass’>. Not escaped: &lt;tag>. Also not escaped: &lt;p>This is an HTML paragraph.&lt;p></li>
 
-<li>Escaped: <p>This is an HTML paragraph.<p>
-</li>
+<li>Escaped: <p>This is an HTML paragraph.<p></li>
 </ul>
 <p>
 Note that we need to replace the opening &lt;, even if it occurs at the beginning of a line, like this:
@@ -700,7 +684,7 @@ This is some more regular text.
 A sentence with <sub>subscript</sub> and <sup>superscript</sup> and some more regular text and <sup><a href="http://www.google.com">a link to Google</a></sup>.
 </p>
 <p>
-And more <sub><strong>bold</strong></sub> and <sup><code>mixed<strong><em> </em>bold<em> italic </em></strong>code</code></sup> and some more text. Some <em>italic text</em>.
+And more <strong><sub>bold</sub></strong> and <code><sup>mixed<strong><em> </em>bold<em> italic </em></strong>code</sup></code> and some more text. Some <em>italic text</em>.
 
 <p>
 Another paragraph with <strong>some bold text</strong>.
@@ -710,10 +694,9 @@ Another paragraph with <strong>some bold text</strong>.
 </p>
 <ol>
 
-<li>A numbered list following a terminal subscript.
+<li>A numbered list following a terminal subscript.</li>
 
-<li>Another list item.
-</li>
+<li>Another list item.</li>
 </ol>
 <h2 id="horizontal-rules">Horizontal rules</h2>
 
@@ -738,23 +721,21 @@ Line 2
 
 
 <p>
-Handle centered, right-aligned text for Markdown/HTML (in progress).
+Handle centered, right-aligned text for Markdown/HTML (in progress). Note that GitHub flavored Markdown does not honor horizontal alignment styling.
 </p>
-<p>
 <p style="text-align: right">
-Right-aligned paragraph.</p>
-
+Right-aligned paragraph.
 </p>
 <p>
 Left-aligned paragraph.
 </p>
-<p>
+<p style="text-align: center">
 Center-aligned paragraph.
 </p>
 <p>
 Left-aligned paragraph.
 </p>
-<h3 id="center-aligned-heading">Center-aligned Heading</h3>
+<h3 id="center-aligned-heading" style="text-align: center">Center-aligned Heading</h3>
 
 
 <p>
@@ -765,10 +746,9 @@ Regular paragraph.
 
 <ul>
 
-<li>Current open bugs: <a href="https://github.com/evbacher/gd2md-html/issues">https://github.com/evbacher/gd2md-html/issues</a> 
+<li>Current open bugs: <a href="https://github.com/evbacher/gd2md-html/issues">https://github.com/evbacher/gd2md-html/issues</a> </li>
 
-<li>New bug or feature request: <a href="https://github.com/evbacher/gd2md-html/issues/new">https://github.com/evbacher/gd2md-html/issues/new</a>. Thanks for helping to make Docs to Markdown better!
-</li>
+<li>New bug or feature request: <a href="https://github.com/evbacher/gd2md-html/issues/new">https://github.com/evbacher/gd2md-html/issues/new</a>. Thanks for helping to make Docs to Markdown better!</li>
 </ul>
 <h2 id="end">End</h2>
 
