@@ -52,10 +52,10 @@ gdc.banner = '<!-- NOTICE: Google recently added tabs to Google Docs: '
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β42'; // based on 1.0β41
+var GDC_VERSION = '1.0β40'; // based on 1.0β39'
 
 // Version notes: significant changes (latest on top). (files changed)
-/** - 1.0β40 (12 Oct 2024): 
+/** - 1.0β40 (13 Oct 2024): 
     - Close list items before opening a new item. Close at the end of the list. (gdc, html)
     - Add support for Markdown checkbox lists. (gdc)
     - Fixes handling of superscript/subscript to close old styles before opening new style. Moves opening superscript/subscript later in process. (gdc)
@@ -76,14 +76,14 @@ var GDC_VERSION = '1.0β42'; // based on 1.0β41
 // - 1.0β32 (7 Jan. 2022): Make the Donate button more obvious. (gdc, sidebar)
 // - 1.0β31 (24 Aug. 2021): Don't contain <hr> in <p> for HTML. (gdc)
 // - 1.0β30 (1 July 2021): Reduce whitespace after list item (bullets, numbers) in Markdown. (gdc)
-// - 1.0β29: Handle partial selections correctly (expand to whole paragraph). (gdc)
-// - 1.0β28: Add Coffee button. UI change only. (gdc, sidebar)
-// - 1.0β27: Copy output to clipboard. Print success/error messages for clipboard output (see chromium bug 1074489). (gdc, sidebar)
-// - 1.0β26: Render soft line breaks correctly in HTML (<br> not &lt;br>). (gdc)
-// - 1.0β25: Use image path in this form: images/image1.png, images/image2.png, etc. Clean up old zip image code. (gdc,html,sidebar)
+// - 1.0β29 (2 Jul. 2020): Handle partial selections correctly (expand to whole paragraph). (gdc)
+// - 1.0β28 (2 Jul. 2020): Add Coffee button. UI change only. (gdc, sidebar)
+// - 1.0β27 (19 June 2020): Copy output to clipboard. Print success/error messages for clipboard output (see chromium bug 1074489). (gdc, sidebar)
+// - 1.0β26 (6 June 2020): Render soft line breaks correctly in HTML (<br> not &lt;br>). (gdc)
+// - 1.0β25 (1 June 2020): Use image path in this form: images/image1.png, images/image2.png, etc. Clean up old zip image code. (gdc,html,sidebar)
 // - 1.0β24: Correct a spelling error (s/Supress/Suppress). (gdc)
-// - 1.0β23: Copy converted output to the clipboard. Add option to suppress top comment. Add copyright comment, note about Docs link. (gdc, html, sidebar, addon)
-// - 1.0β22: Roll back font-change runs for now (still causing problems), but keep table note. (gdc)
+// - 1.0β23 (3 May 2020): Copy converted output to the clipboard. Add option to suppress top comment. Add copyright comment, note about Docs link. (gdc, html, sidebar, addon)
+// - 1.0β22 (21 April 2020: first open-source version): Roll back font-change runs for now (still causing problems), but keep table note. (gdc)
 // - 1.0β21: Add a note that tables are currently converted to HTML tables. No change to rendered conversion. (gdc, html)
 // - 1.0β20: Handle font-change runs with extra whitespace better (italic, bold, etc.). (gdc)
 // - 1.0β19: Fix for angle bracket at beginning of a line. Also: use doc title instead of URL in conversion comment. (gdc)
@@ -825,7 +825,7 @@ gdc.handleText = function(textElement) {
     if (alignment === SUPERSCRIPT) {
       superscript = true;
     }
-   
+
     var currentAttrs = gdc.getCurrentAttributes(textElement, attrOff);
     // Attributes need to close for new text before opening any new attributes. This is for when words run together like italicsSUPERSCRIPT. or BOLDitalics 
     gdc.maybeCloseAttrs(currentAttrs);
@@ -887,6 +887,7 @@ gdc.handleText = function(textElement) {
       gdc.openAttrs.push(gdc.superscript);
       gdc.writeStringToBuffer(gdc.markup.superOpen);
     }
+
     // Open underline (uses HTML always). This should really be discouraged!
     if (!gdc.isUnderline && underline && !url) {
       gdc.isUnderline = true;
@@ -1348,7 +1349,14 @@ gdc.maybeCloseAttrs = function(currentAttrs) {
       gdc.openAttrs.pop();
       keepChecking = true;
       if (!gdc.inCodeBlock) {
+        // Check to see if we're in a mixed font span (mixed code with other font styles).
+        // If so, use HTML (or mixed)
+        if (gdc.isMixedCode) {
+          gdc.useMixed();
+        }
         gdc.writeStringToBuffer(gdc.markup.codeClose);
+        // We probably don't want to continue using mixed markup.
+        gdc.resetMarkup
       }
     }
     // Close bold.
