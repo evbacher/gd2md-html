@@ -3,7 +3,7 @@
 * WARNINGs: 2
 * ALERTS: 6 -->
 
-**version**: 1.0β40 (13 Oct 2024)
+**version**: 1.0β40: 13 Oct 2024)
 
 This is a raw conversion from a Google Doc (For verification purposes: use HTML headings and Reckless mode options for both Markdown and HTML conversion, no other options).
 
