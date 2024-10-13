@@ -4,7 +4,7 @@
 * ALERTS: 6 -->
 
 <p>
-<strong>version</strong>: 1.0β40 (13 Oct 2024)
+<strong>version</strong>: 1.0β40: 13 Oct 2024
 </p>
 <p>
 This is a raw conversion from a Google Doc (For verification purposes: use HTML headings and Reckless mode options for both Markdown and HTML conversion, no other options).
