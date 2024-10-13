@@ -3,12 +3,14 @@
 * WARNINGs: 2
 * ALERTS: 6 -->
 
-This is a raw conversion from a Google Doc (For verification purposes: use HTML headings and Reckless mode options for Markdown conversion, no other options).
+**version**: 1.0β40 (13 Oct 2024)
+
+This is a raw conversion from a Google Doc (For verification purposes: use HTML headings and Reckless mode options for both Markdown and HTML conversion, no other options).
 
 <h1>MAIN: Docs to Markdown (GD2md-html)</h1>
 
 
-This page demonstrates the features of [Docs to Markdown](https://workspace.google.com/marketplace/app/docs_to_markdown/700168918607) conversion from a Google Doc to a simple Markdown or HTML file. 
+This page both demonstrates and tests the features of [Docs to Markdown](https://workspace.google.com/marketplace/app/docs_to_markdown/700168918607) conversion from a Google Doc to a simple Markdown or HTML file. 
 
 **Note**: Not all Markdown renderers support all Markdown features. For example github Markdown does not support a table of contents ([TOC]), footnotes, or definition lists. Also, some Markdown environments strip heading IDs and replace them with their own generated IDs. You’ll have to do some manual adjustments, depending on your target environment.
 
@@ -180,6 +182,14 @@ Note: Works for Markdown, still a known issue for HTML.
 
 A regular paragraph.
 
+<h3>Checkbox lists</h3>
+
+
+
+
+- [ ] Task 1 (completed)
+- [ ] Task 2
+
 <h3 id="definition-lists">Definition lists</h3>
 
 
@@ -350,8 +360,7 @@ A table:
    <td>A list:
 <ul>
 
-<li><a href="https://en.wikipedia.org/wiki/Mozzarella">mozzarella cheese</a>
-</li>
+<li><a href="https://en.wikipedia.org/wiki/Mozzarella">mozzarella cheese</a></li>
 </ul>
    </td>
   </tr>
@@ -548,7 +557,7 @@ This is some more regular text.
 
 A sentence with <sub>subscript</sub> and <sup>superscript</sup> and some more regular text and <sup><a href="http://www.google.com">a link to Google</a></sup>.
 
-And more <sub><strong>bold</strong></sub> and <sup><code>mixed<strong><em> </em>bold<em> italic </em></strong>code</code></sup> and some more text. Some *italic text*.
+And more **<sub>bold</sub>** and <code><sup>mixed<strong><em> </em>bold<em> italic </em></strong>code</sup></code> and some more text. Some <em>italic text</em>.
 
 Another paragraph with **some bold text**.
 
@@ -579,11 +588,9 @@ Line 2
 <h2 id="centered-right-aligned-text">Centered/Right aligned text</h2>
 
 
-Handle centered, right-aligned text for Markdown/HTML (in progress).
+Handle centered, right-aligned text for Markdown/HTML (in progress). Note that GitHub flavored Markdown does not honor horizontal alignment styling.
 
-<p style="text-align: right">
-Right-aligned paragraph.</p>
-
+Right-aligned paragraph.
 
 Left-aligned paragraph.
 
@@ -591,7 +598,7 @@ Center-aligned paragraph.
 
 Left-aligned paragraph.
 
-<h3 id="center-aligned-heading">Center-aligned Heading</h3>
+<h3 id="center-aligned-heading" style="text-align: center">Center-aligned Heading</h3>
 
 
 Regular paragraph.
