@@ -18,8 +18,6 @@ Conversion notes:
 
 <h2>Developer tips for Docs to Markdown</h2>
 
-**Note**: We are not currently updating the code with contributions, partly because I do not have much time and I am not good at managing contributions.
-
 [Docs to Markdown](https://gsuite.google.com/marketplace/app/docs_to_markdown/700168918607) is a Google Docs add-on that converts a Google Doc to simple, readable Markdown or HTML.
 
 <h2 id="the-spirit-of-docs-to-markdown">The spirit of Docs to Markdown</h2>
