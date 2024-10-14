@@ -1,5 +1,6 @@
 <!----- Conversion time: 0.906 seconds.
-
+NOTE: Original converted from a doc. Recent changes may be Markdown-only on
+this page.
 
 Using this Markdown file:
 
@@ -57,7 +58,7 @@ The goal is to minimize the intrusiveness of Docs to Markdown. While it would be
 <h2 id="modifying-docs-to-markdown-code">Modifying Docs to Markdown code</h2>
 
 
-There is a [development/verification doc](https://docs.google.com/document/d/18gdpECY7PDFT6govm7l7M1fjgGqESDZWOYkhmJoy0U8/edit) that you can use to develop changes to Docs to Markdown. Make a copy of the development/verification doc and change the source there :
+There is a [development/verification doc](https://docs.google.com/document/d/1rVxv3to8z0mFng1vB1ypvPOfGmB4FVPzs2z9Zz63d0s/edit) that you can use to develop changes to Docs to Markdown. Make a copy of the development/verification doc and create your test add-on there:
 
 1. Tools > Script Manager > New
 2. Create a new project and copy the add-on files there (keep the same names).
