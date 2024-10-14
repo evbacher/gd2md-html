@@ -1356,7 +1356,7 @@ gdc.maybeCloseAttrs = function(currentAttrs) {
         }
         gdc.writeStringToBuffer(gdc.markup.codeClose);
         // We probably don't want to continue using mixed markup.
-        gdc.resetMarkup
+        gdc.resetMarkup();
       }
     }
     // Close bold.
