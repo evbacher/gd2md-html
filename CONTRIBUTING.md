@@ -1,6 +1,6 @@
 # How to Contribute
 
-**Note**: If you do sent a pull request, please make it small and focused.
+**Note**: If you do send a pull request, please make it small and focused.
 
 If you do make a change and are burning to add it to Docs to Markdown, I will try to find the time to take a look at it.
 
