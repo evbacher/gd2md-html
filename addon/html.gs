@@ -22,38 +22,37 @@
 
 var html = html || {
   // Attribute change markers.
-  codeOpen:   '<code>',
-  codeClose:  '</code>',
-  italicOpen: '<em>',
-  italicClose:'</em>',
-  boldOpen:   '<strong>',
-  boldClose:  '</strong>',
-  
+  codeOpen: "<code>",
+  codeClose: "</code>",
+  italicOpen: "<em>",
+  italicClose: "</em>",
+  boldOpen: "<strong>",
+  boldClose: "</strong>",
+
   // HTML code blocks (do not add \n at end of <pre>):
-  openCodeBlock:         '\n\n<pre class="prettyprint">',
-  openCodeBlockStart:    '\n\n<pre class="prettyprint lang-',
-  openCodeBlockEnd:      '">',
-  openCodeBlockLangNone: '\n\n<pre>',
-  closeCodeBlock:        '</pre>\n\n',
+  openCodeBlock: '\n\n<pre class="prettyprint">',
+  openCodeBlockStart: '\n\n<pre class="prettyprint lang-',
+  openCodeBlockEnd: '">',
+  openCodeBlockLangNone: "\n\n<pre>",
+  closeCodeBlock: "</pre>\n\n",
 
   // non-semantic underline, since Docs supports it.
   underlineStart: '<span style="text-decoration:underline;">',
-  underlineEnd:   '</span>',
+  underlineEnd: "</span>",
 
-
-  // I think we need to track these independently because the previous/next sibling won't always be a list item, 
-  // thus not giving reliable nesting level. 
+  // I think we need to track these independently because the previous/next sibling won't always be a list item,
+  // thus not giving reliable nesting level.
   listNestingLevel: 0,
-  // This will also help us know if a list item needs to be closed before opening a new one. 
-  inListItem: false
+  // This will also help us know if a list item needs to be closed before opening a new one.
+  inListItem: false,
 };
 
-html.tablePrefix = '  ';
+html.tablePrefix = "  ";
 
-html.doHtml = function(config) {
+html.doHtml = function (config) {
   // Basically, we can use the same code as doMarkdown, just change the markup.
   gdc.useHtml();
-  
+
   gdc.config(config);
   // Get the body elements.
   var elements = gdc.getElements();
@@ -69,30 +68,51 @@ html.doHtml = function(config) {
       izip.createImagesZip();
     }
   }
-  
+
   if (gdc.hasImages) {
-    gdc.info += '\n* This document has images: check for ' + gdc.alertPrefix;
-    gdc.info += ' inline image link in generated source and store images to your server.';
-    gdc.info += ' NOTE: Images in exported zip file from Google Docs may not appear in ';
-    gdc.info += ' the same order as they do in your doc. Please check the images!\n';
+    gdc.info += "\n* This document has images: check for " + gdc.alertPrefix;
+    gdc.info +=
+      " inline image link in generated source and store images to your server.";
+    gdc.info +=
+      " NOTE: Images in exported zip file from Google Docs may not appear in ";
+    gdc.info +=
+      " the same order as they do in your doc. Please check the images!\n";
   }
-  
+
   if (gdc.hasFootnotes) {
-    gdc.info += '\n* Footnote support in HTML is alpha: please check your footnotes.';
+    gdc.info +=
+      "\n* Footnote support in HTML is alpha: please check your footnotes.";
   }
-  
+
+  // Add comment support (if enabled)
+  const comments = getDocumentComments();
+  if (comments && comments.length > 0) {
+    if (gdc.docType === gdc.docTypes.md) {
+      gdc.out = insertMarkdownCommentReferences(gdc.out, comments);
+      gdc.out += createMarkdownCommentSection(comments);
+    } else {
+      gdc.out = insertHtmlCommentReferences(gdc.out, comments);
+      gdc.out =
+        addCommentStyles() + gdc.out + createHtmlCommentSection(comments);
+    }
+  }
+
   // Record elapsed time.
-  var eTime = (new Date().getTime() - gdc.startTime)/1000;
-  gdc.info = '\n\nConversion time: ' + eTime + ' seconds.\n' + gdc.info;
+  var eTime = (new Date().getTime() - gdc.startTime) / 1000;
+  gdc.info = "\n\nConversion time: " + eTime + " seconds.\n" + gdc.info;
 
   // Note ERRORs or WARNINGs or ALERTs at the top if there are any.
-  gdc.errorSummary = '';
-  if ( gdc.errorCount || gdc.warningCount || gdc.alertCount ) {
-    gdc.errorSummary = 'You have some errors, warnings, or alerts. '
-      + 'If you are using reckless mode, turn it off to see inline alerts.'
-      + '\n* ERRORs: '   + gdc.errorCount
-      + '\n* WARNINGs: ' + gdc.warningCount
-      + '\n* ALERTS: '   + gdc.alertCount;
+  gdc.errorSummary = "";
+  if (gdc.errorCount || gdc.warningCount || gdc.alertCount) {
+    gdc.errorSummary =
+      "You have some errors, warnings, or alerts. " +
+      "If you are using reckless mode, turn it off to see inline alerts." +
+      "\n* ERRORs: " +
+      gdc.errorCount +
+      "\n* WARNINGs: " +
+      gdc.warningCount +
+      "\n* ALERTS: " +
+      gdc.alertCount;
   }
   gdc.info = gdc.errorSummary + gdc.info;
 
@@ -101,7 +121,7 @@ html.doHtml = function(config) {
 
   // Warn at the top if DEBUG is true.
   if (DEBUG) {
-    gdc.info = '<!-- WARNING: DEBUG is TRUE!! -->\n\n' + gdc.info;
+    gdc.info = "<!-- WARNING: DEBUG is TRUE!! -->\n\n" + gdc.info;
   }
 
   // Add info and alert message to top of output.
@@ -109,23 +129,22 @@ html.doHtml = function(config) {
   gdc.out = gdc.alertMessage + gdc.out;
   // Add info comment if desired.
   if (!gdc.suppressInfo) {
-    gdc.out = gdc.info + '\n----->\n\n' + gdc.out;
-  } else if (gdc.suppressInfo && gdc.errorSummary !== '') {
+    gdc.out = gdc.info + "\n----->\n\n" + gdc.out;
+  } else if (gdc.suppressInfo && gdc.errorSummary !== "") {
     // But notify if there are errors.
-    gdc.out = '<!-- ' + gdc.errorSummary + ' -->\n' + gdc.out;
+    gdc.out = "<!-- " + gdc.errorSummary + " -->\n" + gdc.out;
   }
 
   // Always include the banner.
   gdc.out = gdc.banner + gdc.out;
 
-  
   // Output content.
   gdc.flushBuffer();
   gdc.flushFootnoteBuffer();
 
   // Close footnotes list if necessary.
   if (gdc.hasFootnotes) {
-    gdc.writeStringToBuffer('\n</ol></div>');
+    gdc.writeStringToBuffer("\n</ol></div>");
     gdc.flushBuffer();
   }
 
@@ -134,16 +153,16 @@ html.doHtml = function(config) {
 
 // Switch for handling different child elements for HTML conversion.
 // Use for all element types, unless they have no children.
-html.handleChildElement = function(child) {
+html.handleChildElement = function (child) {
   gdc.useHtml();
   var childType = child.getType();
-  
+
   // Get indent if possible for this element.
   // For HTML, we can also count blank paragraphs: Note difference in md.handleChildElement.
   if (child.getIndentStart) {
     gdc.indent = child.getIndentStart();
   }
-  
+
   html.checkList();
 
   // Most common element types first.
@@ -155,8 +174,13 @@ html.handleChildElement = function(child) {
     case TEXT:
       try {
         gdc.handleText(child);
-      } catch(e) {
-          gdc.log('ERROR handling text element:\n\n' + e + '\n\nText: ' + child.getText());
+      } catch (e) {
+        gdc.log(
+          "ERROR handling text element:\n\n" +
+            e +
+            "\n\nText: " +
+            child.getText()
+        );
       }
       break;
     case LIST_ITEM:
@@ -199,21 +223,21 @@ html.handleChildElement = function(child) {
     case EQUATION:
       break;
     case UNSUPPORTED:
-      gdc.log('child element: UNSUPPORTED');
+      gdc.log("child element: UNSUPPORTED");
       break;
     default:
-      gdc.log('child element: unknown');
-  };
+      gdc.log("child element: unknown");
+  }
   gdc.lastChildType = childType;
 };
 
-html.handleTable = function(tableElement) {
+html.handleTable = function (tableElement) {
   // Note that we're converting all tables to HTML.
   if (!gdc.hasTables) {
-    gdc.info += '\n* Tables are currently converted to HTML tables.';
+    gdc.info += "\n* Tables are currently converted to HTML tables.";
     gdc.hasTables = true;
   }
- 
+
   // init counters.
   gdc.nCols = 0;
   gdc.nRows = 0;
@@ -228,7 +252,6 @@ html.handleTable = function(tableElement) {
 
   // Handle single-cell table here.
   if (gdc.nCols === 1 && gdc.nRows === 1) {
-    
     // Examine text length and text font to see if it's a suspicious single-cell table.
     var text = tableElement.getChild(0).getText();
     var textElement = tableElement.getChild(0).editAsText();
@@ -236,43 +259,46 @@ html.handleTable = function(tableElement) {
     // But if it's in code font (first and last lines), we'll let it go.
     // How long is suspiciously long?
     var singleCellMaxChars = 5120;
-    if (text.length > singleCellMaxChars && !gdc.textIsCode(textElement) ) {
+    if (text.length > singleCellMaxChars && !gdc.textIsCode(textElement)) {
       gdc.warningCount++;
-      gdc.info += '\nWARNING:\nFound a long single-cell table ';
-      gdc.info += '(' + text.length + ' characters) starting with:\n';
-      gdc.info += '**start sample:**\n';
-      gdc.info += text.substring(0, 32) + '\n**end sample**\n';
-      gdc.info += 'Check to make sure this is supposed to be a code block.\n';
-      gdc.alert('Long single-cell table. Check to make sure this is meant to be a code block.');
+      gdc.info += "\nWARNING:\nFound a long single-cell table ";
+      gdc.info += "(" + text.length + " characters) starting with:\n";
+      gdc.info += "**start sample:**\n";
+      gdc.info += text.substring(0, 32) + "\n**end sample**\n";
+      gdc.info += "Check to make sure this is supposed to be a code block.\n";
+      gdc.alert(
+        "Long single-cell table. Check to make sure this is meant to be a code block."
+      );
     }
-        
+
     // Markdown or HTML table for single-cell table.
     // Also handling lang for single-cell table.
     if (gdc.docType === gdc.docTypes.md && !gdc.isHTML) {
       gdc.inCodeBlock = gdc.isSingleCellTable = true;
       var text = tableElement.getText();
-      var lang = gdc.getLang(text.split('\n')[0]);
-      if (lang !== '') {
+      var lang = gdc.getLang(text.split("\n")[0]);
+      if (lang !== "") {
         // Skip first line, since it just specified lang.
         // XXX: note difference between HTML and Markdown. Why?
-        text = text.substring(text.indexOf('\n') + 1);
-      } 
-      
+        text = text.substring(text.indexOf("\n") + 1);
+      }
+
       // Write the code block.
       gdc.startCodeBlock(lang);
       gdc.writeStringToBuffer(text);
-      gdc.writeStringToBuffer('<newline>' + md.closeCodeBlock);
+      gdc.writeStringToBuffer("<newline>" + md.closeCodeBlock);
       gdc.inCodeBlock = gdc.isSingleCellTable = false;
-    } else { // HTML code block.
+    } else {
+      // HTML code block.
       gdc.inCodeBlock = gdc.isSingleCellTable = true;
       var text = tableElement.getText();
-      var lang = gdc.getLang(text.split('\n')[0]);
-      if (lang !== '') {
+      var lang = gdc.getLang(text.split("\n")[0]);
+      if (lang !== "") {
         // Skip first line, since it just specified lang.
         // Note difference between HTML and Markdown. Why?
-        text = text.substring(text.indexOf('\n'));
+        text = text.substring(text.indexOf("\n"));
       }
-      
+
       // Write the code block.
       gdc.startCodeBlock(lang);
       text = html.escapeOpenTag(text);
@@ -280,43 +306,42 @@ html.handleTable = function(tableElement) {
       text = util.markSpecial(text);
       text = util.markNewlines(text);
       gdc.writeStringToBuffer(text);
-      gdc.writeStringToBuffer(html.closeCodeBlock);      
+      gdc.writeStringToBuffer(html.closeCodeBlock);
       gdc.inCodeBlock = gdc.isSingleCellTable = false;
     }
-    
+
     return;
   }
-  
+
   // Regular table processing.
   gdc.isTable = true;
-  
+
   gdc.useHtml();
-  
+
   // Go through children of this table.
-  gdc.writeStringToBuffer('\n\n<table>');
+  gdc.writeStringToBuffer("\n\n<table>");
   md.childLoop(tableElement);
-  gdc.writeStringToBuffer('\n</table>\n\n');
+  gdc.writeStringToBuffer("\n</table>\n\n");
   // Turn off guard for table cell.
   gdc.startingTableCell = false;
-  
+
   gdc.isTable = false;
   gdc.useMarkdown();
 };
 
-html.handleTableRow = function(tableRowElement) {
-  
+html.handleTableRow = function (tableRowElement) {
   if (gdc.isSingleCellTable === true) {
     md.childLoop(tableRowElement);
     return;
   }
-  
+
   // Go through children of this row.
-  gdc.writeStringToBuffer('\n  <tr>');
+  gdc.writeStringToBuffer("\n  <tr>");
   md.childLoop(tableRowElement);
-  gdc.writeStringToBuffer('\n  </tr>');
+  gdc.writeStringToBuffer("\n  </tr>");
 };
 
-html.handleTableCell = function(tableCellElement) {
+html.handleTableCell = function (tableCellElement) {
   if (gdc.isSingleCellTable === true) {
     md.childLoop(tableCellElement);
     return;
@@ -325,11 +350,13 @@ html.handleTableCell = function(tableCellElement) {
   gdc.startingTableCell = true;
 
   // Set <td> attribute for colspan or rowspan, if necessary (>1).
-  var tdAttr = '';
-  
+  var tdAttr = "";
+
   // Rowspan handling.
   var rowspan = tableCellElement.getRowSpan();
-  if (rowspan === 0) { return; }
+  if (rowspan === 0) {
+    return;
+  }
 
   if (rowspan > 1) {
     tdAttr += ' rowspan="' + rowspan + '"';
@@ -338,66 +365,67 @@ html.handleTableCell = function(tableCellElement) {
 
   // Colspan handling.
   var colspan = tableCellElement.getColSpan();
-  // Skip cells that have been merged over. 
-  if (colspan === 0) { return; }
-    
+  // Skip cells that have been merged over.
+  if (colspan === 0) {
+    return;
+  }
+
   if (colspan > 1) {
     tdAttr += ' colspan="' + colspan + '"';
   }
   // End colspan code.
-  
+
   // Add attribute only if non-empty.
   if (tdAttr) {
-    gdc.writeStringToBuffer('\n   <td' + tdAttr + ' >');
+    gdc.writeStringToBuffer("\n   <td" + tdAttr + " >");
   } else {
-    gdc.writeStringToBuffer('\n   <td>');
+    gdc.writeStringToBuffer("\n   <td>");
   }
-  
+
   // Go through children of this cell.
   md.childLoop(tableCellElement);
   md.maybeEndCodeBlock();
   html.closeAllLists();
-  gdc.writeStringToBuffer('\n   </td>');
+  gdc.writeStringToBuffer("\n   </td>");
 };
 
 // Handle the heading type of the paragraph.
 // Need to close heading for HTML too, so need to save heading state.
 // Fall through for NORMAL.
-html.handleHeading = function(heading, para) {
-  
+html.handleHeading = function (heading, para) {
   // We're doing a little dance here for heading demotion. Also for closing tags.
   var htitle = 0;
   if (gdc.demoteHeadings) {
     htitle = 1;
   }
   switch (heading) {
-    case DocumentApp.ParagraphHeading.HEADING6:     
-     // Warn about level 6 headings if demoting (and do not demote h6).
-      var warning = 'H6 not demoted to H7.';
+    case DocumentApp.ParagraphHeading.HEADING6:
+      // Warn about level 6 headings if demoting (and do not demote h6).
+      var warning = "H6 not demoted to H7.";
       if (gdc.demoteHeadings) {
         if (!gdc.warnedAboutH7) {
           gdc.warn(warning + ' Look for "' + warning + '" inline.');
           gdc.warnedAboutH7 = true;
         }
-        gdc.writeStringToBuffer('\n<!--' + warning + ' -->\n');
+        gdc.writeStringToBuffer("\n<!--" + warning + " -->\n");
       }
-      gdc.writeStringToBuffer('\n<h6');
+      gdc.writeStringToBuffer("\n<h6");
       html.isHeading = html.h6 = true;
       break;
     case DocumentApp.ParagraphHeading.HEADING5:
-      gdc.writeStringToBuffer('\n<h' + (5+htitle) );
+      gdc.writeStringToBuffer("\n<h" + (5 + htitle));
       html.isHeading = html.h5 = true;
       break;
     case DocumentApp.ParagraphHeading.HEADING4:
-      gdc.writeStringToBuffer('\n<h' + (4+htitle) );
+      gdc.writeStringToBuffer("\n<h" + (4 + htitle));
       html.isHeading = html.h4 = true;
       break;
     case DocumentApp.ParagraphHeading.HEADING3:
-      gdc.writeStringToBuffer('\n<h' + (3+htitle) );
+      gdc.writeStringToBuffer("\n<h" + (3 + htitle));
       html.isHeading = html.h3 = true;
       break;
     case DocumentApp.ParagraphHeading.HEADING2:
-      gdc.writeStringToBuffer('\n<h' + (2+htitle) );
+      gdc.writeStringToBuffer("\n<h" + (2 + htitle));
       html.isHeading = html.h2 = true;
       break;
     case DocumentApp.ParagraphHeading.HEADING1:
@@ -405,20 +433,20 @@ html.handleHeading = function(heading, para) {
         gdc.h1Count++;
       }
     case DocumentApp.ParagraphHeading.TITLE:
-      gdc.writeStringToBuffer('\n<h' + (1+htitle) );
+      gdc.writeStringToBuffer("\n<h" + (1 + htitle));
       html.isHeading = html.h1 = true;
       break;
-    
+
     // Handle SUBTITLE as a regular paragraph.
     case DocumentApp.ParagraphHeading.SUBTITLE:
     default:
       html.isHeading = false;
       // Add paragraph markup if appropriate.
       if (!gdc.isMarkdown && !gdc.inCodeBlock && !gdc.isTable) {
-        gdc.writeStringToBuffer('\n<p');
+        gdc.writeStringToBuffer("\n<p");
       }
   }
-  
+
   // Insert id for HTML headings (that occur after the TOC).
   // But do not warn unless we're actually linking to a heading that has no ID.
   var id = gdc.headingIds[para.getText()];
@@ -427,43 +455,60 @@ html.handleHeading = function(heading, para) {
   }
 
   // Check for right alignment before closing the tag
-  if (para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
+  if (
+    para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT &&
+    para.isLeftToRight()
+  ) {
     gdc.writeStringToBuffer(' style="text-align: right"');
   }
 
   // Check for center alignment before closing the tag
-  if (para.getAlignment() === DocumentApp.HorizontalAlignment.CENTER && para.isLeftToRight()) {
+  if (
+    para.getAlignment() === DocumentApp.HorizontalAlignment.CENTER &&
+    para.isLeftToRight()
+  ) {
     gdc.writeStringToBuffer(' style="text-align: center"');
   }
 
   // Close the tag.
-  gdc.writeStringToBuffer('>');
+  gdc.writeStringToBuffer(">");
 };
 
 // Close heading if necessary. (Blank line after to keep Markdown parser happy.)
-html.closeHeading = function() {
-
+html.closeHeading = function () {
   // We're doing a little dance here for heading demotion.
   var htitle = 0;
   if (gdc.demoteHeadings) {
     htitle = 1;
   }
-  if (html.h1)      { html.h1 = false; gdc.writeStringToBuffer('</h' + (1+htitle) + '>\n\n'); }
-  else if (html.h2) { html.h2 = false; gdc.writeStringToBuffer('</h' + (2+htitle) + '>\n\n'); }
-  else if (html.h3) { html.h3 = false; gdc.writeStringToBuffer('</h' + (3+htitle) + '>\n\n'); }
-  else if (html.h4) { html.h4 = false; gdc.writeStringToBuffer('</h' + (4+htitle) + '>\n\n'); }
-  else if (html.h5) { html.h5 = false; gdc.writeStringToBuffer('</h' + (5+htitle) + '>\n\n'); }
-  else if (html.h6) { html.h6 = false; gdc.writeStringToBuffer('</h' + (6+htitle) + '>\n\n'); }
+  if (html.h1) {
+    html.h1 = false;
+    gdc.writeStringToBuffer("</h" + (1 + htitle) + ">\n\n");
+  } else if (html.h2) {
+    html.h2 = false;
+    gdc.writeStringToBuffer("</h" + (2 + htitle) + ">\n\n");
+  } else if (html.h3) {
+    html.h3 = false;
+    gdc.writeStringToBuffer("</h" + (3 + htitle) + ">\n\n");
+  } else if (html.h4) {
+    html.h4 = false;
+    gdc.writeStringToBuffer("</h" + (4 + htitle) + ">\n\n");
+  } else if (html.h5) {
+    html.h5 = false;
+    gdc.writeStringToBuffer("</h" + (5 + htitle) + ">\n\n");
+  } else if (html.h6) {
+    html.h6 = false;
+    gdc.writeStringToBuffer("</h" + (6 + htitle) + ">\n\n");
+  }
 
   html.isHeading = false;
 };
 
 // Formats footnotes for HTML. For HTML, we'll print out the actual
 // footnotes at the end.
-html.handleFootnote = function(footnote) {
-
+html.handleFootnote = function (footnote) {
   gdc.hasFootnotes = true;
-  
+
   gdc.footnoteNumber++;
   var fSection = footnote.getFootnoteContents();
   if (!fSection) {
@@ -471,26 +516,39 @@ html.handleFootnote = function(footnote) {
     var findex = gdc.footnoteNumber - 1;
     fSection = gdc.footnotes[findex].getFootnoteContents();
   }
-  
+
   // Write the footnote ref link in the text.
-  gdc.writeStringToBuffer('<sup id="fnref' + gdc.footnoteNumber + '"><a href="#fn' 
-    + gdc.footnoteNumber + '" rel="footnote">' + gdc.footnoteNumber + '</a></sup>');
+  gdc.writeStringToBuffer(
+    '<sup id="fnref' +
+      gdc.footnoteNumber +
+      '"><a href="#fn' +
+      gdc.footnoteNumber +
+      '" rel="footnote">' +
+      gdc.footnoteNumber +
+      "</a></sup>"
+  );
 
   // Now, write the footnotes themselves.
   gdc.isFootnote = true;
   // Open list for first footnote.
   if (gdc.footnoteNumber === 1) {
-      gdc.writeStringToBuffer('\n\n<!-- Footnotes themselves at the bottom. -->'
-      + '\n\n<h2>Notes</h2>'
-      + '\n<div class="footnotes">'
-      + '\n<hr>'
-      + '\n<ol>');
+    gdc.writeStringToBuffer(
+      "\n\n<!-- Footnotes themselves at the bottom. -->" +
+        "\n\n<h2>Notes</h2>" +
+        '\n<div class="footnotes">' +
+        "\n<hr>" +
+        "\n<ol>"
+    );
   }
   // Each HTML footnote is a list item in an ordered list:
   gdc.writeStringToBuffer('<li id="fn' + gdc.footnoteNumber + '">');
   md.childLoop(fSection);
   // Close footnote with a link back to the ref.
-  gdc.writeStringToBuffer('&nbsp;<a href="#fnref' + gdc.footnoteNumber + '" rev="footnote">&#8617;</a>');
+  gdc.writeStringToBuffer(
+    '&nbsp;<a href="#fnref' +
+      gdc.footnoteNumber +
+      '" rev="footnote">&#8617;</a>'
+  );
   gdc.isFootnote = false;
 };
 
@@ -498,17 +556,16 @@ html.handleFootnote = function(footnote) {
 // For keeping track of nested HTML lists.
 html.listStack = [];
 
-html.handleListItem = function(listItem) {
-  
+html.handleListItem = function (listItem) {
   // Close definition list if we're in one now.
   if (gdc.inDlist) {
     gdc.closeDlist();
   }
-  
+
   var gt = listItem.getGlyphType(),
-      textElement = listItem.asText(),
-      attrix = textElement.getTextAttributeIndices(),
-      isList = true;
+    textElement = listItem.asText(),
+    attrix = textElement.getTextAttributeIndices(),
+    isList = true;
 
   html.nestingLevel = listItem.getNestingLevel();
 
@@ -517,43 +574,45 @@ html.handleListItem = function(listItem) {
     html.closeListItem();
   }
 
-  gdc.listPrefix = '';
+  gdc.listPrefix = "";
   for (var i = 0; i < html.nestingLevel; i++) {
-    gdc.listPrefix += ' ';
+    gdc.listPrefix += " ";
   }
-  
+
   // Determine what type of list before we open it (if necessary).
-  if (gt === DocumentApp.GlyphType.BULLET
-      || gt === DocumentApp.GlyphType.HOLLOW_BULLET
-      || gt === DocumentApp.GlyphType.SQUARE_BULLET) {
+  if (
+    gt === DocumentApp.GlyphType.BULLET ||
+    gt === DocumentApp.GlyphType.HOLLOW_BULLET ||
+    gt === DocumentApp.GlyphType.SQUARE_BULLET
+  ) {
     gdc.listType = gdc.ul;
     html.maybeOpenList(listItem);
   } else {
     gdc.listType = gdc.ol;
     html.maybeOpenList(listItem);
   }
-  
-  gdc.writeStringToBuffer('\n');
+
+  gdc.writeStringToBuffer("\n");
   // Note that ulItem, olItem are the same in HTML (<li>).
   gdc.writeStringToBuffer(gdc.listPrefix + gdc.htmlMarkup.ulItem);
   html.inListItem = true;
   md.childLoop(listItem);
-  
+
   // Check to see if we should close this list.
   gdc.maybeCloseList(listItem);
 };
 
 // Called to check if we're exiting a list as we enter a new element.
 // Maybe this should just be gdc.checklist().
-html.checkList = function() {
+html.checkList = function () {
   if (gdc.isList && !gdc.indent) {
     html.closeAllLists();
     gdc.isList = false;
   }
 };
 // Closes list item. Not necessary for Markdown.
-html.closeListItem = function() {
-  // Check if we're in a code block and end if so. Always close codeblocks before closing list items. 
+html.closeListItem = function () {
+  // Check if we're in a code block and end if so. Always close codeblocks before closing list items.
   if (gdc.inCodeBlock) {
     gdc.writeStringToBuffer(html.closeCodeBlock);
     gdc.inCodeBlock = false;
@@ -571,28 +630,28 @@ html.maybeOpenList = function (listItem) {
   }
   // Open list if last sibling was not a list item.
   if (previousType !== DocumentApp.ElementType.LIST_ITEM) {
-    // We need to check if a list is already opened first. Is a global variable to track list level the best solution here? 
-    // The previous sibling won't return the list level if it's a paragraph. 
+    // We need to check if a list is already opened first. Is a global variable to track list level the best solution here?
+    // The previous sibling won't return the list level if it's a paragraph.
 
     // Could we also use:
     // if (html.nestingLevel == 0 && gdc.isList == false) {
 
     if (html.nestingLevel >= html.listNestingLevel) {
       html.openList();
-    } 
+    }
   } else if (previousType == DocumentApp.ElementType.LIST_ITEM) {
     // Open a new list if nesting level increases.
-      if (html.nestingLevel > previous.getNestingLevel()) {
+    if (html.nestingLevel > previous.getNestingLevel()) {
       html.openList();
-      }
+    }
   }
 };
 
 // Open list and save current list type to stack.
-html.openList = function() {
+html.openList = function () {
   gdc.isList = true;
   if (gdc.nestingLevel === 0) {
-    gdc.writeStringToBuffer('\n');
+    gdc.writeStringToBuffer("\n");
   }
 
   if (gdc.ul === gdc.listType) {
@@ -608,7 +667,7 @@ html.openList = function() {
 };
 
 // Close list and remove it's list type from the stack.
-html.closeList = function() {
+html.closeList = function () {
   // Close the last item of the list. This will always need to be called.
   html.closeListItem();
 
@@ -627,7 +686,7 @@ html.closeList = function() {
 };
 
 // But what about a table that's in a list item?
-html.closeAllLists = function() {
+html.closeAllLists = function () {
   var list = html.listStack[0];
   while (html.listStack.length > 0) {
     var list = html.listStack[0];
@@ -636,7 +695,7 @@ html.closeAllLists = function() {
 };
 
 // Escape angle brackets so code blocks will display HTML tags.
-html.escapeOpenTag = function(text) {
-  text = text.replace(/</g, '&lt;');
+html.escapeOpenTag = function (text) {
+  text = text.replace(/</g, "&lt;");
   return text;
 };
