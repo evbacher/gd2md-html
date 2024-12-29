@@ -2,6 +2,9 @@
 
 Docs to Markdown is a free Google Docs add-on that converts a Google Doc to simple, readable Markdown or HTML text.
 
+(**Note**: Not currently accepting contributions.)
+For more information, please read [CONTRIBUTING.md](CONTRIBUTING.md) and [dev.md](dev.md) for the general philosophy of Docs to Markdown.
+
 ## Overview
 
 Docs to Markdown lets you use Google Docs' editing, formatting, and collaboration tools before you publish to a Markdown or HTML platform. Docs to Markdown also lets you select and convert part of a Google Doc.
