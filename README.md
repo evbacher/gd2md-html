@@ -27,10 +27,3 @@ Use Google Docs styles for headings (Heading 1, Heading 2, etc.) so that Docs to
 
 (**Note**: Not currently accepting contributions.)
 For more information, please read [CONTRIBUTING.md](CONTRIBUTING.md) and [dev.md](dev.md) for the general philosophy of Docs to Markdown.
-
-## Contributors
-
-Thanks to all!
-
-* [danielramosbh74](https://github.com/danielramosbh74)
-* [evbacher](https://github.com/evbacher)
