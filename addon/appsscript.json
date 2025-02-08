@@ -1,9 +1,16 @@
 {
   "timeZone": "America/Los_Angeles",
-  "dependencies": {},
+  "dependencies": {
+    "enabledAdvancedServices": [{
+      "userSymbol": "Drive",
+      "serviceId": "drive",
+      "version": "v2"
+    }]
+  },
   "oauthScopes": [
     "https://www.googleapis.com/auth/documents.currentonly",
-    "https://www.googleapis.com/auth/script.container.ui"
+    "https://www.googleapis.com/auth/script.container.ui",
+    "https://www.googleapis.com/auth/drive.readonly"
   ],
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "DEPRECATED_ES5"
