@@ -2198,7 +2198,7 @@ md.handleFootnote = function(footnote) {
 
   // Now, we're ready for the footnote itself.
   gdc.isFootnote = true;
-  if (gdc.footnoteNumber === 1) {
+  if (gdc.footnoteNumber === 1 && !gdc.suppressInfo) {
       gdc.writeStringToBuffer('\n\n<!-- Footnotes themselves at the bottom. -->'
       + '\n## Notes');
   }

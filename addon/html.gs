@@ -479,7 +479,7 @@ html.handleFootnote = function(footnote) {
   // Now, write the footnotes themselves.
   gdc.isFootnote = true;
   // Open list for first footnote.
-  if (gdc.footnoteNumber === 1) {
+  if (gdc.footnoteNumber === 1 && !gdc.suppressInfo) {
       gdc.writeStringToBuffer('\n\n<!-- Footnotes themselves at the bottom. -->'
       + '\n\n<h2>Notes</h2>'
       + '\n<div class="footnotes">'
