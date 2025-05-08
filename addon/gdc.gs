@@ -52,9 +52,10 @@ gdc.banner = '<!-- NOTICE: Google recently added tabs to Google Docs: '
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β40'; // based on 1.0β39'
+var GDC_VERSION = '1.0β41'; // based on 1.0β40'
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β41 (8 May 2025): Closes <li> tag in footnotes. When writing footnote content, does not open a <p> tag. (gdc, html)
 /** - 1.0β40 (13 Oct 2024): 
     - Close list items before opening a new item. Close at the end of the list. (gdc, html)
     - Add support for Markdown checkbox lists. (gdc)
@@ -1356,7 +1357,7 @@ gdc.maybeCloseAttrs = function(currentAttrs) {
         }
         gdc.writeStringToBuffer(gdc.markup.codeClose);
         // We probably don't want to continue using mixed markup.
-        gdc.resetMarkup();
+        gdc.resetMarkup
       }
     }
     // Close bold.
@@ -1942,6 +1943,8 @@ md.handleParagraph = function(para) {
     if (gdc.inCodeBlock) {
       // do nothing: we also want to not add the tablePrefix.
       // But check for table cell or definition list.
+    } else if (gdc.isFootnote) {
+      // Do nothing. We don't want to open a paragraph  
     } else if (!gdc.startingTableCell && !gdc.inDlist) {
       // This is where we want to check for right/center alignment so that the proper paragraph style can be applied. 
       if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
