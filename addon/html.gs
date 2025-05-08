@@ -1,5 +1,3 @@
-// *** html.gs ***
-
 /*
  * Copyright 2020 Google LLC
  *
@@ -114,10 +112,6 @@ html.doHtml = function(config) {
     // But notify if there are errors.
     gdc.out = '<!-- ' + gdc.errorSummary + ' -->\n' + gdc.out;
   }
-
-  // Always include the banner.
-  gdc.out = gdc.banner + gdc.out;
-
   
   // Output content.
   gdc.flushBuffer();
@@ -488,9 +482,9 @@ html.handleFootnote = function(footnote) {
   }
   // Each HTML footnote is a list item in an ordered list:
   gdc.writeStringToBuffer('<li id="fn' + gdc.footnoteNumber + '">');
-  md.childLoop(fSection);
-  // Close footnote with a link back to the ref.
-  gdc.writeStringToBuffer('&nbsp;<a href="#fnref' + gdc.footnoteNumber + '" rev="footnote">&#8617;</a>');
+  md.childLoop(fSection); // Adds footnote text, plus an extra paragraph tag. How do we avoid opening an unclosed paragraph in these footnote items?
+  // Close footnote with a link back to the ref. Remember to close the tag. 
+  gdc.writeStringToBuffer('&nbsp;<a href="#fnref' + gdc.footnoteNumber + '" rev="footnote">&#8617;</a></li>');
   gdc.isFootnote = false;
 };
 
