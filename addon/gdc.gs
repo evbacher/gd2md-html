@@ -1356,7 +1356,7 @@ gdc.maybeCloseAttrs = function(currentAttrs) {
         }
         gdc.writeStringToBuffer(gdc.markup.codeClose);
         // We probably don't want to continue using mixed markup.
-        gdc.resetMarkup();
+        gdc.resetMarkup
       }
     }
     // Close bold.
@@ -1942,6 +1942,8 @@ md.handleParagraph = function(para) {
     if (gdc.inCodeBlock) {
       // do nothing: we also want to not add the tablePrefix.
       // But check for table cell or definition list.
+    } else if (gdc.isFootnote) {
+      // Do nothing. We don't want to open a paragraph  
     } else if (!gdc.startingTableCell && !gdc.inDlist) {
       // This is where we want to check for right/center alignment so that the proper paragraph style can be applied. 
       if (gdc.isHTML && para.getAlignment() === DocumentApp.HorizontalAlignment.RIGHT && para.isLeftToRight()) {
