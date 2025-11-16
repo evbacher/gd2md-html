@@ -43,18 +43,22 @@ var gdc = gdc || {};
 // NOTE: Check these before publishing! (and remove β if appropriate)
 // Use banner comment (very rarely) to communicate important information
 // (like recent bugs affecting output) at the top of the conversion test.
-gdc.banner = ''; // This is the general case.
+
+gdc.banner = ''; // This is the general case (no outstanding major issues).
+// Original banner text: replace and uncomment as necessary.
 /*
 gdc.banner = '<!-- NOTICE: Google recently added tabs to Google Docs: '
   + 'Internal links in converted text do not work now. '
   + 'We are working on a fix. See News link for more details. -->\n\n';
 */
+
 var DEBUG = false;
 var LOG = false;
 var GDC_TITLE = 'Docs to Markdown'; // formerly GD2md-html, formerly gd2md-html
-var GDC_VERSION = '1.0β40'; // based on 1.0β39'
+var GDC_VERSION = '1.0β40a'; // based on 1.0β40'
 
 // Version notes: significant changes (latest on top). (files changed)
+// - 1.0β40a (15 Nov. 2025): Fix bug 175: render Markdown definition lists in HTML (gdc).
 /** - 1.0β40 (13 Oct 2024): 
     - Close list items before opening a new item. Close at the end of the list. (gdc, html)
     - Add support for Markdown checkbox lists. (gdc)
@@ -272,6 +276,16 @@ gdc.mdMarkup = {
 
   hr:           '<newline><newline>---<newline>',
 
+  // description/definition lists (HTML markkup for MD conversion)
+  dlOpen:      '\n\n<dl>',
+  dlClose:     '</dl>\n',
+  dtOpen:      '\n  <dt>',
+  dtClose:     '</dt>',
+  ddOpen:      '\n   <dd>',
+  ddClose:     '</dd>',
+
+/* Use HTML instead: not all MD parsers support definition lists, and it's
+   a pain to have to just convert the definition list and paste it in to the Markdown file.
   // description/definition lists (Markdown)
   dlOpen:      '\n\n',
   dlClose:     '\n\n',
@@ -279,6 +293,7 @@ gdc.mdMarkup = {
   dtClose:     '\n',
   ddOpen:      ': ',
   ddClose:     '',
+*/
 
   // subscript, superscript
   subOpen:     '<sub>',
@@ -1544,15 +1559,7 @@ gdc.isDdef = function(para) {
   return false;
 };
 gdc.handleDterm = function(para) {
-  if ( gdc.docType === gdc.docTypes.html ) {
-    gdc.writeStringToBuffer(gdc.markup.dtOpen);
-    return;
-  }
-
-  // Only add extra newline for first term (Markdown).
-  if ( (gdc.docType === gdc.docTypes.md) && gdc.dtermCount === 0) {
-    gdc.writeStringToBuffer(gdc.markup.dtOpen);
-  }
+  gdc.writeStringToBuffer(gdc.markup.dtOpen);
   gdc.dtermCount++;
 };
 gdc.handleDdef = function(para) {
