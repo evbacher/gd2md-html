@@ -3,7 +3,7 @@
 * WARNINGs: 2
 * ALERTS: 6 -->
 
-**version**: 1.0β40: 13 Oct 2024)
+**version**: 2.0β1: 16 Nov.. 2025
 
 This is a raw conversion from a Google Doc (For verification purposes: use HTML headings and Reckless mode options for both Markdown and HTML conversion, no other options).
 
@@ -11,8 +11,6 @@ This is a raw conversion from a Google Doc (For verification purposes: use HTML 
 
 
 This page both demonstrates and tests the features of [Docs to Markdown](https://workspace.google.com/marketplace/app/docs_to_markdown/700168918607) conversion from a Google Doc to a simple Markdown or HTML file. 
-
-**Note**: Not all Markdown renderers support all Markdown features. For example github Markdown does not support a table of contents ([TOC]), footnotes, or definition lists. Also, some Markdown environments strip heading IDs and replace them with their own generated IDs. You’ll have to do some manual adjustments, depending on your target environment.
 
 
 [TOC]
@@ -41,6 +39,8 @@ END BLANK HEADINGS
 
 
 This is a paragraph.[^1] (Docs to Markdown also supports footnotes) A sentence with `some embedded code`. Docs to Markdown changes “smart quotes” to straight quotes in code to guard against cut-and-paste errors.
+
+'Single quotes' and "double quotes" should convert properly, whether they are smart or not.
 
 <h2 id="basic-font-styling">Basic font styling</h2>
 
@@ -182,7 +182,7 @@ Note: Works for Markdown, still a known issue for HTML.
 
 A regular paragraph.
 
-<h3>Checkbox lists</h3>
+<h3 id="checkbox-lists">Checkbox lists</h3>
 
 
 
@@ -222,19 +222,19 @@ Because Google Docs does not have a definition list element, Docs to Markdown us
 renders as:
 
 
+<dl>
+  <dt>term</dt>
+   <dd> Definition here.</dd>
 
-term
-:  Definition here.
+  <dt>term1</dt>
+  <dt>term2</dt>
+   <dd> First paragraph of definition.</dd>
 
-term1
-term2
-:  First paragraph of definition.
-:  Second paragraph of definition.
+   <dd> Second paragraph of definition.</dd>
 
-A term that has some ***crazy formatting*** and `characters` (not recommended)//.
-:  Definition of crazy term.
-
-
+  <dt>A term that has some ***crazy formatting*** and `characters` (not recommended)//.</dt>
+   <dd> Definition of crazy term.</dd>
+</dl>
 
 
 
@@ -557,7 +557,7 @@ This is some more regular text.
 
 A sentence with <sub>subscript</sub> and <sup>superscript</sup> and some more regular text and <sup><a href="http://www.google.com">a link to Google</a></sup>.
 
-And more **<sub>bold</sub>** and <code><sup>mixed<strong><em> </em>bold<em> italic </em></strong>code</sup></code> and some more text. Some <em>italic text</em>.
+And more **<sub>bold</sub>** and <code><sup>mixed<strong><em> </em>bold<em> italic </em></strong>code</sup></code> and some more text. Some *italic text*.
 
 Another paragraph with **some bold text**.
 
