@@ -4,7 +4,7 @@
 * ALERTS: 6 -->
 
 <p>
-<strong>version</strong>: 1.0β40: 13 Oct 2024
+<strong>version</strong>: 2.0β1: 16 Nov.. 2025
 </p>
 <p>
 This is a raw conversion from a Google Doc (For verification purposes: use HTML headings and Reckless mode options for both Markdown and HTML conversion, no other options).
@@ -14,9 +14,6 @@ This is a raw conversion from a Google Doc (For verification purposes: use HTML 
 
 <p>
 This page both demonstrates and tests the features of <a href="https://workspace.google.com/marketplace/app/docs_to_markdown/700168918607">Docs to Markdown</a> conversion from a Google Doc to a simple Markdown or HTML file. 
-</p>
-<p>
-<strong>Note</strong>: Not all Markdown renderers support all Markdown features. For example github Markdown does not support a table of contents ([TOC]), footnotes, or definition lists. Also, some Markdown environments strip heading IDs and replace them with their own generated IDs. You’ll have to do some manual adjustments, depending on your target environment.
 </p>
 <p>
 <strong>Note</strong>: If you find any bugs, please file them at <a href="https://github.com/evbacher/gd2md-html/issues">https://github.com/evbacher/gd2md-html/issues</a>. Thanks for helping to make Docs to Markdown better!
@@ -47,6 +44,9 @@ END BLANK HEADINGS
 
 <p>
 This is a paragraph.<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup> (Docs to Markdown also supports footnotes) A sentence with <code>some embedded code</code>. Docs to Markdown changes “smart quotes” to straight quotes in code to guard against cut-and-paste errors.
+</p>
+<p>
+'Single quotes' and "double quotes" should convert properly, whether they are smart or not.
 </p>
 <h2 id="basic-font-styling">Basic font styling</h2>
 
@@ -239,7 +239,7 @@ callSomeFunction();
 <p>
 A regular paragraph.
 </p>
-<h3>Checkbox lists</h3>
+<h3 id="checkbox-lists">Checkbox lists</h3>
 
 
 <ol>
